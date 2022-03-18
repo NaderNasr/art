@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import ProductsList from './components/ProductsList'
-import Navbar from './Components/Navbar/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import commerce from './lib/commerce';
 
 const App = () => {
@@ -26,7 +26,9 @@ const App = () => {
   return (
 
     <div className="App">
+      <div style={{marginBottom:'50px'}}>
       <Navbar />
+      </div>
       <ProductsList products={products} />
     </div>
   )
