@@ -27,7 +27,7 @@ const App = () => {
   return (
 
     <div className="App">
-      <div style={{marginBottom:'50px'}}>
+      <div style={{marginBottom:'100px'}}>
       <Navbar />
       </div>
       <ProductsList products={products} />
