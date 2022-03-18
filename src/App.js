@@ -1,11 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import ProductsList from './components/ProductsList'
+import commerce from './lib/commerce';
 
-function App() {
+const App = () => {
+  // use state to fetch products
+  const [products, setProducts] = useState([]);
+  // use promise to load products
+  const fetchProducts = () => {
+    commerce.products.list()
+    .then((products) => {
+      setProducts(products.data);
+    })
+    .catch((error) => {
+      console.log('There was an error fetching the products', error)
+    });
+  }
+
+  //load products once
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
-    <div className="App">
+    <div>
+      <ProductsList products={products} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
