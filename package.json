@@ -16,7 +16,15 @@
     "react-hook-form": "^7.28.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@google/model-viewer": "^1.10.1",
+    "@mui/material": "^5.5.0",
+    "@mui/styled-engine-sc": "^5.4.2",
+    "prop-types": "^15.8.1",
+    "string-strip-html": "^9.1.6"
+
   },
   "scripts": {
     "start": "react-scripts start",
