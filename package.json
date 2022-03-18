@@ -24,7 +24,6 @@
     "@mui/styled-engine-sc": "^5.4.2",
     "prop-types": "^15.8.1",
     "string-strip-html": "^9.1.6"
-
   },
   "scripts": {
     "start": "react-scripts start",

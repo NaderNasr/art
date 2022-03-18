@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState } from 'react'
-import ProductsList from './components/ProductsList'
-import Navbar from './Components/Navbar/Navbar';
+// import ProductsList from './components/ProductsList'
+// import Navbar from './components/Navbar/Navbar';
 import commerce from './lib/commerce';
+import { Navbar , ProductsList } from './components/'
 
 const App = () => {
   // use state to fetch products
