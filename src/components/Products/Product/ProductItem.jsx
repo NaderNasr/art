@@ -1,9 +1,10 @@
 import React from "react";
-import '../styles/productItem.css';
 // import '@google/model-viewer'
+import useStyles from './styles'
 
 const ProductItem = ({ product }) => {
 
+  const classes = useStyles()
   //Remove html tags from JSON data
 
   // const regex = /(<([^>]+)>)/ig
@@ -13,7 +14,7 @@ const ProductItem = ({ product }) => {
   return (
     <>
       <div>
-      <img  style={{width:'200px'}} alt="" src={product.image?.url}/>
+      <img  className={classes.productImage} alt="" src={product.image?.url}/>
       <p>{product.name}</p>
       <ul>
         <li>{product.is.sold_out ? "Sold out" : product.inventory.available + " units"}</li>
