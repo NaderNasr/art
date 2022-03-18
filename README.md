@@ -1,106 +1,70 @@
-# ARt
+# Getting Started with Create React App
 
-## descriptions
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-A dressing room for your wall to try various different art pieces, users might not know how something looks and the AR implementation would help the buyer to demo the art display.
+## Available Scripts
 
-This would help buyers plan out their art rooms
-* How the piece fits a room
-* No need for measurements
-* Easy interior design
-* Sellers Focus more on Creating instead of answering questions because the user would be able to see how it looks.
+In the project directory, you can run:
 
+### `npm start`
 
-Team Members
-* Gerard Compion
-* Nader Nasr
-* Armin Glavovic
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## User Stories
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-As a User 
-I want to buy Art online
-Because there is a wider selection online
+### `npm test`
 
-As a User 
-I want to be able to tell how a art piece in my home
-Because I want to be able to tell how a art piece looks in my room before buying
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-As a user 
-Im drawn to Ar because it is a exciting new concept 
-because It's a new way to shop
+### `npm run build`
 
-As a user 
-I want to be able to sell my Art online 
-because i have a wider market by selling it online 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-As a user
-Not needing to develope a website for my Art
-Because its work that takes away from me building Art
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-As a user 
-I want to have more information in regards to what im buying 
-because i do not enjoy going through customer service
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-As a user 
-I want to have a clear and easy experience shopping online
-because i want a streamlined purchasing process
+### `npm run eject`
 
-As a user 
-I want to see what other users think of a art piece
-because it would reassure me of the quality 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-As a user 
-I would like to know what kind of material is being used
-because i have an aesthetic or personal preference 
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-## ERD
-____________
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-* Users
+## Learn More
 
-  * primary key INT
-  * Email
-  * Phone
-  * username
-  * password
-  * timestamp
-  * Address
-___________
-* Orders
-  * primary key INT
-  * customer_id
-  * cart_id
-____________
-* Cart
-  * primary key 
-  * created_at
-  * user_id, FK
-  * product_id, FK
-  * shipping address
-  * price, int
-____________
-* Product
-  * primary key
-  * name 
-  * description
-  * picture
-  * created_at
-____________
-* Reviews
-  * primary key
-  * review
-  * product id FK
-  * user_id FK
-  * rating
-  * created_at 
-____________
-* Categories
-  * primary id
-  * category
-  * product id fk
-______
-* Merchant
-  * user_id
-  * product_id
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
