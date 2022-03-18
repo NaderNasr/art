@@ -2,7 +2,7 @@
 
 ## descriptions
 
-A dressing room for your wall to try various different art pieces, users might not know how something looks and the AR implementation would help the buyer to demo the art display.
+A dressing room for your wall to try various different art pieces, users might not know how something looks and the AR implementation would help the buyer demo the art display.
 
 This would help buyers plan out their art rooms
 * How the piece fits a room
