@@ -30,7 +30,7 @@ const App = () => {
       console.log('There was an error fetching the products', error)
     });
   }
-
+  // use promise to load cart
   const fetchCart = () => {
     commerce.cart.retrieve()
     .then((cart) => {
@@ -40,7 +40,7 @@ const App = () => {
       console.log('There was an error fetching the cart', error);
     });
   }
-
+  // use promise to add item(s) to cart
   const handleAddToCart = (productId, quantity) => {
     commerce.cart.add(productId, quantity)
     .then((item) => {
@@ -51,7 +51,7 @@ const App = () => {
     });
   }
 
-  //load products once
+  //load products/cart once
   useEffect(() => {
     fetchProducts();
     fetchCart();
