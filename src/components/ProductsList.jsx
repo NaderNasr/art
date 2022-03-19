@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-const ProductsList = ({ products, setOpen, open }) => {
+const ProductsList = ({ products }) => {
   //view the products in browser > inspect > console
   console.log(products)
   return (
@@ -26,16 +26,14 @@ const ProductsList = ({ products, setOpen, open }) => {
     <div>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
-          {products.map((product, idx) => (
+          {products.map((product) => (
             <Grid item xs={2} sm={4} md={4} key={product.id}>
               <Item>
+              {/* {console.log(product)} */}
                 {/* Product Item */}
                 <ProductItem
-                  //Modal State
-                  open={open} setOpen={setOpen}
                   // Commerce Products
                   product={product}
-                  idx={idx}
                 />
               </Item>
             </Grid>
