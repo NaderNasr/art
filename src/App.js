@@ -8,6 +8,9 @@ const App = () => {
   // use state to fetch products
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const [open, setOpen] = React.useState(true); //set back to false
+
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
@@ -41,7 +44,7 @@ const App = () => {
           </Box>
         </div>
         :
-        <ProductsList products={products} />}
+        <ProductsList products={products} open={open} setOpen={setOpen}/>}
     </div>
   )
 }
