@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import '../styles/productItem.css';
 import AvailableProductsAlert from "./AvailableProductsAlert";
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
@@ -12,10 +12,11 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 
-const ProductItem = ({ product, setOpen, open, idx }) => {
+const ProductItem = ({ product }) => {
+  const [open, setOpen] = useState(false); // Add to custom hook
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   //Remove html tags from JSON data
 
   // const regex = /(<([^>]+)>)/ig
@@ -59,7 +60,6 @@ const ProductItem = ({ product, setOpen, open, idx }) => {
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
               {product.name}
-              {idx}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
               {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
