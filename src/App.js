@@ -4,6 +4,16 @@ import React, { useEffect, useState } from 'react'
 // import Navbar from './components/Navbar/Navbar';
 import commerce from './lib/commerce';
 import { Navbar , ProductsList } from './components/'
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+
+const theme = createTheme({
+  typography: {
+    h1: {
+      fontSize: "3rem"
+    }
+  },
+});
+
 
 const App = () => {
   // use state to fetch products
@@ -25,13 +35,14 @@ const App = () => {
   }, []);
 
   return (
-
-    <div className="App">
-      <div style={{marginBottom:'100px'}}>
-      <Navbar />
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <div style={{marginBottom:'100px'}}>
+        <Navbar />
+        </div>
+        <ProductsList products={products} />
       </div>
-      <ProductsList products={products} />
-    </div>
+    </ThemeProvider>
   )
 }
 

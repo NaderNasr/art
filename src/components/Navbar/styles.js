@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const drawerWidth = 0;
 
 export default makeStyles((theme) => ({
@@ -12,5 +13,22 @@ export default makeStyles((theme) => ({
   },
   image: {
     marginRight: '1rem',
+  },
+  buttons: {
+    flexGrow: 1,
+    color: 'black'
+  },
+  cart: {
+
+  },
+  menuButton: {
+    display: "flex",
+    flexGrow: "1",
+    justifyContent: "start",
+  },
+  mobileBar: {
+    display: "flex",
+    alignItems: "center"
   }
+
 }));

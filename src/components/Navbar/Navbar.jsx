@@ -6,6 +6,7 @@ import {
   Typography,
   useMediaQuery,
   Button,
+  Badge,
   useScrollTrigger,
   Slide,
   Menu,
@@ -17,6 +18,8 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import { ShoppingCart } from '@material-ui/icons';
 
+import { useTheme } from '@mui/material/styles';
+
 
 import logo from '../../assets/logo.png'
 import useStyles from './styles';
@@ -27,6 +30,10 @@ const Navbar = (props) => {
   const classes = useStyles();
   const [anchor, setAnchor] = useState(null);
   const open = Boolean(anchor);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
+
   
   const handleMenu = (event) => {
     setAnchor(event.currentTarget);
@@ -37,27 +44,58 @@ const Navbar = (props) => {
     <div>
     <AppBar className={classes.appBar}>
       <Toolbar>
-        <Typography
-         variant="h5"
-         color="black"
-         className={classes.title}
-        >
-          <img src={logo} alt="ARt" height="25px" className={classes.image}/>
-          ARt
-        </Typography>
-        {isMobile ? (
-          <>
-          <IconButton
-          color="text primary"
-          className={classes.menuButton}
-          edge="start"
-          aria-label="menu"
-          onClick={handleMenu}
+        {isMobile ? 
+        <>
+          <Typography
+            variant="h5"
+            color="black"
+            className={classes.title}
           >
-            <MenuIcon/>
+          <img src={logo} alt="ARt" height="25px" className={classes.image}/>
+            ARt
+          </Typography>
+          <div className={classes.buttons}>
+            <Button variant="text" >
+              Hot
+            </Button>
+            <Button variant="text" >
+              categories
+            </Button>
+            <Button variant="text" >
+              Products
+            </Button>
+          </div>
+          <div className={classes.cart}>
+            <IconButton aria-label="Show cart items">
+              <Badge badgeContent={2} color="red">
+                <ShoppingCart/>
+              </Badge>
+            </IconButton>
+          </div>
+        </>
+        :
+        <>
+          <IconButton color="White" className={classes.menuButton} edge="start" aria-label="menu" onClick={handleMenu}>
+            <MenuIcon />
           </IconButton>
-          </>
-        ) : <div></div> }
+          <Typography
+            variant="h5"
+            color="black"
+            className={classes.title}
+          >
+          <img src={logo} alt="ARt" height="25px" className={classes.image}/>
+            ARt
+          </Typography>
+          <div className={classes.cart}>
+            <IconButton aria-label="Show cart items">
+              <Badge badgeContent={2} color="red">
+                <ShoppingCart/>
+              </Badge>
+            </IconButton>
+          </div>
+        </>
+        }
+
       </Toolbar>
     </AppBar>
     </div>
