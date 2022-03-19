@@ -2,7 +2,7 @@ import React from "react";
 // import '@google/model-viewer'
 import useStyles from './styles'
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, onAddToCart }) => {
 
   const classes = useStyles()
   //Remove html tags from JSON data

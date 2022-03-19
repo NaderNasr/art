@@ -61,7 +61,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <div style={{marginBottom:'100px'}}>
-        <Navbar />
+        <Navbar total_items={cart.total_items} />
         </div>
         <ProductsList products={products} onAddToCart={handleAddToCart} />
       </div>

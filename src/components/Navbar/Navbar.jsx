@@ -25,7 +25,7 @@ import logo from '../../assets/logo.png'
 import useStyles from './styles';
 
 
-const Navbar = (props) => {
+const Navbar = ({ totalItems }) => {
 
   const classes = useStyles();
   const [anchor, setAnchor] = useState(null);
@@ -67,7 +67,7 @@ const Navbar = (props) => {
           </div>
           <div className={classes.cart}>
             <IconButton aria-label="Show cart items">
-              <Badge badgeContent={2} color="red">
+              <Badge badgeContent={totalItems} color="red">
                 <ShoppingCart/>
               </Badge>
             </IconButton>
