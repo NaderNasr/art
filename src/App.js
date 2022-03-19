@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import { LinearProgress } from '@mui/material';
 import { Box } from '@mui/system';
-=======
-
->>>>>>> main
 import React, { useEffect, useState } from 'react'
 // import ProductsList from './components/ProductsList'
 // import Navbar from './components/Navbar/Navbar';
