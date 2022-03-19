@@ -7,9 +7,10 @@ import commerce from './lib/commerce';
 const App = () => {
   // use state to fetch products
   const [products, setProducts] = useState([]);
+  // loading animation
   const [loading, setLoading] = useState(true);
-
-  const [open, setOpen] = React.useState(true); //set back to false
+  // modal state
+  // const [open, setOpen] = React.useState(false);
 
   // use promise to load products
   const fetchProducts = () => {
@@ -44,7 +45,10 @@ const App = () => {
           </Box>
         </div>
         :
-        <ProductsList products={products} open={open} setOpen={setOpen}/>}
+        <ProductsList products={products}
+        // open={open} setOpen={setOpen}
+
+        />}
     </div>
   )
 }
