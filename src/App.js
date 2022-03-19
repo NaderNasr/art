@@ -18,6 +18,8 @@ const theme = createTheme({
 const App = () => {
   // use state to fetch products
   const [products, setProducts] = useState([]);
+  //cart managed with state
+  const [cart, setCart] = useState({});
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
@@ -29,9 +31,30 @@ const App = () => {
     });
   }
 
+  const fetchCart = () => {
+    commerce.cart.retrieve()
+    .then((cart) => {
+      setCart(cart);
+    })
+    .catch((error) => {
+      console.log('There was an error fetching the cart', error);
+    });
+  }
+
+  const handleAddToCart = (productId, quantity) => {
+    commerce.cart.add(productId, quantity)
+    .then((item) => {
+      setCart(item.cart);
+    })
+    .catch((error) => {
+      console.log('There was an error adding an item to cart', error);
+    });
+  }
+
   //load products once
   useEffect(() => {
     fetchProducts();
+    fetchCart();
   }, []);
 
   return (

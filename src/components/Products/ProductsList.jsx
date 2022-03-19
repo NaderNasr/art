@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const ProductsList = ({ products }) => {
   //view the products in browser > inspect > console
-  console.log(products)
+  // console.log(products)
   return (
     //Material UI Grid
     <div>
