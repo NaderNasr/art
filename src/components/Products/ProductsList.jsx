@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductItem from './ProductItem'
+import ProductItem from '../Products/Product/ProductItem'
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
