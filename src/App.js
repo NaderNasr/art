@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 // import Navbar from './components/Navbar/Navbar';
 import commerce from './lib/commerce';
 import { Navbar , ProductsList } from './components/'
+import Cart from './components/Cart/Cart';
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
 const theme = createTheme({
@@ -55,15 +56,25 @@ const App = () => {
   useEffect(() => {
     fetchProducts();
     fetchCart();
+
+    // commerce.cart.empty(); // REMEMBER!!
   }, []);
+
+  // console.log(cart);
+
+  //////////////////////
+  //EMPTY CART!!!!!!!!//
+  //EMPTY CART!!!!!!!!//
+  //////////////////////
 
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <div style={{marginBottom:'100px'}}>
-        <Navbar total_items={cart.total_items} />
+        <Navbar totalItems={cart.total_items} />
         </div>
-        <ProductsList products={products} onAddToCart={handleAddToCart} />
+        {/* <ProductsList products={products} onAddToCart={handleAddToCart} /> */}
+        <Cart cart={cart} />
       </div>
     </ThemeProvider>
   )
