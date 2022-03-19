@@ -63,7 +63,7 @@ const App = () => {
         <div style={{marginBottom:'100px'}}>
         <Navbar />
         </div>
-        <ProductsList products={products} />
+        <ProductsList products={products} onAddToCart={handleAddToCart} />
       </div>
     </ThemeProvider>
   )

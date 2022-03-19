@@ -13,7 +13,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const ProductsList = ({ products }) => {
+const ProductsList = ({ products, onAddToCart }) => {
   //view the products in browser > inspect > console
   // console.log(products)
   return (
@@ -25,7 +25,7 @@ const ProductsList = ({ products }) => {
         <Grid item xs={2} sm={4} md={4} key={product.id}>
           <Item>
           <ProductItem
-            product={product}
+            product={product} onAddToCart={onAddToCart}
           />
           </Item>
         </Grid>
