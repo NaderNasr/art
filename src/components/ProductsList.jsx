@@ -11,6 +11,10 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: 'center',
   color: theme.palette.text.secondary,
+  background: "#F6F6F6",
+    '&:hover': {
+      boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
+    },
 }));
 
 const ProductsList = ({ products }) => {
