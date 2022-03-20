@@ -25,7 +25,7 @@ import logo from '../../assets/logo.png'
 import useStyles from './styles';
 
 
-const Navbar = (props) => {
+const Navbar = ({ totalItems }) => {
 
   const classes = useStyles();
   const [anchor, setAnchor] = useState(null);

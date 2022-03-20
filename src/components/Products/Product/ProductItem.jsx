@@ -10,9 +10,8 @@ import { BrowserView, MobileView } from 'react-device-detect';
 
 import ProductModal from "./ProductModal";
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, onAddToCart }) => {
   const [open, setOpen] = useState(false); // Add to custom hook
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -28,10 +27,10 @@ const ProductItem = ({ product }) => {
       {/* <model-viewer src={Poster} ar ar-placement="wall" ar-modes="webxr scene-viewer quick-look" camera-controls alt="A 3D model of some wall art"></model-viewer> */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <p style={{ fontSize: '24px' }}>{product.name}</p>
-        {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
+        {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
       </div>
       <Button onClick={handleOpen}>Learn More</Button>
-      <ProductModal handleClose={handleClose} open={open} product={product} />
+      <ProductModal handleClose={handleClose} open={open} product={product} onAddToCart={onAddToCart} />
       <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
         <p>{product.price.formatted_with_code}</p>
       </div>

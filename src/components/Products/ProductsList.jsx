@@ -17,10 +17,9 @@ const Item = styled(Paper)(({ theme }) => ({
   },
 }));
 
-
-const ProductsList = ({ products }) => {
+const ProductsList = ({ products, onAddToCart }) => {
   //view the products in browser > inspect > console
-  console.log(products)
+  // console.log(products)
   return (
     //Material UI Grid
     <div>
@@ -29,11 +28,8 @@ const ProductsList = ({ products }) => {
           {products.map((product) => (
             <Grid item xs={2} sm={4} md={4} key={product.id}>
               <Item>
-              {/* {console.log(product)} */}
-                {/* Product Item */}
                 <ProductItem
-                  // Commerce Products
-                  product={product}
+                  product={product} onAddToCart={onAddToCart}
                 />
               </Item>
             </Grid>

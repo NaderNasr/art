@@ -15,7 +15,7 @@ import AR from '../../../mobile.png'
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
 
-const ProductModal = ({ handleClose, product, open }) => {
+const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
 
   const style = {
     position: 'absolute',
@@ -77,7 +77,7 @@ const ProductModal = ({ handleClose, product, open }) => {
                     {/* Your local IP address for now, then set domain URL to redirect to mobile view */}
                     <p>{descriptionStriped}</p>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
+                      {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
                       <div>
                         <Button>
                           <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
@@ -126,7 +126,7 @@ const ProductModal = ({ handleClose, product, open }) => {
                     <p>{product.name}</p>
                     <p>{product.price.formatted_with_code}</p>
                     <p>{descriptionStriped}</p>
-                    {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
+                    {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
                     <Button>
                       <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
                       View in AR
