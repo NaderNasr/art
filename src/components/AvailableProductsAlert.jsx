@@ -1,19 +1,28 @@
 import React from 'react'
-import { Alert } from '@mui/material'
+import { Alert, Tooltip } from '@mui/material'
 
 
 const AvailableProductsAlert = ({ product }) => {
-  console.log(product.inventory.available === 0)
+
   return (
     <>
       {product.is.sold_out && !product.inventory.available
         ?
-        <Alert severity="error" style={{ width: '120px' }}>SOLD OUT</Alert>
+        <Tooltip title="SOLD OUT" placement="right">
+          <Alert severity="error" style={{ width: '0px' }}></Alert>
+        </Tooltip>
         :
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Alert severity="success" style={{ width: '100px' }}>
-            {product.inventory.available} {product.inventory.available < 2 ? 'Unit' : 'Units'}
-          </Alert>
+
+          {product.inventory.available < 2
+            ? <Tooltip title="Low Stock" placement="right">
+              <Alert severity="warning"></Alert>
+            </Tooltip>
+            :
+            <Tooltip title="In Stock" placement="right">
+              <Alert severity="success" style={{ width: '0px' }}></Alert>
+            </Tooltip>
+          }
         </div>}
     </>
   )
