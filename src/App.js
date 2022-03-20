@@ -1,4 +1,5 @@
-
+import { LinearProgress } from '@mui/material';
+import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 // import ProductsList from './components/ProductsList'
 // import Navbar from './components/Navbar/Navbar';
@@ -21,15 +22,20 @@ const App = () => {
   const [products, setProducts] = useState([]);
   //cart managed with state
   const [cart, setCart] = useState({});
+  // loading animation
+  const [loading, setLoading] = useState(true);
+  // modal state
+  // const [open, setOpen] = React.useState(false);
+
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
-    .then((products) => {
-      setProducts(products.data);
-    })
-    .catch((error) => {
-      console.log('There was an error fetching the products', error)
-    });
+      .then((products) => {
+        setProducts(products.data);
+      })
+      .catch((error) => {
+        console.log('There was an error fetching the products', error)
+      });
   }
   // use promise to load cart
   const fetchCart = () => {
@@ -54,9 +60,15 @@ const App = () => {
 
   //load products/cart once
   useEffect(() => {
+    // const timer = setInterval(() => {
     fetchProducts();
     fetchCart();
     // commerce.cart.empty(); // REMEMBER!!
+    setLoading(false)
+  // }, 100);
+  // return () => {
+  //   clearInterval(timer);
+  // };
   }, []);
 
   //////////////////////
@@ -65,15 +77,26 @@ const App = () => {
   //////////////////////
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
+       <div className="App">
         <div style={{marginBottom:'100px'}}>
         <Navbar totalItems={cart.total_items} />
         </div>
-        {/* <ProductsList products={products} onAddToCart={handleAddToCart} /> */}
-        <Cart cart={cart} />
-      </div>
-    </ThemeProvider>
+
+      {loading
+        ?
+        <div>
+          <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
+          <p>Loading</p>
+            <LinearProgress />
+          </Box>
+        </div>
+        :
+        <ProductsList products={products}
+        // <Cart cart={cart} />
+        // open={open} setOpen={setOpen}
+
+        />}
+    </div>
   )
 }
 
