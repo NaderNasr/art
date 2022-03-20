@@ -36,7 +36,7 @@ const ProductAR = ({ products }) => {
         <DefaultXRControllers />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <HitTest image={image} />
+          <HitTest image={image} dimensions={planeDimensions} />
         </Suspense>
       </ARCanvas>
     </div>

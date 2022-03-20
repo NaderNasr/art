@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { useHitTest, useInteraction } from '@react-three/xr';
 import { useTexture } from '@react-three/drei';
-import { PlaneGeometry } from 'three';
-import { MeshStandardMaterial } from 'three';
+import Marker from './Marker';
+import Art from './Art';
 
 const HitTest = ({ image, dimensions }) => {
   const [placed, setPlaced] = useState(false);
@@ -25,20 +25,10 @@ const HitTest = ({ image, dimensions }) => {
     setPlacement([x, y, z]);
   });
 
-  const Marker = () => (
-    <mesh ref={ref}>
-      <PlaneGeometry args={dimensions} />
-      <MeshStandardMaterial map={texture} opacity={0.5} />
-    </mesh>
-  )
-
-  const Art = () => (
-    <mesh position={placement}>
-      <PlaneGeometry args={dimensions} />
-      <MeshStandardMaterial map={texture} />
-    </mesh>
-  )
-
+  if (!placed) {
+    return <Marker ref={ref} dimensions={dimensions} texture={texture} />
+  }
+  return <Art position={placement} dimensions={dimensions} texture={texture} />
 }
 
 export default HitTest;
