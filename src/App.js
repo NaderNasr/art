@@ -6,6 +6,7 @@ import {
   Navbar,
   ProductsList
 } from './components/'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 
@@ -67,23 +68,28 @@ const App = () => {
   //////////////////////
 
   return (
-    <div className="App">
-      <div style={{ marginBottom: '100px' }}>
-        <Navbar totalItems={cart.total_items} />
-      </div>
-
-      {loading
-        ?
-        <div>
-          <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
-            <p>Loading</p>
-            <LinearProgress />
-          </Box>
+    <Router>
+      <div className="App">
+        <div style={{ marginBottom: '100px' }}>
+          <Navbar totalItems={cart.total_items} />
         </div>
-        :
-        <ProductsList products={products} onAddToCart={handleAddToCart} />}
-      {/* <Cart cart={cart} /> */}
-    </div>
+
+        <Routes>
+          <Route path="/" element= {
+            loading
+            ?
+            <div>
+              <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
+                <p>Loading</p>
+                <LinearProgress />
+              </Box>
+            </div>
+            :
+            <ProductsList products={products} onAddToCart={handleAddToCart} />}/>
+          <Route path="/cart" element={<Cart cart={cart} />}/>
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
