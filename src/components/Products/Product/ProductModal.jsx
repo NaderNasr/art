@@ -127,6 +127,10 @@ const ProductModal = ({ handleClose, product, open }) => {
                     <p>{product.price.formatted_with_code}</p>
                     <p>{descriptionStriped}</p>
                     {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
+                    <Button>
+                      <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
+                      View in AR
+                    </Button>
                   </Typography>
                 </CardContent>
               </Box>
