@@ -5,7 +5,8 @@ import commerce from './lib/commerce';
 import {
   Navbar,
   ProductsList,
-  Hot
+  Hot,
+  Checkout
 } from './components/'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -89,6 +90,7 @@ const App = () => {
             <ProductsList products={products} onAddToCart={handleAddToCart} />}/>
           <Route path="/cart" element={<Cart cart={cart} />}/>
           <Route path="/hot" element={<Hot />}/>
+          <Route path="/checkout" element={<Checkout />}/>
         </Routes>
       </div>
     </Router>
