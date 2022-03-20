@@ -36,6 +36,7 @@ const App = () => {
     commerce.cart.retrieve()
       .then((cart) => {
         setCart(cart);
+        console.log(cart);
       })
       .catch((error) => {
         console.log('There was an error fetching the cart', error);
@@ -52,9 +53,32 @@ const App = () => {
       });
   }
 
+  const handleEmptyCart = () => {
+    commerce.cart.empty()
+    .then((res) => {
+      setCart(res.cart);
+      console.log(cart);
+    })
+    .catch((error) => {
+      console.log('There was an error emptying cart', error);
+    });
+  }
+
+  const handleRemoveFromCart = (lineItemId) => {
+    commerce.cart.remove(lineItemId)
+    .then((res) => {
+      setCart(res.cart);
+      console.log(cart);
+    })
+    .catch((error) => {
+      console.log(`There was an error removing ${lineItemId} from cart`, error);
+    });
+  }
+
   //load products/cart once
   useEffect(() => {
     fetchProducts();
+    fetchCart();
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
@@ -82,7 +106,7 @@ const App = () => {
         </div>
         :
         <ProductsList products={products} onAddToCart={handleAddToCart} />}
-      {/* <Cart cart={cart} /> */}
+      <Cart cart={cart} setCart={setCart} onEmptyCart={handleEmptyCart} onRemoveFromCart={handleRemoveFromCart} />
     </div>
   )
 }
