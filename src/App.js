@@ -91,7 +91,7 @@ const App = () => {
           </Box>
         </div>
         :
-        <ProductsList products={products}
+        <ProductsList products={products} onAddToCart={handleAddToCart}
 
         // open={open} setOpen={setOpen}
 

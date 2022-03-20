@@ -40,7 +40,7 @@ const ProductItem = ({ product, onAddToCart }) => {
       {/* <model-viewer src={Poster} ar ar-placement="wall" ar-modes="webxr scene-viewer quick-look" camera-controls alt="A 3D model of some wall art"></model-viewer> */}
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <p style={{fontSize:'24px'}}>{product.name}</p>
-        {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
+        {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
       </div>
       <Button onClick={handleOpen}>Learn More</Button>
       <Modal
@@ -60,7 +60,7 @@ const ProductItem = ({ product, onAddToCart }) => {
               {product.name}
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />}>Add To Cart</Button>}
+              {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
             </Typography>
           </Box>
         </Fade>
