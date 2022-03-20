@@ -131,7 +131,7 @@ const App = () => {
           <Route path="/hot" element={<Hot />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/AR" element={<ARWrapper />}>
-            <Route path=":productId" element={<ProductAR />} />
+            <Route path=":productId" element={<ProductAR products={products}/>} />
           </Route>
         </Routes>
       </div>
