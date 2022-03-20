@@ -66,7 +66,7 @@ const Navbar = ({ totalItems }) => {
               </div>
               <div className={classes.cart}>
                 <IconButton aria-label="Show cart items">
-                  <Badge badgeContent={2} color="secondary">
+                  <Badge badgeContent={totalItems} color="secondary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>
@@ -87,7 +87,7 @@ const Navbar = ({ totalItems }) => {
               </Typography>
               <div className={classes.cart}>
                 <IconButton aria-label="Show cart items">
-                  <Badge badgeContent={2} color="secondary">
+                  <Badge badgeContent={totalItems} color="secondary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>
