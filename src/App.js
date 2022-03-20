@@ -11,6 +11,7 @@ import {
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
+import ProductAR from './components/Products/Product/ProductAR';
 
 
 
@@ -128,6 +129,7 @@ const App = () => {
             />} />
           <Route path="/hot" element={<Hot />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/AR" element={<ProductAR />}/>
         </Routes>
       </div>
     </Router>
