@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Typography, Button, Grid, LinearProgress } from '@material-ui/core';
+import { Alert } from "@mui/material";
 import { Link } from 'react-router-dom'
 import makeStyles from './styles';
 import CartItem from './CartItem/CartItem';
@@ -9,8 +10,10 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      Your shopping cart is empty
-      {console.log('Empty Cart')}
+      <Alert severity="error">Your shopping cart is empty </Alert>
+      <Link to='/'>
+      Browse Products
+      </Link>
     </Typography>
   );
 
@@ -38,8 +41,8 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
       </div>
     </>
   );
-  console.log(cart.line_items);
-  if (!cart.line_items) return(
+
+  if (!cart.line_items) return (
     <div>
       <p>Loading</p>
       <LinearProgress />
