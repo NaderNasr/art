@@ -14,6 +14,7 @@ import {
   // ListItemIcon
 } from "@material-ui/core";
 // import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 import MenuIcon from "@material-ui/icons/Menu";
 import { ShoppingCart } from '@material-ui/icons';
@@ -54,22 +55,24 @@ const Navbar = ({ totalItems }) => {
                 ARt
               </Typography>
               <div className={classes.buttons}>
-                <Button variant="text" >
+                <Button component={Link} to={"/hot"} variant="text" >
                   Hot
                 </Button>
-                <Button variant="text" >
+                <Button component={Link} to={"/categories"} variant="text" >
                   categories
                 </Button>
-                <Button variant="text" >
+                <Button component={Link} to={"/"}variant="text" >
                   Products
                 </Button>
               </div>
               <div className={classes.cart}>
+                <Link to="/cart">
                 <IconButton aria-label="Show cart items">
-                  <Badge badgeContent={2} color="secondary">
+                  <Badge badgeContent={totalItems} color="secondary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>
+                </Link>
               </div>
             </>
             :
@@ -87,7 +90,7 @@ const Navbar = ({ totalItems }) => {
               </Typography>
               <div className={classes.cart}>
                 <IconButton aria-label="Show cart items">
-                  <Badge badgeContent={2} color="secondary">
+                  <Badge badgeContent={totalItems} color="secondary">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>
