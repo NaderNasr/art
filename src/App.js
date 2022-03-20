@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 // import ProductsList from './components/ProductsList'
 // import Navbar from './components/Navbar/Navbar';
 import commerce from './lib/commerce';
-import { Navbar , ProductsList } from './components/'
+import { Navbar, ProductsList } from './components/'
 import Cart from './components/Cart/Cart';
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 
@@ -40,22 +40,22 @@ const App = () => {
   // use promise to load cart
   const fetchCart = () => {
     commerce.cart.retrieve()
-    .then((cart) => {
-      setCart(cart);
-    })
-    .catch((error) => {
-      console.log('There was an error fetching the cart', error);
-    });
+      .then((cart) => {
+        setCart(cart);
+      })
+      .catch((error) => {
+        console.log('There was an error fetching the cart', error);
+      });
   }
   // use promise to add item(s) to cart
   const handleAddToCart = (productId, quantity) => {
     commerce.cart.add(productId, quantity)
-    .then((item) => {
-      setCart(item.cart);
-    })
-    .catch((error) => {
-      console.log('There was an error adding an item to cart', error);
-    });
+      .then((item) => {
+        setCart(item.cart);
+      })
+      .catch((error) => {
+        console.log('There was an error adding an item to cart', error);
+      });
   }
 
   //load products/cart once
@@ -65,10 +65,10 @@ const App = () => {
     fetchCart();
     // commerce.cart.empty(); // REMEMBER!!
     setLoading(false)
-  // }, 100);
-  // return () => {
-  //   clearInterval(timer);
-  // };
+    // }, 100);
+    // return () => {
+    //   clearInterval(timer);
+    // };
   }, []);
 
   //////////////////////
@@ -77,22 +77,22 @@ const App = () => {
   //////////////////////
 
   return (
-       <div className="App">
-        <div style={{marginBottom:'100px'}}>
+    <div className="App">
+      <div style={{ marginBottom: '100px' }}>
         <Navbar totalItems={cart.total_items} />
-        </div>
+      </div>
 
       {loading
         ?
         <div>
           <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
-          <p>Loading</p>
+            <p>Loading</p>
             <LinearProgress />
           </Box>
         </div>
         :
         <ProductsList products={products}
-        // <Cart cart={cart} />
+
         // open={open} setOpen={setOpen}
 
         />}
