@@ -97,6 +97,7 @@ const App = () => {
         // open={open} setOpen={setOpen}
 
         />}
+        {/* <Cart cart={cart} /> */}
     </div>
   )
 }
