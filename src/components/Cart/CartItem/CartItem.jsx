@@ -3,7 +3,7 @@ import { Typography, Button, Card, CardActions, CardContent, CardMedia } from '@
 
 import makeStyles from './styles';
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, onRemoveFromCart }) => {
   const classes = makeStyles();
 
   return (
@@ -19,7 +19,7 @@ const CartItem = ({ item }) => {
           <Typography>{item.quantity}</Typography>
           <Button type="button" size="small" >+</Button> 
         </div>
-        <Button variant="contained" type="button" color="secondary">Remove</Button>
+        <Button variant="contained" type="button" color="secondary" onClick={() => onRemoveFromCart(item.id)}>Remove</Button>
       </CardActions>
     </Card>
   )
