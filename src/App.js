@@ -47,9 +47,10 @@ const App = () => {
     commerce.cart.add(productId, quantity)
       .then((item) => {
         setCart(item.cart);
+        console.log(item.cart);
       })
       .catch((error) => {
-        console.log('There was an error adding an item to cart', error);
+        console.log(`There was an error adding ${productId} to cart`, error);
       });
   }
 
@@ -81,6 +82,9 @@ const App = () => {
       setCart(res.cart);
       console.log(cart);
     })
+    .catch((error) => {
+      console.log(`There was an error updating quantity of ${lineItemId}`, error);
+    });
   }
 
   //load products/cart once
@@ -92,11 +96,6 @@ const App = () => {
     }, 2000);
     return () => clearInterval(timer);
   }, []);
-
-  //////////////////////
-  //EMPTY CART!!!!!!!!//
-  //EMPTY CART!!!!!!!!//
-  //////////////////////
 
   return (
     <div className="App">
@@ -116,7 +115,6 @@ const App = () => {
         <ProductsList products={products} onAddToCart={handleAddToCart} />}
       <Cart
         cart={cart}
-        setCart={setCart}
         onEmptyCart={handleEmptyCart}
         onRemoveFromCart={handleRemoveFromCart}
         onUpdateCartQuantity={handleUpdateCartQuantity}
