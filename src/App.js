@@ -8,10 +8,11 @@ import {
   Hot,
   Checkout
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
-import ProductAR from './components/Products/Product/ProductAR';
+import ProductAR from './components/Products/Product/AR/ProductAR';
+import ARWrapper from './components/Products/Product/AR/ARWrapper';
 
 
 
@@ -129,7 +130,9 @@ const App = () => {
             />} />
           <Route path="/hot" element={<Hot />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/AR" element={<ProductAR />}/>
+          <Route path="/AR" element={<ARWrapper />}>
+            <Route path=":productId" element={<ProductAR />} />
+          </Route>
         </Routes>
       </div>
     </Router>

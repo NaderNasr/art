@@ -80,7 +80,7 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
                       <div>
-                        <Link to='/AR'>
+                        <Link to={`/AR/${product.id}`}>
                           <Button>
                             <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
                             View in AR
