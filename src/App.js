@@ -56,11 +56,8 @@ const App = () => {
   useEffect(() => {
     fetchProducts();
     fetchCart();
-
     // commerce.cart.empty(); // REMEMBER!!
   }, []);
-
-  // console.log(cart);
 
   //////////////////////
   //EMPTY CART!!!!!!!!//
