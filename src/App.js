@@ -8,6 +8,7 @@ import {
 } from './components/'
 
 import Cart from './components/Cart/Cart';
+import UserAuthentication from './components/Authentication/UserAuthentication';
 
 
 
@@ -18,7 +19,10 @@ const App = () => {
   const [cart, setCart] = useState({});
   // loading animation
   const [loading, setLoading] = useState(true);
-  // modal state
+
+  // email authentication
+  const auth = commerce.customer.login('leslie.lawless@example.com', 'http://localhost:3000/login/callback').then((token) => console.log(token));
+  const jwt = commerce.customer.getToken('1ae420a5-2f43-426f-8a61-516eabb56d33').then((jwt) => console.log(jwt));
 
   // use promise to load products
   const fetchProducts = () => {
@@ -68,7 +72,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <div style={{ marginBottom: '100px' }}>
+    <UserAuthentication auth={auth} jwt={jwt}/>
+      {/* <div style={{ marginBottom: '100px' }}>
         <Navbar totalItems={cart.total_items} />
       </div>
 
@@ -81,7 +86,7 @@ const App = () => {
           </Box>
         </div>
         :
-        <ProductsList products={products} onAddToCart={handleAddToCart} />}
+        <ProductsList products={products} onAddToCart={handleAddToCart} />} */}
       {/* <Cart cart={cart} /> */}
     </div>
   )
