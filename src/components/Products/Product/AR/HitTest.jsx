@@ -32,6 +32,13 @@ const HitTest = ({ image, dimensions }) => {
     </mesh>
   )
 
+  const Art = () => (
+    <mesh position={placement}>
+      <PlaneGeometry args={dimensions} />
+      <MeshStandardMaterial map={texture} />
+    </mesh>
+  )
+
 }
 
 export default HitTest;
