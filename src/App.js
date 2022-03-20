@@ -127,7 +127,7 @@ const App = () => {
                 onUpdateCartQuantity={handleUpdateCartQuantity}
               />}/>
           <Route path="/hot" element={<Hot />}/>
-          <Route path="/checkout" element={<Checkout />}/>
+          <Route path="/checkout" element={<Checkout cart={cart} />}/>
         </Routes>
       </div>
     </Router>
