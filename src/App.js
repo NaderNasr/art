@@ -39,6 +39,7 @@ const App = () => {
     commerce.cart.retrieve()
       .then((cart) => {
         setCart(cart);
+        console.log(cart);
       })
       .catch((error) => {
         console.log('There was an error fetching the cart', error);
@@ -47,27 +48,57 @@ const App = () => {
   // use promise to add item(s) to cart
   const handleAddToCart = (productId, quantity) => {
     commerce.cart.add(productId, quantity)
-      .then((item) => {
-        setCart(item.cart);
+      .then((res) => {
+        setCart(res.cart);
+        console.log(res.cart);
       })
       .catch((error) => {
-        console.log('There was an error adding an item to cart', error);
+        console.log(`There was an error adding ${productId} to cart`, error);
       });
+  }
+
+  const handleEmptyCart = () => {
+    commerce.cart.empty()
+    .then((res) => {
+      setCart(res.cart);
+      console.log(cart);
+    })
+    .catch((error) => {
+      console.log('There was an error emptying cart', error);
+    });
+  }
+
+  const handleRemoveFromCart = (lineItemId) => {
+    commerce.cart.remove(lineItemId)
+    .then((res) => {
+      setCart(res.cart);
+      console.log(cart);
+    })
+    .catch((error) => {
+      console.log(`There was an error removing ${lineItemId} from cart`, error);
+    });
+  }
+
+  const handleUpdateCartQuantity = (lineItemId, quantity) => {
+    commerce.cart.update(lineItemId, { quantity })
+    .then((res) => {
+      setCart(res.cart);
+      console.log(cart);
+    })
+    .catch((error) => {
+      console.log(`There was an error updating quantity of ${lineItemId}`, error);
+    });
   }
 
   //load products/cart once
   useEffect(() => {
     fetchProducts();
+    fetchCart();
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
   }, []);
-
-  //////////////////////
-  //EMPTY CART!!!!!!!!//
-  //EMPTY CART!!!!!!!!//
-  //////////////////////
 
   return (
     <Router>
@@ -88,12 +119,19 @@ const App = () => {
             </div>
             :
             <ProductsList products={products} onAddToCart={handleAddToCart} />}/>
-          <Route path="/cart" element={<Cart cart={cart} />}/>
+          <Route path="/cart" element={     
+              <Cart
+                cart={cart}
+                onEmptyCart={handleEmptyCart}
+                onRemoveFromCart={handleRemoveFromCart}
+                onUpdateCartQuantity={handleUpdateCartQuantity}
+              />}/>
           <Route path="/hot" element={<Hot />}/>
           <Route path="/checkout" element={<Checkout />}/>
         </Routes>
       </div>
     </Router>
+
   )
 }
 
