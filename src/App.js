@@ -45,9 +45,9 @@ const App = () => {
   // use promise to add item(s) to cart
   const handleAddToCart = (productId, quantity) => {
     commerce.cart.add(productId, quantity)
-      .then((item) => {
-        setCart(item.cart);
-        console.log(item.cart);
+      .then((res) => {
+        setCart(res.cart);
+        console.log(res.cart);
       })
       .catch((error) => {
         console.log(`There was an error adding ${productId} to cart`, error);
