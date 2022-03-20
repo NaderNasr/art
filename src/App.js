@@ -63,35 +63,35 @@ const App = () => {
 
   const handleEmptyCart = () => {
     commerce.cart.empty()
-    .then((res) => {
-      setCart(res.cart);
-      console.log(cart);
-    })
-    .catch((error) => {
-      console.log('There was an error emptying cart', error);
-    });
+      .then((res) => {
+        setCart(res.cart);
+        console.log(cart);
+      })
+      .catch((error) => {
+        console.log('There was an error emptying cart', error);
+      });
   }
 
   const handleRemoveFromCart = (lineItemId) => {
     commerce.cart.remove(lineItemId)
-    .then((res) => {
-      setCart(res.cart);
-      console.log(cart);
-    })
-    .catch((error) => {
-      console.log(`There was an error removing ${lineItemId} from cart`, error);
-    });
+      .then((res) => {
+        setCart(res.cart);
+        console.log(cart);
+      })
+      .catch((error) => {
+        console.log(`There was an error removing ${lineItemId} from cart`, error);
+      });
   }
 
   const handleUpdateCartQuantity = (lineItemId, quantity) => {
     commerce.cart.update(lineItemId, { quantity })
-    .then((res) => {
-      setCart(res.cart);
-      console.log(cart);
-    })
-    .catch((error) => {
-      console.log(`There was an error updating quantity of ${lineItemId}`, error);
-    });
+      .then((res) => {
+        setCart(res.cart);
+        console.log(cart);
+      })
+      .catch((error) => {
+        console.log(`There was an error updating quantity of ${lineItemId}`, error);
+      });
   }
 
   //load products/cart once
@@ -112,26 +112,26 @@ const App = () => {
         </div>
 
         <Routes>
-          <Route path="/" element= {
+          <Route path="/" element={
             loading
-            ?
-            <div>
-              <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
-                <p>Loading</p>
-                <LinearProgress />
-              </Box>
-            </div>
-            :
-            <ProductsList products={products} onAddToCart={handleAddToCart} />}/>
-          <Route path="/cart" element={     
-              <Cart
-                cart={cart}
-                onEmptyCart={handleEmptyCart}
-                onRemoveFromCart={handleRemoveFromCart}
-                onUpdateCartQuantity={handleUpdateCartQuantity}
-              />}/>
-          <Route path="/hot" element={<Hot />}/>
-          <Route path="/checkout" element={<Checkout />}/>
+              ?
+              <div>
+                <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
+                  <p>Loading</p>
+                  <LinearProgress />
+                </Box>
+              </div>
+              :
+              <ProductsList products={products} onAddToCart={handleAddToCart} />} />
+          <Route path="/cart" element={
+            <Cart
+              cart={cart}
+              onEmptyCart={handleEmptyCart}
+              onRemoveFromCart={handleRemoveFromCart}
+              onUpdateCartQuantity={handleUpdateCartQuantity}
+            />} />
+          <Route path="/hot" element={<Hot />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </div>
     </Router>
