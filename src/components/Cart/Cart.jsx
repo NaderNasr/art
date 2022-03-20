@@ -1,6 +1,8 @@
 import React from "react";
 import { Container, Typography, Button, Grid } from '@material-ui/core';
+
 import makeStyles from './styles';
+import CartItem from './CartItem/CartItem';
 
 const Cart = ({ cart }) => {
   const classes = makeStyles();
@@ -33,6 +35,8 @@ const Cart = ({ cart }) => {
       </div>
     </>
   );
+
+  if (!cart.line_items) return 'Loading...'
 
   return (
     <Container>
