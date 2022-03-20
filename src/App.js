@@ -75,6 +75,14 @@ const App = () => {
     });
   }
 
+  const handleUpdateCartQuantity = (lineItemId, quantity) => {
+    commerce.cart.update(lineItemId, { quantity })
+    .then((res) => {
+      setCart(res.cart);
+      console.log(cart);
+    })
+  }
+
   //load products/cart once
   useEffect(() => {
     fetchProducts();
@@ -106,7 +114,13 @@ const App = () => {
         </div>
         :
         <ProductsList products={products} onAddToCart={handleAddToCart} />}
-      <Cart cart={cart} setCart={setCart} onEmptyCart={handleEmptyCart} onRemoveFromCart={handleRemoveFromCart} />
+      <Cart
+        cart={cart}
+        setCart={setCart}
+        onEmptyCart={handleEmptyCart}
+        onRemoveFromCart={handleRemoveFromCart}
+        onUpdateCartQuantity={handleUpdateCartQuantity}
+      />
     </div>
   )
 }
