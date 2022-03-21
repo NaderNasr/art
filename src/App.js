@@ -30,7 +30,6 @@ const App = () => {
     commerce.products.list()
       .then((products) => {
         setProducts(products.data);
-        console.log(products);
       })
       .catch((error) => {
         console.log('There was an error fetching the products', error)
@@ -41,7 +40,6 @@ const App = () => {
     commerce.cart.retrieve()
       .then((cart) => {
         setCart(cart);
-        console.log(cart);
       })
       .catch((error) => {
         console.log('There was an error fetching the cart', error);
@@ -52,7 +50,6 @@ const App = () => {
     commerce.cart.add(productId, quantity)
       .then((res) => {
         setCart(res.cart);
-        console.log(res.cart);
       })
       .catch((error) => {
         console.log(`There was an error adding ${productId} to cart`, error);
