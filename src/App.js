@@ -35,14 +35,14 @@ const App = () => {
 
   const handleAuth = () => {
     commerce.customer.login(userEmail, `http://localhost:3000/authentication`)
-    .then((token) => setUser(token))
+      .then((token) => setUser(token))
       .catch((err) => console.log('Handle Auth ERROR: ', err))
   }
 
   const handleJWT = () => {
     commerce.customer.getToken(user)
-    .then((jwt) => console.log(jwt))
-    .catch((err) => console.log('handleJWT ERROR: ', err))
+      .then((jwt) => console.log(jwt))
+      .catch((err) => console.log('handleJWT ERROR: ', err))
   }
 
   // console.log(JSON.stringify(params))
@@ -156,10 +156,11 @@ const App = () => {
           <Route path="/authentication" element={
             <UserAuthentication setUserEmail={setUserEmail} />
           } />
-        </Routes>
-        <Route path="/AR" element={<ARWrapper />}>
-            <Route path=":productId" element={<ProductAR products={products}/>} />
+          <Route path="/AR" element={<ARWrapper />}>
+            <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
+        </Routes>
+
       </div>
     </Router>
 
