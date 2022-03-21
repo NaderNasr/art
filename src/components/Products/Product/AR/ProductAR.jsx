@@ -1,18 +1,27 @@
-import React, {Suspense} from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
 import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
+import { TextureLoader } from 'three';
 
 import HitTest from './HitTest';
 
 const ProductAR = ({ products }) => {
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
-  // const image = targetProduct.image.url;
+
+  const image = 'https://cors-anywhere.herokuapp.com/' + targetProduct.image.url;
+  console.log(image);
 
   const dimensions = targetProduct.image.image_dimensions;
-  console.log(dimensions);
+  let texture = null;
 
+  // const loadTexture = () => {
+  //   const loader = new TextureLoader();
+  //   const newTexture = loader.load('./hand.jpg');
+  //   return newTexture;
+  // }
+  
   const rescaleImageForAR = (height, width) => {
     const aspect = height / width;
     console.log(aspect);
@@ -33,6 +42,10 @@ const ProductAR = ({ products }) => {
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
   console.log(planeDimensions);
 
+  // useEffect(() => {
+  //   texture = loadTexture();
+  // })
+
   return (
     <div style={{ height: "35rem" }}>
       <ARCanvas className="canvas" sessionInit={{ requiredFeatures: ['hit-test'] }}>
@@ -40,7 +53,7 @@ const ProductAR = ({ products }) => {
         <DefaultXRControllers />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <HitTest dimensions={planeDimensions} />
+          <HitTest dimensions={planeDimensions} image={image} />
         </Suspense>
       </ARCanvas>
     </div>

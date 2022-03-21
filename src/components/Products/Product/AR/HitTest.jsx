@@ -1,20 +1,18 @@
 import React, { useRef, useState } from 'react';
-import { useHitTest, useInteraction, Interactive } from '@react-three/xr';
+import { useHitTest, useInteraction, Interactive, useXR } from '@react-three/xr';
 import { useTexture, Plane } from '@react-three/drei';
 // import Marker from './Marker';
 import Art from './Art';
 
-const HitTest = ({ dimensions }) => {
+const HitTest = ({ dimensions, image }) => {
   const [placed, setPlaced] = useState(false);
   const [placement, setPlacement] = useState([]);
   const ref = useRef();
-  // const texture = useTexture(image);
+
+  const texture = useTexture(image);
 
   useInteraction(ref, 'onSelect', () => {
     setPlaced(true);
-    ref.current.position.x = placement[0];
-    ref.current.position.y = placement[1];
-    ref.current.position.z = placement[2];
   });
 
   useHitTest((hit) => {
@@ -27,9 +25,9 @@ const HitTest = ({ dimensions }) => {
   });
 
   return (
-  <Interactive>
+  <Interactive onSelect={() => console.log('click!')}>
     <Plane ref={ref} args={dimensions} />
-    {placed && <Art position={placement} dimensions={dimensions} />}
+    {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>
   )
 }
