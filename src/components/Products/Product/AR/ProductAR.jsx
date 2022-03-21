@@ -29,12 +29,6 @@ const ProductAR = ({ products }) => {
 
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
 
-  if (!image) return (
-    <div>
-      <LinearProgress />
-    </div>
-  )
-
   return (
     <div style={{ height: "35rem" }}>
       <ARCanvas className="canvas" sessionInit={{ requiredFeatures: ['hit-test'] }}>

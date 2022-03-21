@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useHitTest, Interactive, useXR } from '@react-three/xr';
+import { useHitTest, Interactive } from '@react-three/xr';
 import { useTexture, Plane } from '@react-three/drei';
 import Art from './Art';
 

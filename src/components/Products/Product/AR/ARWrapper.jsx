@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 // using this component for nested routes... outlet may be causing problems...
 
 const ARWrapper = () => {
-  const arCanvas = document.querySelector('.canvas');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -20,7 +19,6 @@ const ARWrapper = () => {
 
   return (
     <div>
-      <p>Hello AR</p>
       <Outlet />
     </div>
   );
