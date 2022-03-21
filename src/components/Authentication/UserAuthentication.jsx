@@ -24,7 +24,6 @@ const UserAuthentication = () => {
   const [test, setTest] = useState('')
 
 
-  console.log('userEmail: ', userEmail)
 
   const auth = () => {
     commerce.customer.login(userEmail, 'http://localhost:3000/').then((loginToken) => setTest(loginToken));
@@ -34,7 +33,7 @@ const UserAuthentication = () => {
   let { id } = useParams();
   let jwtToken = { id }
   console.log(jwtToken)
-  console.log('LOGIN',test)
+  console.log('LOGIN', test)
 
 
   const jwt = () => {
@@ -42,35 +41,32 @@ const UserAuthentication = () => {
       .then((jwt) => setUserToken(jwt))
       .catch((err) => console.log('JWT ERROR: ', err))
   }
-  console.log('JWT_Token: ', userToken)
 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    setUserEmail(data.get('email'))
+    // const data = new FormData(event.currentTarget);
+    // setUserEmail(data.get('email'))
     auth()
   };
 
-  console.log('YOUR MOTHER FUCKING EMAIL',userEmail)
 
+  // const handleLogOut = (e) => {
+  //   e.preventDefault();
+  //   commerce.customer.logout();
+  // };
 
-
-  const handleLogOut = (e) => {
-    e.preventDefault();
-    commerce.customer.logout();
-  };
-
-  console.log('ID: ', id)
+  // console.log('ID: ', id)
   useEffect(() => {
-    if(id){
-      jwt()
+    if (jwtToken) {
+      return jwt()
     }
-  });
+  }, []);
 
+  console.log('userEmail: ', userEmail);
+  console.log('JWT_Token: ', userToken);
+  console.log('YOUR EMAIL', userEmail);
   console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.token() ? "YAAAAAAAAAS" : "NO BITCH"));
-
-  // commerce.customer.token() ? {}
 
   return (
     <ThemeProvider theme={theme}>
@@ -91,7 +87,7 @@ const UserAuthentication = () => {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
@@ -100,6 +96,14 @@ const UserAuthentication = () => {
               name="email"
               autoComplete="email"
               autoFocus
+            /> */}
+            <input
+              
+              onChange={e => setUserEmail(e.target.value)}
+              placeholder="email"
+              type="text"
+              name="email"
+              required
             />
             {<br />}
             {<br />}
@@ -112,20 +116,6 @@ const UserAuthentication = () => {
             >
               Sign In
             </Button>
-            {<br />}
-
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
         {/* <Box component="form" onSubmit={handleLogOut} sx={{ mt: 1 }}>
