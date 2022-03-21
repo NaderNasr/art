@@ -33,14 +33,19 @@ const App = () => {
   const params = useParams();
 
   // const handleAuth = () => {
-    const auth = commerce.customer.login(userEmail, `http://localhost:3000/authentication/`)
-      .then((token) => setUser(token.json))
-      .catch((err) => console.log('Handle Auth ERROR: ', err.message))
+  const auth = commerce.customer.login(userEmail, `http://localhost:3000/authentication/`)
+    .then((token) => setUser(token.json))
+    .catch((err) => console.log('Handle Auth ERROR: ', err.message))
   // }
   console.log(auth)
   const handleJWT = commerce.customer.getToken('45d71740-add0-4608-a43c-5c1643c86f22')
-      .then((jwt) => console.log(jwt))
-      .catch((err) => console.log('handleJWT ERROR: ', err.message))
+    .then((jwt) => console.log(jwt))
+    .catch((err) => console.log('handleJWT ERROR: ', err.message))
+
+  // incoming order to state
+  const [order, setOrder] = useState({})
+  //error message
+  const [errorMessage, setErrorMessage] = useState('')
 
   // use promise to load products
   const fetchProducts = () => {
@@ -82,6 +87,24 @@ const App = () => {
       .catch((error) => {
         console.log('There was an error emptying cart', error);
       });
+  }
+
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh()
+
+    setCart(newCart);
+  }
+
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
+
+      console.log("Incoming Order: ", incomingOrder)
+      setOrder(incomingOrder);
+      refreshCart()
+    } catch (error) {
+      setErrorMessage(error.data.error.message)
+    }
   }
 
   const handleRemoveFromCart = (lineItemId) => {
@@ -150,6 +173,15 @@ const App = () => {
           <Route path="/authentication" element={
             <UserAuthentication setUserEmail={setUserEmail} />
           } />
+          <Route
+            path="/checkout"
+            element={
+              <Checkout
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />} />
           <Route path="/AR" element={<ARWrapper />}>
             <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
