@@ -8,7 +8,7 @@ import {
   Hot,
   Checkout
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 import UserAuthentication from './components/Authentication/UserAuthentication';
@@ -22,20 +22,40 @@ const App = () => {
   const [cart, setCart] = useState({});
   // loading animation
   const [loading, setLoading] = useState(true);
+  // Authentication
+  const [user, setUser] = useState('');
+  const [userEmail, setUserEmail] = useState('');
 
   // email authentication
-  const auth = commerce.customer.login('leslie.lawless@example.com', 'http://localhost:3000/login/callback').then((token) => console.log(token));
-  const jwt = commerce.customer.getToken('1ae420a5-2f43-426f-8a61-516eabb56d33').then((jwt) => console.log(jwt));
+  // const auth = ()
+  // handle user authentication
+  const params = useParams();
+  const handleAuth = () => {
+    commerce.customer.login(userEmail, `http://localhost:3000/authentication`)
+    .then((token) => setUser(token))
+      .catch((err) => console.log('Handle Auth ERROR: ', err))
+  }
+ 
+  // console.log(y)
+
+  const handleJWT = () => {
+    commerce.customer.getToken(params)
+    .then((jwt) => console.log(jwt))
+    .catch((err) => console.log('handleJWT ERROR: ', err))
+  }
+  
+  console.log(JSON.stringify(params))
+  console.log(user)
 
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
       .then((products) => {
         setProducts(products.data);
-        console.log(products);
+        // console.log(products);
       })
       .catch((error) => {
-        console.log('There was an error fetching the products', error)
+        console.log('There was an error fetching the products: ', error)
       });
   }
   // use promise to load cart
@@ -43,7 +63,7 @@ const App = () => {
     commerce.cart.retrieve()
       .then((cart) => {
         setCart(cart);
-        console.log(cart);
+        // console.log(cart);
       })
       .catch((error) => {
         console.log('There was an error fetching the cart', error);
@@ -54,7 +74,7 @@ const App = () => {
     commerce.cart.add(productId, quantity)
       .then((res) => {
         setCart(res.cart);
-        console.log(res.cart);
+        // console.log(res.cart);
       })
       .catch((error) => {
         console.log(`There was an error adding ${productId} to cart`, error);
@@ -96,12 +116,15 @@ const App = () => {
 
   //load products/cart once
   useEffect(() => {
+    handleAuth();
+    handleJWT();
     fetchProducts();
     fetchCart();
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
+
   }, []);
 
   return (
@@ -132,6 +155,9 @@ const App = () => {
             />} />
           <Route path="/hot" element={<Hot />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/authentication/:id" element={
+            <UserAuthentication setUserEmail={setUserEmail} />
+          } />
         </Routes>
       </div>
     </Router>
