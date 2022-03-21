@@ -29,23 +29,22 @@ const App = () => {
   // email authentication
   // const auth = ()
   // handle user authentication
-  const params = useParams();
+  // const params = useParams();
+
   const handleAuth = () => {
     commerce.customer.login(userEmail, `http://localhost:3000/authentication`)
     .then((token) => setUser(token))
       .catch((err) => console.log('Handle Auth ERROR: ', err))
   }
- 
-  // console.log(y)
 
   const handleJWT = () => {
-    commerce.customer.getToken(params)
+    commerce.customer.getToken(user)
     .then((jwt) => console.log(jwt))
     .catch((err) => console.log('handleJWT ERROR: ', err))
   }
-  
-  console.log(JSON.stringify(params))
-  console.log(user)
+
+  // console.log(JSON.stringify(params))
+  console.log(handleJWT())
 
   // use promise to load products
   const fetchProducts = () => {
@@ -116,8 +115,8 @@ const App = () => {
 
   //load products/cart once
   useEffect(() => {
-    handleAuth();
-    handleJWT();
+    // handleAuth();
+    // handleJWT();
     fetchProducts();
     fetchCart();
     const timer = setInterval(() => {
@@ -155,7 +154,7 @@ const App = () => {
             />} />
           <Route path="/hot" element={<Hot />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/authentication/:id" element={
+          <Route path="/authentication" element={
             <UserAuthentication setUserEmail={setUserEmail} />
           } />
         </Routes>
