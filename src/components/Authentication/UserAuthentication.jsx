@@ -32,12 +32,12 @@ const UserAuthentication = () => {
 
   let { id } = useParams();
   let jwtToken = { id }
-  console.log(jwtToken)
+  console.log(jwtToken.id)
   console.log('LOGIN', test)
 
 
   const jwt = () => {
-    commerce.customer.getToken(jwtToken)
+    commerce.customer.getToken(jwtToken.id)
       .then((jwt) => setUserToken(jwt))
       .catch((err) => console.log('JWT ERROR: ', err))
   }
@@ -51,10 +51,10 @@ const UserAuthentication = () => {
   };
 
 
-  // const handleLogOut = (e) => {
-  //   e.preventDefault();
-  //   commerce.customer.logout();
-  // };
+  const handleLogOut = (e) => {
+    // e.preventDefault();
+    commerce.customer.logout();
+  };
 
   // console.log('ID: ', id)
   useEffect(() => {
@@ -66,7 +66,8 @@ const UserAuthentication = () => {
   console.log('userEmail: ', userEmail);
   console.log('JWT_Token: ', userToken);
   console.log('YOUR EMAIL', userEmail);
-  console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.token() ? "YAAAAAAAAAS" : "NO BITCH"));
+  console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YAAAAAAAAAS" : "NO Not YET"));
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -87,18 +88,7 @@ const UserAuthentication = () => {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            {/* <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            /> */}
             <input
-              
               onChange={e => setUserEmail(e.target.value)}
               placeholder="email"
               type="text"
@@ -118,7 +108,7 @@ const UserAuthentication = () => {
             </Button>
           </Box>
         </Box>
-        {/* <Box component="form" onSubmit={handleLogOut} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleLogOut} sx={{ mt: 1 }}>
 
           <Button
             type="submit"
@@ -129,7 +119,7 @@ const UserAuthentication = () => {
             logout
           </Button>
           {<br />}
-        </Box> */}
+        </Box>
       </Container>
     </ThemeProvider>
   );
