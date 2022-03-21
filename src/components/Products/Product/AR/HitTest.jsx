@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useHitTest, Interactive, useXR } from '@react-three/xr';
 import { useTexture, Plane } from '@react-three/drei';
-// import Marker from './Marker';
 import Art from './Art';
 
 const HitTest = ({ dimensions, image }) => {
@@ -13,8 +12,13 @@ const HitTest = ({ dimensions, image }) => {
   const texture = useTexture(image);
 
   const onSelect = () => {
-    setPlaced(true);
-    setMarker([0, 0]);
+    if (placed) {
+      setPlaced(false);
+      setMarker(dimensions);
+    } else {
+      setPlaced(true);
+      setMarker([0, 0]);
+    }
   }
 
   useHitTest((hit) => {
@@ -29,7 +33,7 @@ const HitTest = ({ dimensions, image }) => {
   return (
   <Interactive onSelect={() => onSelect()}>
     <Plane ref={ref} args={marker}>
-      <meshStandardMaterial map={texture} opacity={0.5} />
+      <meshStandardMaterial map={texture} opacity={0.1} />
     </Plane>
     {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>

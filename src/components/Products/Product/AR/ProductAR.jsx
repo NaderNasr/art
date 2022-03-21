@@ -1,24 +1,19 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
 import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
 
 import HitTest from './HitTest';
+import { LinearProgress } from '@mui/material';
 
 const ProductAR = ({ products }) => {
+
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
 
   const image = 'https://cors-anywhere.herokuapp.com/' + targetProduct.image.url;
 
   const dimensions = targetProduct.image.image_dimensions;
-  // let texture = null;
-
-  // const loadTexture = () => {
-  //   const loader = new TextureLoader();
-  //   const newTexture = loader.load('./hand.jpg');
-  //   return newTexture;
-  // }
   
   const rescaleImageForAR = (height, width) => {
     let planeWidth = 1;
@@ -34,9 +29,11 @@ const ProductAR = ({ products }) => {
 
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
 
-  // useEffect(() => {
-  //   texture = loadTexture();
-  // })
+  if (!image) return (
+    <div>
+      <LinearProgress />
+    </div>
+  )
 
   return (
     <div style={{ height: "35rem" }}>

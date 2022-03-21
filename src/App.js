@@ -93,11 +93,13 @@ const App = () => {
   useEffect(() => {
     fetchProducts();
     fetchCart();
+
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
   }, []);
+
 
   return (
     <Router>
@@ -128,7 +130,7 @@ const App = () => {
           <Route path="/hot" element={<Hot />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/AR" element={<ARWrapper />}>
-            <Route path=":productId" element={<ProductAR products={products}/>} />
+            <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
         </Routes>
       </div>
