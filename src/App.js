@@ -23,7 +23,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   // modal state
 
-  // sets empty cart and confirms order to api
+  // incoming order to state
   const [order, setOrder] = useState({})
   //error message
   const [errorMessage, setErrorMessage] = useState('')
@@ -80,7 +80,7 @@ const App = () => {
     try {
       const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
 
-      console.log(incomingOrder)
+      console.log("Incoming Order: ", incomingOrder)
       setOrder(incomingOrder);
       refreshCart()
     } catch (error) {
@@ -149,12 +149,13 @@ const App = () => {
           <Route path="/hot" element={<Hot />}/>
           <Route 
             path="/checkout" 
-            element={<Checkout 
-            cart={cart} 
-            order={order} 
-            onCaptureCheckout={handleCaptureCheckout} 
-            error={errorMessage} />}
-          />
+            element={
+            <Checkout 
+              cart={cart} 
+              order={order} 
+              onCaptureCheckout={handleCaptureCheckout} 
+              error={errorMessage} 
+            />} />
         </Routes>
       </div>
     </Router>

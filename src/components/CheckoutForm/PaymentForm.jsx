@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js'
 
 import Review from './Review'
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY)
+const stripePromise = loadStripe('pk_test_51KfZxkD09P5Qad1izF66NQFXDYDZqCUscmQJrSYQqxFLWIYfZX6NE5HRMog3UBU94K1WyUxExcdUDktGDCMym0IF007S1sw5AQ')
 
 const PaymentForm = ({ checkoutToken, backStep, shippingData, onCaptureCheckout, nextStep }) => {
 
@@ -18,7 +18,9 @@ const PaymentForm = ({ checkoutToken, backStep, shippingData, onCaptureCheckout,
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({type: 'card', card: cardElement });
 
-    console.log(shippingData)
+    console.log("paymentMethod: ", paymentMethod)
+
+    console.log("shippingData: ", shippingData)
 
     if(error) {
       console.log(error);
@@ -42,7 +44,7 @@ const PaymentForm = ({ checkoutToken, backStep, shippingData, onCaptureCheckout,
           }
         }
       }
-      console.log(orderData)
+      console.log("orderData: ", orderData)
       onCaptureCheckout(checkoutToken.id, orderData)
 
       nextStep();
