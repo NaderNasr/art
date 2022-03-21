@@ -23,6 +23,11 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   // modal state
 
+  // sets empty cart and confirms order to api
+  const [order, setOrder] = useState({})
+  //error message
+  const [errorMessage, setErrorMessage] = useState('')
+
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
@@ -63,6 +68,24 @@ const App = () => {
       .catch((error) => {
         console.log('There was an error emptying cart', error);
       });
+  }
+
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh()
+
+    setCart(newCart);
+  }
+
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(checkoutTokenId, newOrder);
+
+      console.log(incomingOrder)
+      setOrder(incomingOrder);
+      refreshCart()
+    } catch (error) {
+      setErrorMessage(error.data.error.message)
+    }
   }
 
   const handleRemoveFromCart = (lineItemId) => {
@@ -124,7 +147,14 @@ const App = () => {
                 onUpdateCartQuantity={handleUpdateCartQuantity}
               />}/>
           <Route path="/hot" element={<Hot />}/>
-          <Route path="/checkout" element={<Checkout cart={cart} />}/>
+          <Route 
+            path="/checkout" 
+            element={<Checkout 
+            cart={cart} 
+            order={order} 
+            onCaptureCheckout={handleCaptureCheckout} 
+            error={errorMessage} />}
+          />
         </Routes>
       </div>
     </Router>
