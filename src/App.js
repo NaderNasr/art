@@ -8,9 +8,11 @@ import {
   Hot,
   Checkout
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
+import ProductAR from './components/Products/Product/AR/ProductAR';
+import ARWrapper from './components/Products/Product/AR/ARWrapper';
 
 
 
@@ -130,23 +132,23 @@ const App = () => {
         <Routes>
           <Route path="/" element={
             loading
-            ?
-            <div>
-              <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
-                <p>Loading</p>
-                <LinearProgress />
-              </Box>
-            </div>
-            :
-            <ProductsList products={products} onAddToCart={handleAddToCart} />}/>
-          <Route path="/cart" element={     
-              <Cart
-                cart={cart}
-                onEmptyCart={handleEmptyCart}
-                onRemoveFromCart={handleRemoveFromCart}
-                onUpdateCartQuantity={handleUpdateCartQuantity}
-              />}/>
-          <Route path="/hot" element={<Hot />}/>
+              ?
+              <div>
+                <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
+                  <p>Loading</p>
+                  <LinearProgress />
+                </Box>
+              </div>
+              :
+              <ProductsList products={products} onAddToCart={handleAddToCart} />} />
+          <Route path="/cart" element={
+            <Cart
+              cart={cart}
+              onEmptyCart={handleEmptyCart}
+              onRemoveFromCart={handleRemoveFromCart}
+              onUpdateCartQuantity={handleUpdateCartQuantity}
+            />} />
+          <Route path="/hot" element={<Hot />} />
           <Route 
             path="/checkout" 
             element={
@@ -156,6 +158,9 @@ const App = () => {
               onCaptureCheckout={handleCaptureCheckout} 
               error={errorMessage} 
             />} />
+          <Route path="/AR" element={<ARWrapper />}>
+            <Route path=":productId" element={<ProductAR products={products}/>} />
+          </Route>
         </Routes>
       </div>
     </Router>
