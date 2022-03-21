@@ -56,35 +56,35 @@ const App = () => {
 
   const handleEmptyCart = () => {
     commerce.cart.empty()
-    .then((res) => {
-      setCart(res.cart);
-
-    })
-    .catch((error) => {
-      console.log('There was an error emptying cart', error);
-    });
+      .then((res) => {
+        setCart(res.cart);
+        console.log(cart);
+      })
+      .catch((error) => {
+        console.log('There was an error emptying cart', error);
+      });
   }
 
   const handleRemoveFromCart = (lineItemId) => {
     commerce.cart.remove(lineItemId)
-    .then((res) => {
-      setCart(res.cart);
- 
-    })
-    .catch((error) => {
-      console.log(`There was an error removing ${lineItemId} from cart`, error);
-    });
+      .then((res) => {
+        setCart(res.cart);
+        console.log(cart);
+      })
+      .catch((error) => {
+        console.log(`There was an error removing ${lineItemId} from cart`, error);
+      });
   }
 
   const handleUpdateCartQuantity = (lineItemId, quantity) => {
     commerce.cart.update(lineItemId, { quantity })
-    .then((res) => {
-      setCart(res.cart);
-
-    })
-    .catch((error) => {
-      console.log(`There was an error updating quantity of ${lineItemId}`, error);
-    });
+      .then((res) => {
+        setCart(res.cart);
+        console.log(cart);
+      })
+      .catch((error) => {
+        console.log(`There was an error updating quantity of ${lineItemId}`, error);
+      });
   }
 
   //load products/cart once
@@ -105,7 +105,7 @@ const App = () => {
         </div>
 
         <Routes>
-          <Route path="/" element= {
+          <Route path="/" element={
             loading
             ?
             <div>
