@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button} from '@material-ui/core'
-import { Link } from '@mui/material'
+import { Link } from 'react-router-dom'
 
 import useStyles from './styles'
 import AddressForm from '../AddressForm'
@@ -50,7 +50,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error  }) => {
         <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
       </div>
       <br />
-      <button component={Link} to={"/"} variant="outlined" type="button" >Back to Home</button>
+      <Button component={Link} to={"/"} variant="outlined" type="button" >Back to Home</Button>
     </>
   ) : (
     <div className={classes.spinner}>
@@ -62,7 +62,7 @@ const Checkout = ({ cart, order, onCaptureCheckout, error  }) => {
     <>
       <Typography variant="h5">Error: {error}</Typography>
       <br />
-      <button component={Link} to={"/"} variant="outlined" type="button" >Back to Home</button>
+      <Button component={Link} to={"/"} variant="outlined" type="button" >Back to Home</Button>
     </>
   }
 
