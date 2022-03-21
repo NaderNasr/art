@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 const Art = ({ position, dimensions, texture }) => {
-  const ref = useRef();
-  console.log(texture);
+  // const ref = useRef();
 
   return(
-  <mesh ref={ref} position={position}>
+  <mesh position={position}>
     <planeGeometry args={dimensions} />
     <meshStandardMaterial map={texture} />
   </mesh>
