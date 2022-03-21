@@ -13,9 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-const UserAuthentication = ({ handleAuth, setUserEmail }) => {
-  //   const email = 'nadernasr7@gmail.com';
-//   handleAuth(setUserEmail(email))
+const UserAuthentication = ({ setUserEmail }) => {
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
