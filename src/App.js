@@ -11,8 +11,8 @@ import {
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
-import ProductAR from './components/Products/Product/AR/ProductAR';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
+import ProductAR from './components/Products/Product/AR/ProductAR';
 
 
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { RayGrab } from '@react-three/xr';
 
 const Art = ({ position, dimensions, texture }) => {
 

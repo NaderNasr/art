@@ -4,15 +4,14 @@ import { OrbitControls } from '@react-three/drei';
 import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
 
 import HitTest from './HitTest';
-import { LinearProgress } from '@mui/material';
 
 const ProductAR = ({ products }) => {
-
+  
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
-
+  
   const image = 'https://cors-anywhere.herokuapp.com/' + targetProduct.image.url;
-
+  
   const dimensions = targetProduct.image.image_dimensions;
   
   const rescaleImageForAR = (height, width) => {
@@ -26,7 +25,7 @@ const ProductAR = ({ products }) => {
     }
     return [planeWidth, planeHeight];
   }
-
+  
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
 
   return (
@@ -36,7 +35,7 @@ const ProductAR = ({ products }) => {
         <DefaultXRControllers />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <HitTest dimensions={planeDimensions} image={image} />
+          <HitTest className='hittest' dimensions={planeDimensions} image={image} />
         </Suspense>
       </ARCanvas>
     </div>

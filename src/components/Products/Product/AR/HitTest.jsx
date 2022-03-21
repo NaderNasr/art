@@ -33,7 +33,7 @@ const HitTest = ({ dimensions, image }) => {
   return (
   <Interactive onSelect={() => onSelect()}>
     <Plane ref={ref} args={marker}>
-      <meshStandardMaterial map={texture} opacity={0.1} />
+      <meshStandardMaterial map={texture} />
     </Plane>
     {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>
