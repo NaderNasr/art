@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useHitTest, useInteraction } from '@react-three/xr';
+import { useHitTest, useInteraction, Interactive } from '@react-three/xr';
 import { useTexture, Plane } from '@react-three/drei';
 // import Marker from './Marker';
 import Art from './Art';
@@ -11,8 +11,10 @@ const HitTest = ({ dimensions }) => {
   // const texture = useTexture(image);
 
   useInteraction(ref, 'onSelect', () => {
-    if (placed) return;
     setPlaced(true);
+    ref.current.position.x = placement[0];
+    ref.current.position.y = placement[1];
+    ref.current.position.z = placement[2];
   });
 
   useHitTest((hit) => {
@@ -24,12 +26,12 @@ const HitTest = ({ dimensions }) => {
     setPlacement([x, y, z]);
   });
 
-  console.log(placement);
-
-  if (!placed) {
-    return <Plane ref={ref} args={dimensions} />
-  }
-  return <Art position={placement} dimensions={dimensions} />
+  return (
+  <Interactive>
+    <Plane ref={ref} args={dimensions} />
+    {placed && <Art position={placement} dimensions={dimensions} />}
+  </Interactive>
+  )
 }
 
 export default HitTest;
