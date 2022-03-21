@@ -61,21 +61,20 @@ const Navbar = ({ totalItems }) => {
                 <Button component={Link} to={"/categories"} variant="text" >
                   categories
                 </Button>
-                <Button component={Link} to={"/"}variant="text" >
+                <Button component={Link} to={"/"} variant="text" >
                   Products
                 </Button>
-                
               </div>
               <div className={classes.cart}>
-              <Button component={Link} to={"/authentication"}variant="text" >
+                <Button component={Link} to={"/authentication"} variant="text" >
                   Register
                 </Button>
                 <Link to="/cart">
-                <IconButton aria-label="Show cart items">
-                  <Badge badgeContent={totalItems} color="secondary">
-                    <ShoppingCart />
-                  </Badge>
-                </IconButton>
+                  <IconButton aria-label="Show cart items">
+                    <Badge badgeContent={totalItems} color="secondary">
+                      <ShoppingCart />
+                    </Badge>
+                  </IconButton>
                 </Link>
               </div>
             </>
