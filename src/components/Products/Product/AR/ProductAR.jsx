@@ -33,7 +33,6 @@ const ProductAR = ({ products }) => {
   }
 
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
-  console.log(planeDimensions);
 
   // useEffect(() => {
   //   texture = loadTexture();

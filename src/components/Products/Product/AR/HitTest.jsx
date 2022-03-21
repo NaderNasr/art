@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useHitTest, useInteraction, Interactive, useXR } from '@react-three/xr';
+import { useHitTest, Interactive, useXR } from '@react-three/xr';
 import { useTexture, Plane } from '@react-three/drei';
 // import Marker from './Marker';
 import Art from './Art';
@@ -28,7 +28,9 @@ const HitTest = ({ dimensions, image }) => {
 
   return (
   <Interactive onSelect={() => onSelect()}>
-    <Plane ref={ref} args={marker} />
+    <Plane ref={ref} args={marker}>
+      <meshStandardMaterial map={texture} opacity={0.5} />
+    </Plane>
     {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>
   )
