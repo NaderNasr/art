@@ -32,7 +32,7 @@ const AddressForm = ({ checkoutToken, next }) => {
     label: `${shippingOption.description} - (${shippingOption.price.formatted_with_symbol})`
   }));
 
-  console.log(shippingOptions)
+
 
 
   const fetchShippingCountries = async (checkoutTokenId) => {
