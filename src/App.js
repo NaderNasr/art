@@ -29,24 +29,18 @@ const App = () => {
   const [userEmail, setUserEmail] = useState('');
 
   // email authentication
-  // const auth = ()
   // handle user authentication
-  // const params = useParams();
+  const params = useParams();
 
-  const handleAuth = () => {
-    commerce.customer.login(userEmail, `http://localhost:3000/authentication`)
-      .then((token) => setUser(token))
-      .catch((err) => console.log('Handle Auth ERROR: ', err))
-  }
-
-  const handleJWT = () => {
-    commerce.customer.getToken(user)
+  // const handleAuth = () => {
+    const auth = commerce.customer.login(userEmail, `http://localhost:3000/authentication/`)
+      .then((token) => setUser(token.json))
+      .catch((err) => console.log('Handle Auth ERROR: ', err.message))
+  // }
+  console.log(auth)
+  const handleJWT = commerce.customer.getToken('45d71740-add0-4608-a43c-5c1643c86f22')
       .then((jwt) => console.log(jwt))
-      .catch((err) => console.log('handleJWT ERROR: ', err))
-  }
-
-  // console.log(JSON.stringify(params))
-  console.log(handleJWT())
+      .catch((err) => console.log('handleJWT ERROR: ', err.message))
 
   // use promise to load products
   const fetchProducts = () => {

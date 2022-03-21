@@ -9,7 +9,7 @@ const ProductAR = ({ products }) => {
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
   // const image = targetProduct.image.url;
-
+  console.log(products)
   const dimensions = targetProduct.image.image_dimensions;
   console.log(dimensions);
 
