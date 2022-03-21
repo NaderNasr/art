@@ -7,13 +7,15 @@ import Art from './Art';
 const HitTest = ({ dimensions, image }) => {
   const [placed, setPlaced] = useState(false);
   const [placement, setPlacement] = useState([]);
+  const [marker, setMarker] = useState(dimensions);
   const ref = useRef();
 
   const texture = useTexture(image);
 
-  useInteraction(ref, 'onSelect', () => {
+  const onSelect = () => {
     setPlaced(true);
-  });
+    setMarker([0, 0]);
+  }
 
   useHitTest((hit) => {
     if (placed) return;
@@ -25,8 +27,8 @@ const HitTest = ({ dimensions, image }) => {
   });
 
   return (
-  <Interactive onSelect={() => console.log('click!')}>
-    <Plane ref={ref} args={dimensions} />
+  <Interactive onSelect={() => onSelect()}>
+    <Plane ref={ref} args={marker} />
     {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>
   )
