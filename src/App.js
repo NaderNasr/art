@@ -33,14 +33,14 @@ const App = () => {
   const params = useParams();
 
   // const handleAuth = () => {
-  const auth = commerce.customer.login(userEmail, `http://localhost:3000/authentication/`)
-    .then((token) => setUser(token.json))
-    .catch((err) => console.log('Handle Auth ERROR: ', err.message))
-  // }
-  console.log(auth)
-  const handleJWT = commerce.customer.getToken('45d71740-add0-4608-a43c-5c1643c86f22')
-    .then((jwt) => console.log(jwt))
-    .catch((err) => console.log('handleJWT ERROR: ', err.message))
+  // const auth = commerce.customer.login(userEmail, `http://localhost:3000/authentication/`)
+  //   .then((token) => setUser(token.json))
+  //   .catch((err) => console.log('Handle Auth ERROR: ', err.message))
+  // // }
+  // console.log(auth)
+  // const handleJWT = commerce.customer.getToken('45d71740-add0-4608-a43c-5c1643c86f22')
+  //   .then((jwt) => console.log(jwt))
+  //   .catch((err) => console.log('handleJWT ERROR: ', err.message))
 
   // incoming order to state
   const [order, setOrder] = useState({})
