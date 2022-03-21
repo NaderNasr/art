@@ -1,12 +1,12 @@
-import React from 'react';
-import { PlaneGeometry, MeshStandardMaterial } from 'three';
+import React, { useRef } from 'react';
 
-const Art = ({ position, dimensions, texture }) => {
+const Art = ({ position, dimensions }) => {
+  const ref = useRef();
 
   return(
-  <mesh position={position}>
-    <PlaneGeometry args={dimensions} />
-    <MeshStandardMaterial map={texture} />
+  <mesh ref={ref} position={position}>
+    <planeGeometry args={dimensions} />
+    <meshStandardMaterial color={0xff0000} />
   </mesh>
   )
 }

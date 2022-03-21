@@ -8,11 +8,14 @@ import HitTest from './HitTest';
 const ProductAR = ({ products }) => {
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
-  const image = targetProduct.image.url;
+  // const image = targetProduct.image.url;
+
   const dimensions = targetProduct.image.image_dimensions;
+  console.log(dimensions);
 
   const rescaleImageForAR = (height, width) => {
     const aspect = height / width;
+    console.log(aspect);
     let planeHeight = 0;
     let planeWidth = 0;
 
@@ -28,6 +31,7 @@ const ProductAR = ({ products }) => {
   }
 
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
+  console.log(planeDimensions);
 
   return (
     <div style={{ height: "35rem" }}>
@@ -36,7 +40,7 @@ const ProductAR = ({ products }) => {
         <DefaultXRControllers />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <HitTest image={image} dimensions={planeDimensions} />
+          <HitTest dimensions={planeDimensions} />
         </Suspense>
       </ARCanvas>
     </div>
