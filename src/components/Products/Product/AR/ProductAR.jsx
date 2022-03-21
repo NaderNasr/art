@@ -2,7 +2,6 @@ import React, { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
 import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
-import { TextureLoader } from 'three';
 
 import HitTest from './HitTest';
 
@@ -11,10 +10,9 @@ const ProductAR = ({ products }) => {
   const targetProduct = products.find(product => product.id === params.productId);
 
   const image = 'https://cors-anywhere.herokuapp.com/' + targetProduct.image.url;
-  console.log(image);
 
   const dimensions = targetProduct.image.image_dimensions;
-  let texture = null;
+  // let texture = null;
 
   // const loadTexture = () => {
   //   const loader = new TextureLoader();
@@ -40,7 +38,6 @@ const ProductAR = ({ products }) => {
   }
 
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
-  console.log(planeDimensions);
 
   // useEffect(() => {
   //   texture = loadTexture();
