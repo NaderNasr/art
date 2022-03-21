@@ -8,11 +8,13 @@ import {
   Hot,
   Checkout
 } from './components/'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
+import UserAuthentication from './components/Authentication/UserAuthentication';
+
 
 
 
@@ -111,7 +113,9 @@ const App = () => {
         console.log(`There was an error updating quantity of ${lineItemId}`, error);
       });
   }
+  // let { id } = useParams();
 
+  // console.log('ID: ',id)
   //load products/cart once
   useEffect(() => {
     fetchProducts();
@@ -149,18 +153,20 @@ const App = () => {
               onUpdateCartQuantity={handleUpdateCartQuantity}
             />} />
           <Route path="/hot" element={<Hot />} />
-          <Route 
-            path="/checkout" 
+          <Route
+            path="/checkout"
             element={
-            <Checkout 
-              cart={cart} 
-              order={order} 
-              onCaptureCheckout={handleCaptureCheckout} 
-              error={errorMessage} 
-            />} />
+              <Checkout
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />} />
           <Route path="/AR" element={<ARWrapper />}>
-            <Route path=":productId" element={<ProductAR products={products}/>} />
+            <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
+          <Route path="/login" element={<UserAuthentication />} />
+          <Route path="/:id" element={<UserAuthentication />} />
         </Routes>
       </div>
     </Router>

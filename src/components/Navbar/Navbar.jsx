@@ -65,6 +65,9 @@ const Navbar = ({ totalItems }) => {
                   Products
                 </Button>
               </div>
+              <Button component={Link} to={"/login"}variant="text" >
+                  Register
+                </Button>
               <div className={classes.cart}>
                 <Link to="/cart">
                 <IconButton aria-label="Show cart items">
