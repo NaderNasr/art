@@ -21,23 +21,19 @@ const ProductAR = ({ products }) => {
   // }
   
   const rescaleImageForAR = (height, width) => {
-    const aspect = height / width;
-    console.log(aspect);
-    let planeHeight = 0;
-    let planeWidth = 0;
-
-    if (aspect <= 1) {
-      planeWidth = 1;
-      planeHeight = 1 * aspect;
-    } else {
-      planeHeight = 1;
-      planeWidth = 1 * aspect;
+    let planeWidth = 1;
+    let planeHeight = 1;
+    if (height > width) {
+      planeWidth = width / height;
     }
-
+    if (height < width) {
+      planeHeight = height / width;
+    }
     return [planeWidth, planeHeight];
   }
 
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
+  console.log(planeDimensions);
 
   // useEffect(() => {
   //   texture = loadTexture();
