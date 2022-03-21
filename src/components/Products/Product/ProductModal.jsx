@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { BrowserView, MobileView } from 'react-device-detect';
 import AR from '../../../mobile.png'
+import { Link } from 'react-router-dom'
 
 
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
@@ -79,10 +80,12 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                       {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
                       <div>
-                        <Button>
-                          <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
-                          View in AR
-                        </Button>
+                        <Link to={`/AR/${product.id}`}>
+                          <Button>
+                            <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
+                            View in AR
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </Typography>

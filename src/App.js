@@ -12,6 +12,8 @@ import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-
 
 import Cart from './components/Cart/Cart';
 import UserAuthentication from './components/Authentication/UserAuthentication';
+import ProductAR from './components/Products/Product/AR/ProductAR';
+import ARWrapper from './components/Products/Product/AR/ARWrapper';
 
 
 
@@ -51,7 +53,6 @@ const App = () => {
     commerce.products.list()
       .then((products) => {
         setProducts(products.data);
-        // console.log(products);
       })
       .catch((error) => {
         console.log('There was an error fetching the products: ', error)
@@ -62,7 +63,6 @@ const App = () => {
     commerce.cart.retrieve()
       .then((cart) => {
         setCart(cart);
-        // console.log(cart);
       })
       .catch((error) => {
         console.log('There was an error fetching the cart', error);
@@ -73,7 +73,6 @@ const App = () => {
     commerce.cart.add(productId, quantity)
       .then((res) => {
         setCart(res.cart);
-        // console.log(res.cart);
       })
       .catch((error) => {
         console.log(`There was an error adding ${productId} to cart`, error);
@@ -158,6 +157,9 @@ const App = () => {
             <UserAuthentication setUserEmail={setUserEmail} />
           } />
         </Routes>
+        <Route path="/AR" element={<ARWrapper />}>
+            <Route path=":productId" element={<ProductAR products={products}/>} />
+          </Route>
       </div>
     </Router>
 
