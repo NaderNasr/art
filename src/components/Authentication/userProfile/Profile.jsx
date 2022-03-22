@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import commerce from '../../../lib/commerce'
 
-const Profile = () => {
+const Profile = ({ customerOrder }) => {
   const [userToken, setUserToken] = useState('');
 
   let { id } = useParams();
@@ -18,12 +18,22 @@ const Profile = () => {
     if (jwtToken) {
       return jwt()
     }
-  },[])
+  }, [])
 
-  console.log(userToken)
-
+  console.log('customerOrder: --------->>', customerOrder.data)
+  const orders = customerOrder.data
   return (
-    <div>Profile</div>
+    <>
+      <div>Profile</div>
+      <ul>
+        {/* {customerOrder ? orders.map((_) => ( */}
+        <li>
+        {customerOrder ? orders[0].order.line_items[0].product_name : ''}
+        </li>
+      {/* )) : <p>ji</p>} */}
+      </ul>
+    </>
+
   )
 }
 

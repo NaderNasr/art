@@ -34,12 +34,20 @@ const App = () => {
 
 
 
-  // Authentication----------------------------------------------------
-  //user authentication
+  // --------User Authentication -------------------
+
   const [userEmail, setUserEmail] = useState('');
   const [userToken, setUserToken] = useState('');
   const [emailSent, setEmailSent] = useState('');
   // --------------------------------------------------------------------------------------------------------
+
+  // --------User Orders ---------------------------
+
+  const [customerOrder, setCustomerOrder] = useState('')
+
+  //------------------------------------------------
+
+
 
   // use promise to load products
   const fetchProducts = () => {
@@ -138,23 +146,36 @@ const App = () => {
   };
 
 
-  
+
 
   const handleLogOut = (e) => {
     commerce.customer.logout();
   };
 
-
-  // console.log(jwtToken.id)
   console.log('Customer Id is: ', commerce.customer.id())
-  console.log('userEmail: ', userEmail);
-  console.log('JWT_Token: ', userToken);
+  // console.log('userEmail: ', userEmail);
+  // console.log('JWT_Token: ', userToken);
   console.log('YOUR EMAIL', userEmail);
   console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
+  console.log('commerce.customer.id():  ', commerce.customer.id())
+  console.log('commerce.customer.token():  ', commerce.customer.token())
+
+  const customer_ID = commerce.customer.id()
+
+  const customerOrderList = () => {
+    commerce.customer.getOrders(customer_ID)
+      .then((res) => setCustomerOrder(res))
+  };
+
+  console.log('====================>>>>>>>>>>>>>>>>>>', customerOrder, '<<<<<<<<<<<<<<<<<++++++++++++'
+  )
+
 
 
   useEffect(() => {
-
+    if(commerce.customer.id()){
+      customerOrderList()
+    }
     fetchProducts();
     fetchCart();
     const timer = setInterval(() => {
@@ -212,6 +233,7 @@ const App = () => {
             } />
           <Route path="/:id"
             element={<Profile
+              customerOrder={customerOrder}
             />}
           />
         </Routes>
