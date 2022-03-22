@@ -6,13 +6,14 @@ import {
   Navbar,
   ProductsList,
   Hot,
-  Checkout
+  Checkout,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
-import ProductAR from './components/Products/Product/AR/ProductAR';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
+import ProductAR from './components/Products/Product/AR/ProductAR';
+import Catch from './components/Catch'
 
 
 
@@ -116,11 +117,13 @@ const App = () => {
   useEffect(() => {
     fetchProducts();
     fetchCart();
+
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
   }, []);
+
 
   return (
     <Router>
@@ -159,8 +162,9 @@ const App = () => {
               error={errorMessage} 
             />} />
           <Route path="/AR" element={<ARWrapper />}>
-            <Route path=":productId" element={<ProductAR products={products}/>} />
+            <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
+          <Route path="*" element={<Catch />} />
         </Routes>
       </div>
     </Router>

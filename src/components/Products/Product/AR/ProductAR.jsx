@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
 import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
@@ -6,32 +6,27 @@ import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
 import HitTest from './HitTest';
 
 const ProductAR = ({ products }) => {
+  
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
-  // const image = targetProduct.image.url;
-
+  
+  const image = 'https://cors-anywhere.herokuapp.com/' + targetProduct.image.url;
+  
   const dimensions = targetProduct.image.image_dimensions;
-  console.log(dimensions);
-
+  
   const rescaleImageForAR = (height, width) => {
-    const aspect = height / width;
-    console.log(aspect);
-    let planeHeight = 0;
-    let planeWidth = 0;
-
-    if (aspect <= 1) {
-      planeWidth = 1;
-      planeHeight = 1 * aspect;
-    } else {
-      planeHeight = 1;
-      planeWidth = 1 * aspect;
+    let planeWidth = 1;
+    let planeHeight = 1;
+    if (height > width) {
+      planeWidth = width / height;
     }
-
+    if (height < width) {
+      planeHeight = height / width;
+    }
     return [planeWidth, planeHeight];
   }
-
+  
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
-  console.log(planeDimensions);
 
   return (
     <div style={{ height: "35rem" }}>
@@ -40,7 +35,7 @@ const ProductAR = ({ products }) => {
         <DefaultXRControllers />
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <HitTest dimensions={planeDimensions} />
+          <HitTest className='hittest' dimensions={planeDimensions} image={image} />
         </Suspense>
       </ARCanvas>
     </div>
