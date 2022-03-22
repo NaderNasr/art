@@ -173,7 +173,7 @@ const App = () => {
 
 
   useEffect(() => {
-    if(commerce.customer.id()){
+    if (commerce.customer.id()) {
       customerOrderList()
     }
     fetchProducts();
