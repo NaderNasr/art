@@ -18,8 +18,7 @@ const UserAuthentication = ({
   handleSubmit,
   handleLogOut,
   emailSent,
-  setUserEmail,
-  // sent
+  setUserEmail
 }) => {
 
   let { id } = useParams();
@@ -31,7 +30,9 @@ const UserAuthentication = ({
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        {/* {sent} */}
+        <div>{emailSent.success ?
+          <Alert severity="success">E-mail sent!</Alert>
+          : ''}</div>
         <Box
           sx={{
             marginTop: 8,

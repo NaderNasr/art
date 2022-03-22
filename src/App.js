@@ -15,7 +15,6 @@ import ProductAR from './components/Products/Product/AR/ProductAR';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
-// import Profile from './components/Authentication/userProfile/Profile';
 
 
 
@@ -139,28 +138,14 @@ const App = () => {
   };
 
 
-  let { id } = useParams();
-  let jwtToken = { id }
-
-
-  const jwt = () => {
-    commerce.customer.getToken(jwtToken.id)
-      .then((jwt) => setUserToken(jwt))
-      .catch((err) => console.log('JWT ERROR: ', err))
-  }
+  
 
   const handleLogOut = (e) => {
     commerce.customer.logout();
   };
 
-  // const sent = () => {
-  //   return <div>{emailSent.success ?
-  //     <Alert severity="success">E-mail sent!</Alert>
-  //     : ''}</div>
-  // }
 
-
-  console.log(jwtToken.id)
+  // console.log(jwtToken.id)
   console.log('Customer Id is: ', commerce.customer.id())
   console.log('userEmail: ', userEmail);
   console.log('JWT_Token: ', userToken);
@@ -169,9 +154,7 @@ const App = () => {
 
 
   useEffect(() => {
-    if (jwtToken) {
-      return jwt()
-    }
+
     fetchProducts();
     fetchCart();
     const timer = setInterval(() => {
@@ -225,13 +208,10 @@ const App = () => {
               handleLogOut={handleLogOut}
               emailSent={emailSent}
               setUserEmail={setUserEmail}
-              userToken={userToken}
-              // sent={sent}
             />
             } />
           <Route path="/:id"
-            element={<UserAuthentication
-              userToken={userToken}
+            element={<Profile
             />}
           />
         </Routes>
