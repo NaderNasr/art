@@ -8,7 +8,7 @@ const LandingPage = () => {
   return (
     <>
       <BrowserView>
-        <div style={{display: 'flex', height: '100vh' }}>
+        <div id='toot' style={{display: 'flex', height: '100vh' }}>
           <Banner />
         </div>
           <Intro />
