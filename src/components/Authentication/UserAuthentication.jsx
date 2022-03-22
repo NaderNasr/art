@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, } from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -8,72 +8,30 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import commerce from '../../lib/commerce';
+// import commerce from '../../lib/commerce';
 import { Alert } from '@mui/material';
 // import Profile from './userProfile/Profile';
 
 const theme = createTheme();
 
-const UserAuthentication = () => {
-
-  //user authentication
-  const [userEmail, setUserEmail] = useState('');
-  const [userToken, setUserToken] = useState('');
-  const [emailSent, setEmailSent] = useState('');
-
-  const auth = () => {
-    commerce.customer.login(userEmail, 'http://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
-  }
-
-  //Post alert when email as been sent console.log(loginToken)
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // setUserEmail(data.get('email'))
-    auth()
-  };
-
+const UserAuthentication = ({
+  handleSubmit,
+  handleLogOut,
+  emailSent,
+  setUserEmail,
+  // sent
+}) => {
 
   let { id } = useParams();
   let jwtToken = { id }
 
-
-  const jwt = () => {
-    commerce.customer.getToken(jwtToken.id)
-      .then((jwt) => setUserToken(jwt))
-      .catch((err) => console.log('JWT ERROR: ', err))
-  }
-
-  console.log(emailSent.success)
-
-
-  const handleLogOut = (e) => {
-    // e.preventDefault();
-    commerce.customer.logout();
-  };
-
-  useEffect(() => {
-    if (jwtToken) {
-      return jwt()
-    }
-
-    console.log(jwtToken.id)
-    console.log('Customer Id is: ', commerce.customer.id())
-    console.log('userEmail: ', userEmail);
-    console.log('JWT_Token: ', userToken);
-    console.log('YOUR EMAIL', userEmail);
-    console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
-  }, []);
-
+  console.log(jwtToken)
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div>{emailSent.success ?
-              <Alert severity="success">E-mail sent!</Alert>
-             : ''}</div>
+        {/* {sent} */}
         <Box
           sx={{
             marginTop: 8,

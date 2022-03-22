@@ -1,4 +1,4 @@
-import { LinearProgress } from '@mui/material';
+import { Alert, LinearProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 import commerce from './lib/commerce';
@@ -8,7 +8,7 @@ import {
   Hot,
   Checkout
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 import ProductAR from './components/Products/Product/AR/ProductAR';
@@ -35,8 +35,12 @@ const App = () => {
 
 
 
-  // Authentication
-
+  // Authentication----------------------------------------------------
+  //user authentication
+  const [userEmail, setUserEmail] = useState('');
+  const [userToken, setUserToken] = useState('');
+  const [emailSent, setEmailSent] = useState('');
+  // --------------------------------------------------------------------------------------------------------
 
   // use promise to load products
   const fetchProducts = () => {
@@ -119,11 +123,55 @@ const App = () => {
         console.log(`There was an error updating quantity of ${lineItemId}`, error);
       });
   }
-  // let { id } = useParams();
 
-  // console.log('ID: ',id)
-  //load products/cart once
+
+  //--------------------------------AUTHENTICATION----------------------------------------------------------------------------------------------------------------------------
+
+  const auth = () => {
+    commerce.customer.login(userEmail, 'http://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
+  }
+
+  //Post alert when email as been sent console.log(loginToken)
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    auth()
+  };
+
+
+  let { id } = useParams();
+  let jwtToken = { id }
+
+
+  const jwt = () => {
+    commerce.customer.getToken(jwtToken.id)
+      .then((jwt) => setUserToken(jwt))
+      .catch((err) => console.log('JWT ERROR: ', err))
+  }
+
+  const handleLogOut = (e) => {
+    commerce.customer.logout();
+  };
+
+  // const sent = () => {
+  //   return <div>{emailSent.success ?
+  //     <Alert severity="success">E-mail sent!</Alert>
+  //     : ''}</div>
+  // }
+
+
+  console.log(jwtToken.id)
+  console.log('Customer Id is: ', commerce.customer.id())
+  console.log('userEmail: ', userEmail);
+  console.log('JWT_Token: ', userToken);
+  console.log('YOUR EMAIL', userEmail);
+  console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
+
+
   useEffect(() => {
+    if (jwtToken) {
+      return jwt()
+    }
     fetchProducts();
     fetchCart();
     const timer = setInterval(() => {
@@ -170,10 +218,22 @@ const App = () => {
           <Route path="/AR" element={<ARWrapper />}>
             <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
-          <Route path="/login" element={<UserAuthentication />} />
-          <Route path="/:id"
-            element={<UserAuthentication />}
+          <Route
+            path="/login"
+            element={<UserAuthentication
+              handleSubmit={handleSubmit}
+              handleLogOut={handleLogOut}
+              emailSent={emailSent}
+              setUserEmail={setUserEmail}
+              userToken={userToken}
+              // sent={sent}
             />
+            } />
+          <Route path="/:id"
+            element={<UserAuthentication
+              userToken={userToken}
+            />}
+          />
         </Routes>
       </div>
     </Router>
