@@ -4,10 +4,11 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { useCursor, MeshReflectorMaterial, Image, Text, Environment } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import getUuid from 'uuid-by-string'
+import './styles.css'
 
 const GOLDENRATIO = 1.61803398875
 
-export default function Banner({ images }) {
+export default function Banner() {
   return (
     <Canvas gl={{ alpha: false }} dpr={[1, 1.5]} camera={{ fov: 70, position: [0, 2, 15] }}>
       <color attach="background" args={['#191920']} />
@@ -34,6 +35,25 @@ export default function Banner({ images }) {
     </Canvas>
   )
 }
+
+const pexel = (id) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260`
+const images = [
+  // Front
+  { position: [0, 0, 1.5], rotation: [0, 0, 0], url: pexel(1103970) },
+  // Back
+  { position: [-0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(416430) },
+  { position: [0.8, 0, -0.6], rotation: [0, 0, 0], url: pexel(310452) },
+  // Left
+  { position: [-1.75, 0, 0.25], rotation: [0, Math.PI / 2.5, 0], url: pexel(327482) },
+  { position: [-2.15, 0, 1.5], rotation: [0, Math.PI / 2.5, 0], url: pexel(325185) },
+  { position: [-2, 0, 2.75], rotation: [0, Math.PI / 2.5, 0], url: pexel(358574) },
+  // Right
+  { position: [1.75, 0, 0.25], rotation: [0, -Math.PI / 2.5, 0], url: pexel(227675) },
+  { position: [2.15, 0, 1.5], rotation: [0, -Math.PI / 2.5, 0], url: pexel(911738) },
+  { position: [2, 0, 2.75], rotation: [0, -Math.PI / 2.5, 0], url: pexel(1738986) }
+]
+
+
 
 function Frames({ images, q = new THREE.Quaternion(), p = new THREE.Vector3() }) {
   const ref = useRef()
