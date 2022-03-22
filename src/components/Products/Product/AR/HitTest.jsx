@@ -1,19 +1,25 @@
 import React, { useRef, useState } from 'react';
-import { useHitTest, useInteraction } from '@react-three/xr';
+import { useHitTest, Interactive } from '@react-three/xr';
 import { useTexture, Plane } from '@react-three/drei';
-// import Marker from './Marker';
 import Art from './Art';
 
-const HitTest = ({ dimensions }) => {
+const HitTest = ({ dimensions, image }) => {
   const [placed, setPlaced] = useState(false);
   const [placement, setPlacement] = useState([]);
+  const [marker, setMarker] = useState(dimensions);
   const ref = useRef();
-  // const texture = useTexture(image);
 
-  useInteraction(ref, 'onSelect', () => {
-    if (placed) return;
-    setPlaced(true);
-  });
+  const texture = useTexture(image);
+
+  const onSelect = () => {
+    if (placed) {
+      setPlaced(false);
+      setMarker(dimensions);
+    } else {
+      setPlaced(true);
+      setMarker([0, 0]);
+    }
+  }
 
   useHitTest((hit) => {
     if (placed) return;
@@ -24,12 +30,14 @@ const HitTest = ({ dimensions }) => {
     setPlacement([x, y, z]);
   });
 
-  console.log(placement);
-
-  if (!placed) {
-    return <Plane ref={ref} args={dimensions} />
-  }
-  return <Art position={placement} dimensions={dimensions} />
+  return (
+  <Interactive onSelect={() => onSelect()}>
+    <Plane ref={ref} args={marker}>
+      <meshStandardMaterial map={texture} />
+    </Plane>
+    {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
+  </Interactive>
+  )
 }
 
 export default HitTest;

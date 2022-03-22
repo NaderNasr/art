@@ -6,16 +6,16 @@ import {
   Navbar,
   ProductsList,
   Hot,
-  Checkout
+  Checkout,
 } from './components/'
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
-import ProductAR from './components/Products/Product/AR/ProductAR';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
-
+import ProductAR from './components/Products/Product/AR/ProductAR';
+import Catch from './components/Catch'
 
 
 
@@ -178,11 +178,13 @@ const App = () => {
     }
     fetchProducts();
     fetchCart();
+
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
   }, []);
+
 
   return (
     <Router>
@@ -236,6 +238,7 @@ const App = () => {
               customerOrder={customerOrder}
             />}
           />
+          <Route path="*" element={<Catch />} />
         </Routes>
       </div>
     </Router>
