@@ -61,6 +61,9 @@ const Navbar = ({ totalItems }) => {
                 <Button component={Link} to={"/categories"} variant="text" >
                   categories
                 </Button>
+                <Button component={Link} to={"/:id"} variant="text" >
+                  profile
+                </Button>
                 <Button component={Link} to={"/"} variant="text" >
                   Products
                 </Button>
