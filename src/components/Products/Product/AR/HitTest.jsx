@@ -33,7 +33,7 @@ const HitTest = ({ dimensions, image }) => {
   return (
   <Interactive onSelect={() => onSelect()}>
     <Ring ref={ref} args={marker}>
-      <meshStandardMaterial map={texture} />
+      <meshStandardMaterial color={0xffffff} />
     </Ring>
     {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>

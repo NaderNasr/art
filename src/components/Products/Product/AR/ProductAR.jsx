@@ -31,10 +31,8 @@ const ProductAR = ({ products }) => {
   return (
     <div style={{ height: "35rem" }}>
       <ARCanvas className="canvas" sessionInit={{ requiredFeatures: ['hit-test'] }}>
-        <OrbitControls />
-        <DefaultXRControllers />
         <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
+          <ambientLight intensity={0.3} />
           <HitTest className='hittest' dimensions={planeDimensions} image={image} />
         </Suspense>
       </ARCanvas>
