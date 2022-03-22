@@ -20,7 +20,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { ShoppingCart } from '@material-ui/icons';
 
 import { useTheme } from '@mui/material/styles';
-
+import commerce from '../../lib/commerce'
 
 import logo from '../../assets/logo.png'
 import useStyles from './styles';
@@ -61,17 +61,30 @@ const Navbar = ({ totalItems }) => {
                 <Button component={Link} to={"/categories"} variant="text" >
                   categories
                 </Button>
-                <Button component={Link} to={"/"}variant="text" >
+                <Button component={Link} to={"/:id"} variant="text" >
+                  profile
+                </Button>
+                <Button component={Link} to={"/"} variant="text" >
                   Products
                 </Button>
               </div>
+                {commerce.customer.token() ?
+                <Button component={Link} to={"/"} variant="text" onClick={() => { commerce.customer.logout();  }}>
+                {/* window.location.reload(false) refresh page to change title to register? */}
+                  Logout
+                </Button>
+                :
+                <Button component={Link} to={"/login"} variant="text">
+                  Register
+                </Button>
+                }
               <div className={classes.cart}>
                 <Link to="/cart">
-                <IconButton aria-label="Show cart items">
-                  <Badge badgeContent={totalItems} color="secondary">
-                    <ShoppingCart />
-                  </Badge>
-                </IconButton>
+                  <IconButton aria-label="Show cart items">
+                    <Badge badgeContent={totalItems} color="secondary">
+                      <ShoppingCart />
+                    </Badge>
+                  </IconButton>
                 </Link>
               </div>
             </>

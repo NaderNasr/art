@@ -1,4 +1,4 @@
-import { LinearProgress } from '@mui/material';
+import { Alert, LinearProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 import commerce from './lib/commerce';
@@ -7,11 +7,14 @@ import {
   ProductsList,
   Hot,
   Checkout,
+  Category,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
+import UserAuthentication from './components/Authentication/UserAuthentication';
+import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch'
 
@@ -24,12 +27,28 @@ const App = () => {
   const [cart, setCart] = useState({});
   // loading animation
   const [loading, setLoading] = useState(true);
-  // modal state
 
   // incoming order to state
   const [order, setOrder] = useState({})
   //error message
   const [errorMessage, setErrorMessage] = useState('')
+
+
+
+  // --------User Authentication -------------------
+
+  const [userEmail, setUserEmail] = useState('');
+  const [userToken, setUserToken] = useState('');
+  const [emailSent, setEmailSent] = useState('');
+  // --------------------------------------------------------------------------------------------------------
+
+  // --------User Orders ---------------------------
+
+  const [customerOrder, setCustomerOrder] = useState('')
+
+  //------------------------------------------------
+
+
 
   // use promise to load products
   const fetchProducts = () => {
@@ -113,8 +132,51 @@ const App = () => {
       });
   }
 
-  //load products/cart once
+
+  //--------------------------------AUTHENTICATION----------------------------------------------------------------------------------------------------------------------------
+
+  const auth = () => {
+    commerce.customer.login(userEmail, 'http://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
+  }
+
+  //Post alert when email as been sent console.log(loginToken)
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    auth()
+  };
+
+
+
+
+  const handleLogOut = (e) => {
+    commerce.customer.logout();
+  };
+
+  console.log('Customer Id is: ', commerce.customer.id())
+  // console.log('userEmail: ', userEmail);
+  // console.log('JWT_Token: ', userToken);
+  console.log('YOUR EMAIL', userEmail);
+  console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
+  console.log('commerce.customer.id():  ', commerce.customer.id())
+  console.log('commerce.customer.token():  ', commerce.customer.token())
+
+  const customer_ID = commerce.customer.id()
+
+  const customerOrderList = () => {
+    commerce.customer.getOrders(customer_ID)
+      .then((res) => setCustomerOrder(res))
+  };
+
+  console.log('====================>>>>>>>>>>>>>>>>>>', customerOrder, '<<<<<<<<<<<<<<<<<++++++++++++'
+  )
+
+
+
   useEffect(() => {
+    if (commerce.customer.id()) {
+      customerOrderList()
+    }
     fetchProducts();
     fetchCart();
 
@@ -131,7 +193,6 @@ const App = () => {
         <div style={{ marginBottom: '100px' }}>
           <Navbar totalItems={cart.total_items} />
         </div>
-
         <Routes>
           <Route path="/" element={
             loading
@@ -152,18 +213,33 @@ const App = () => {
               onUpdateCartQuantity={handleUpdateCartQuantity}
             />} />
           <Route path="/hot" element={<Hot />} />
-          <Route 
-            path="/checkout" 
+          <Route path='/categories' element={<Category />} />
+          <Route
+            path="/checkout"
             element={
-            <Checkout 
-              cart={cart} 
-              order={order} 
-              onCaptureCheckout={handleCaptureCheckout} 
-              error={errorMessage} 
-            />} />
+              <Checkout
+                cart={cart}
+                order={order}
+                onCaptureCheckout={handleCaptureCheckout}
+                error={errorMessage}
+              />} />
           <Route path="/AR" element={<ARWrapper />}>
             <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
+          <Route
+            path="/login"
+            element={<UserAuthentication
+              handleSubmit={handleSubmit}
+              handleLogOut={handleLogOut}
+              emailSent={emailSent}
+              setUserEmail={setUserEmail}
+            />
+            } />
+          <Route path="/:id"
+            element={<Profile
+              customerOrder={customerOrder}
+            />}
+          />
           <Route path="*" element={<Catch />} />
         </Routes>
       </div>
