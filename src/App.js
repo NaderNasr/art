@@ -7,6 +7,7 @@ import {
   ProductsList,
   Hot,
   Checkout,
+  Category,
 } from './components/'
 import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 
@@ -212,6 +213,7 @@ const App = () => {
               onUpdateCartQuantity={handleUpdateCartQuantity}
             />} />
           <Route path="/hot" element={<Hot />} />
+          <Route path='/categories' element={<Category />} />
           <Route
             path="/checkout"
             element={
