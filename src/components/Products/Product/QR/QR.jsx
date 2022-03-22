@@ -7,7 +7,7 @@ const href = window.location.href;
 
 useEffect(() => {
   setSrc(href);
-},[])
+},[href])
 
 return <QRCode value={src} />
 }

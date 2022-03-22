@@ -10,8 +10,8 @@ const ProductAR = ({ products }) => {
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
   
-  const image = 'https://cors-anywhere.herokuapp.com/' + targetProduct.image.url;
-  
+  const image = 'https://vast-earth-27464.herokuapp.com/' + targetProduct.image.url; // workaround for missing CORS
+                                                                                     // headers on commerce.js images 😞
   const dimensions = targetProduct.image.image_dimensions;
   
   const rescaleImageForAR = (height, width) => {
@@ -23,7 +23,7 @@ const ProductAR = ({ products }) => {
     if (height < width) {
       planeHeight = height / width;
     }
-    return [planeWidth, planeHeight];
+    return [planeWidth * 2, planeHeight * 2];
   }
   
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
