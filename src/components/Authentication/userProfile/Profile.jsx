@@ -28,7 +28,7 @@ const Profile = ({ customerOrder }) => {
       <ul>
         {/* {customerOrder ? orders.map((_) => ( */}
         <li>
-        {customerOrder ? orders[0].order.line_items[0].product_name : ''}
+        {/* {customerOrder ? orders[0].order.line_items[0].product_name : ''} */}
         </li>
       {/* )) : <p>ji</p>} */}
       </ul>
