@@ -1,20 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>ARt</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="landingPage"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <title>ARt</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="landingPage"></div>
+  <p>HTML WORKING</p>
+</body>
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.4.3/dist/es-module-shims.js" crossorigin="anonymous"></script>
+<script type='importmap-shim'>
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.138.3/build/three.module.js",
+      "three/": "https://unpkg.com/three@0.138.3/",
+      "omega/": "https://cdn.jsdelivr.net/gh/ycw/omega@0.0.2/"
+    }
+  }
+</script>
+<script defer type='module-shim'>
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { Strip, StripGeometry, StripHelper, UvPreset } from 'omega/dist/Strip.js'
+
+// ----
+// main
+// ----
+
+const renderer = new THREE.WebGLRenderer();
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, 2, .1, 100);
+const controls = new OrbitControls(camera, renderer.domElement);
+
+scene.background = new THREE.Color('white');
+camera.position.set(0, 0, 5);
+controls.autoRotate = true;
+controls.enableDamping = true;
+renderer.shadowMap.enabled = true;
+
+const light = new THREE.DirectionalLight('white', 1);
+light.position.set(-2, 2, 1);
+scene.add(light);
+light.castShadow = true;
+light.shadow.bias = -0.0001;
+scene.add(new THREE.AmbientLight('white', .5));
+
+const N_SEG = 400;
+const BREADTH = .5;
+const curve = new THREE.CatmullRomCurve3([
+  new THREE.Vector3(-1, -1, 0),
+  new THREE.Vector3(-1, 1, 0),
+  new THREE.Vector3(1, 1, 0),
+  new THREE.Vector3(1, -1, 0),
+], true);
+const radius_fn = (i, I) => .1 + .5 * (1 - 2 * Math.abs(i / I - .5));
+const tilt = (i, I) => Math.PI * i / I * 6;
+const strip = new Strip(curve, radius_fn, tilt);
+const frames = strip.computeFrames(N_SEG);
+// scene.add(new StripHelper(strip, N_SEG));
+const strip_geom = new StripGeometry(strip, N_SEG);
+const mat = new THREE.MeshPhysicalMaterial({ clearcoat: 1, roughness: 1, side: THREE.DoubleSide });
+const mesh = new THREE.Mesh(strip_geom, mat);
+scene.add(mesh);
+mesh.castShadow = true;
+mesh.receiveShadow = true;
+
+function f(strip_geom, radius_fn, frames, result) { // random pos lying on strip
+  const ab_pos = strip_geom.getAttribute('position').array;
+  const n_idx = ab_pos.length / 6; // /3/2
+  const idx = Math.random() * n_idx | 0;
+  const pa = new THREE.Vector3(...ab_pos.subarray(idx * 6, idx * 6 + 3));
+  const pb = new THREE.Vector3(...ab_pos.subarray(idx * 6 + 3, idx * 6 + 6));
+  const pa2pb = new THREE.Vector3().subVectors(pb, pa);
+  const len = 2 * radius_fn(idx, n_idx);
+  pa2pb.normalize().multiplyScalar(len * Math.random());
+  pa.add(pa2pb);
+  const [B, N, T] = frames[idx];
+  result.makeBasis(B, N, T).setPosition(pa);
+}
+
+// texture by Hans Isaacson - https://unsplash.com/photos/kFEHiT68zno
+const url = 'https://images.unsplash.com/photo-1636442330662-6f0a898190a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60';
+const tex = new THREE.TextureLoader().load(url);
+tex.wrapT = THREE.MirroredRepeatWrapping;
+{ // https://codepen.io/ycw/pen/KKZgPyB?editors=1000
+  const N_INST = 1000;
+  const strip = new Strip(new THREE.QuadraticBezierCurve3(
+    new THREE.Vector3(.5, .8, 0),
+    new THREE.Vector3(-.1, 2, 0),
+    new THREE.Vector3(0, 0, 0),
+  ), (i, I) => .15 * (i / I), (i, I) => Math.PI * 0.4 * i / I * 0);
+  const geom = new StripGeometry(strip, 32, UvPreset.strip[0]);
+  const mat = new THREE.MeshPhysicalMaterial({ side: THREE.DoubleSide, roughness: 1, alphaMap: tex, alphaTest: .3 });
+  const mesh = new THREE.InstancedMesh(geom, mat, N_INST);
+  const $mat_basis = new THREE.Matrix4();
+  const $mat_r = new THREE.Matrix4(); // ry
+  const $mat_s = new THREE.Matrix4(); // scale
+  const $col = new THREE.Color();
+  for (let i = 0; i < N_INST; ++i) {
+    $mat_r.makeRotationY(Math.PI * Math.random());
+    $mat_s.makeScale(Math.random() + .1, Math.random(), Math.random() + .1);
+    f(strip_geom, radius_fn, frames, $mat_basis);
+    mesh.setMatrixAt(i, $mat_basis.multiply($mat_r).multiply($mat_s));
+    mesh.setColorAt(i, $col.setHSL(Math.random(), .1, .2));
+  }
+  scene.add(mesh);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+}
+
+
+// ----
+// render
+// ----
+
+renderer.setAnimationLoop(() => {
+  renderer.render(scene, camera);
+  controls.update();
+  tex.offset.y += 0.01;
+});
+
+// ----
+// view
+// ----
+
+function resize(w, h, dpr = devicePixelRatio) {
+  renderer.setPixelRatio(dpr);
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', () => resize(innerWidth, innerHeight));
+dispatchEvent(new Event('resize'));
+document.body.prepend(renderer.domElement);
+
+</script>
 </html>

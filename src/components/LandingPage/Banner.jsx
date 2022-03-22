@@ -1,11 +1,13 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import React from 'react'
 
-import LandingPage from './LandingPage'
+const Banner = () => {
+  return (
+    <>
+    </>
+  )
+}
 
-ReactDom.render(
-    <LandingPage />,
-  document.getElementById('landingPage'));
+export default Banner
 
 
 
