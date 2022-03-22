@@ -17,6 +17,7 @@ import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch'
+import Banner from './components/LandingPage/Banner';
 
 
 
@@ -188,62 +189,63 @@ const App = () => {
 
 
   return (
-    <Router>
-      <div className="App">
-        <div style={{ marginBottom: '100px' }}>
-          <Navbar totalItems={cart.total_items} />
-        </div>
-        <Routes>
-          <Route path="/" element={
-            loading
-              ?
-              <div>
-                <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
-                  <p>Loading</p>
-                  <LinearProgress />
-                </Box>
-              </div>
-              :
-              <ProductsList products={products} onAddToCart={handleAddToCart} />} />
-          <Route path="/cart" element={
-            <Cart
-              cart={cart}
-              onEmptyCart={handleEmptyCart}
-              onRemoveFromCart={handleRemoveFromCart}
-              onUpdateCartQuantity={handleUpdateCartQuantity}
-            />} />
-          <Route path="/hot" element={<Hot />} />
-          <Route path='/categories' element={<Category />} />
-          <Route
-            path="/checkout"
-            element={
-              <Checkout
-                cart={cart}
-                order={order}
-                onCaptureCheckout={handleCaptureCheckout}
-                error={errorMessage}
-              />} />
-          <Route path="/AR" element={<ARWrapper />}>
-            <Route path=":productId" element={<ProductAR products={products} />} />
-          </Route>
-          <Route
-            path="/login"
-            element={<UserAuthentication
-              handleSubmit={handleSubmit}
-              handleLogOut={handleLogOut}
-              emailSent={emailSent}
-              setUserEmail={setUserEmail}
-            />
-            } />
-          <Route path="/:id"
-            element={<Profile
-              customerOrder={customerOrder}
-            />}
-          />
-          <Route path="*" element={<Catch />} />
-        </Routes>
-      </div>
-    </Router>
+    // <Router>
+    //   <div className="App">
+    //     <div style={{ marginBottom: '100px' }}>
+    //       <Navbar totalItems={cart.total_items} />
+    //     </div>
+    //     <Routes>
+    //       <Route path="/" element={
+    //         loading
+    //           ?
+    //           <div>
+    //             <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
+    //               <p>Loading</p>
+    //               <LinearProgress />
+    //             </Box>
+    //           </div>
+    //           :
+    //           <ProductsList products={products} onAddToCart={handleAddToCart} />} />
+    //       <Route path="/cart" element={
+    //         <Cart
+    //           cart={cart}
+    //           onEmptyCart={handleEmptyCart}
+    //           onRemoveFromCart={handleRemoveFromCart}
+    //           onUpdateCartQuantity={handleUpdateCartQuantity}
+    //         />} />
+    //       <Route path="/hot" element={<Hot />} />
+    //       <Route path='/categories' element={<Category />} />
+    //       <Route
+    //         path="/checkout"
+    //         element={
+    //           <Checkout
+    //             cart={cart}
+    //             order={order}
+    //             onCaptureCheckout={handleCaptureCheckout}
+    //             error={errorMessage}
+    //           />} />
+    //       <Route path="/AR" element={<ARWrapper />}>
+    //         <Route path=":productId" element={<ProductAR products={products} />} />
+    //       </Route>
+    //       <Route
+    //         path="/login"
+    //         element={<UserAuthentication
+    //           handleSubmit={handleSubmit}
+    //           handleLogOut={handleLogOut}
+    //           emailSent={emailSent}
+    //           setUserEmail={setUserEmail}
+    //         />
+    //         } />
+    //       <Route path="/:id"
+    //         element={<Profile
+    //           customerOrder={customerOrder}
+    //         />}
+    //       />
+    //       <Route path="*" element={<Catch />} />
+    //     </Routes>
+    //   </div>
+    // </Router>
+    <Banner/>
 
   )
 }
