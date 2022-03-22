@@ -6,13 +6,14 @@ import {
   Navbar,
   ProductsList,
   Hot,
-  Checkout
+  Checkout,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import ProductAR from './components/Products/Product/AR/ProductAR';
+import Catch from './components/Catch'
 
 
 
@@ -163,6 +164,7 @@ const App = () => {
           <Route path="/AR" element={<ARWrapper />}>
             <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
+          <Route path="*" element={<Catch />} />
         </Routes>
       </div>
     </Router>
