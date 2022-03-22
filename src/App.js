@@ -14,6 +14,8 @@ import Cart from './components/Cart/Cart';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
+import Profile from './components/Authentication/userProfile/Profile';
+// import Profile from './components/Authentication/userProfile/Profile';
 
 
 
@@ -25,12 +27,16 @@ const App = () => {
   const [cart, setCart] = useState({});
   // loading animation
   const [loading, setLoading] = useState(true);
-  // modal state
 
   // incoming order to state
   const [order, setOrder] = useState({})
   //error message
   const [errorMessage, setErrorMessage] = useState('')
+
+
+
+  // Authentication
+
 
   // use promise to load products
   const fetchProducts = () => {
@@ -132,7 +138,6 @@ const App = () => {
         <div style={{ marginBottom: '100px' }}>
           <Navbar totalItems={cart.total_items} />
         </div>
-
         <Routes>
           <Route path="/" element={
             loading
@@ -166,7 +171,9 @@ const App = () => {
             <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
           <Route path="/login" element={<UserAuthentication />} />
-          <Route path="/:id" element={<UserAuthentication />} />
+          <Route path="/:id"
+            element={<UserAuthentication />}
+            />
         </Routes>
       </div>
     </Router>
