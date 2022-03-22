@@ -30,7 +30,12 @@
     "react-scripts": "5.0.0",
     "string-strip-html": "^9.1.6",
     "three": "^0.138.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    
+    "@pmndrs/branding": "0.0.8",
+    "@types/three": "0.136.1",
+    "uuid-by-string": "3.0.5",
+    "wouter": "2.8.0-alpha.2"
   },
   "scripts": {
     "start": "HTTPS=true react-scripts start",
