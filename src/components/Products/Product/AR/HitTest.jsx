@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { useHitTest, Interactive } from '@react-three/xr';
-import { useTexture, Plane } from '@react-three/drei';
+import { useTexture, Ring } from '@react-three/drei';
 import Art from './Art';
 
 const HitTest = ({ dimensions, image }) => {
   const [placed, setPlaced] = useState(false);
   const [placement, setPlacement] = useState([]);
-  const [marker, setMarker] = useState(dimensions);
+  const [marker, setMarker] = useState([0.1, 0.2, 32]);
   const ref = useRef();
 
   const texture = useTexture(image);
@@ -14,7 +14,7 @@ const HitTest = ({ dimensions, image }) => {
   const onSelect = () => {
     if (placed) {
       setPlaced(false);
-      setMarker(dimensions);
+      setMarker([0.1, 0.2, 32]);
     } else {
       setPlaced(true);
       setMarker([0, 0]);
@@ -32,9 +32,9 @@ const HitTest = ({ dimensions, image }) => {
 
   return (
   <Interactive onSelect={() => onSelect()}>
-    <Plane ref={ref} args={marker}>
+    <Ring ref={ref} args={marker}>
       <meshStandardMaterial map={texture} />
-    </Plane>
+    </Ring>
     {placed && <Art position={placement} dimensions={dimensions} texture={texture} />}
   </Interactive>
   )
