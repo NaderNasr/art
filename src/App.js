@@ -232,6 +232,7 @@ const App = () => {
             <Category
               categories={categories}
               products={products}
+              onAddToCart={handleAddToCart}
             />} />
           <Route
             path="/checkout"

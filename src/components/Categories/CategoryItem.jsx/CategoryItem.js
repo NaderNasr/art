@@ -7,13 +7,14 @@ import '@google/model-viewer'
 import { BrowserView, MobileView } from 'react-device-detect';
 
 
-
 import ProductModal from "./ProductModal";
 
 const CategoryItem = ({ product, onAddToCart }) => {
   const [open, setOpen] = useState(false); // Add to custom hook
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  
 
   return (
     <div>
