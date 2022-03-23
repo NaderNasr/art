@@ -37,11 +37,9 @@ const App = () => {
 
   const [search, setSearch] = useState('');
 
-  const handleSearch = (event) => {
-    console.log(event.target.value);
-    const downCase = event.target.value.toLowerCase();
+  const handleSearch = async (event) => {
+    const downCase = await event.target.value.toLowerCase();
     setSearch(downCase);
-    console.log(search);
   }
 
   const handleFilter = (target) => {
@@ -200,6 +198,7 @@ const App = () => {
     }
     fetchProducts();
     fetchCart();
+    setLoading(false);
 
     // const timer = setInterval(() => {
     //   setLoading(false)
