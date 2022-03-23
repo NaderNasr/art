@@ -25,7 +25,7 @@ const HitTest = ({ dimensions, image }) => {
     if (placed) return;
     hit.decompose(ref.current.position, ref.current.rotation, ref.current.scale);
     const x = ref.current.position.x;
-    const y = ref.current.position.y;
+    const y = ref.current.position.y + 0.5;
     const z = ref.current.position.z;
     setPlacement([x, y, z]);
   });

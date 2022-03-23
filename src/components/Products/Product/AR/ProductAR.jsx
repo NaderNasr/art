@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
-import { ARCanvas, DefaultXRControllers } from '@react-three/xr';
+import { ARCanvas } from '@react-three/xr';
 
 import HitTest from './HitTest';
 
@@ -35,6 +35,7 @@ const ProductAR = ({ products }) => {
           <ambientLight intensity={0.3} />
           <HitTest className='hittest' dimensions={planeDimensions} image={image} />
         </Suspense>
+        <OrbitControls />
       </ARCanvas>
     </div>
   )
