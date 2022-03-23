@@ -45,8 +45,9 @@ const App = () => {
   }
 
   const handleFilter = (target) => {
-    const downcase = target.name.toLowerCase();
-    if (downcase.includes(search)) return true;
+    const downcaseName = target.name.toLowerCase();
+    const downcaseCat = target.categories[0].slug;
+    if (downcaseName.includes(search) || downcaseCat.includes(search)) return true;
   }
 
 
