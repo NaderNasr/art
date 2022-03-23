@@ -49,6 +49,10 @@ const App = () => {
     if (downcaseName.includes(search) || downcaseCat.includes(search)) return true;
   }
 
+  const clearSearch = () => {
+    setSearch('');
+  }
+
 
   //------------------------------------------------
 
@@ -212,7 +216,7 @@ const App = () => {
     <Router>
       <div className="App">
         <div style={{ marginBottom: '100px' }}>
-          <Navbar totalItems={cart.total_items} />
+          <Navbar totalItems={cart.total_items} clearSearch={clearSearch} />
         </div>
         <Routes>
           <Route path="/" element={
