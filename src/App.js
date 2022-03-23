@@ -38,15 +38,18 @@ const App = () => {
   const [search, setSearch] = useState('');
 
   const handleSearch = (value) => {
-    const downCase =  value.toLowerCase();
+    const downCase = value.toLowerCase();
     setSearch(downCase);
     console.log(`searched for ${value}`);
   }
 
   const handleFilter = (target) => {
     const downcaseName = target.name.toLowerCase();
+    const downcaseDesc = target.description.toLowerCase();
     const downcaseCat = target.categories[0].slug;
-    if (downcaseName.includes(search) || downcaseCat.includes(search)) return true;
+    if (downcaseName.includes(search) || downcaseCat.includes(search) || downcaseDesc.includes(search)) {
+      return true;
+    }
   }
 
   const clearSearch = () => {
@@ -221,15 +224,15 @@ const App = () => {
         <Routes>
           <Route path="/" element={
             loading
-            ?
-            <div>
+              ?
+              <div>
                 <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
                   <p>Loading</p>
                   <LinearProgress />
                 </Box>
               </div>
               :
-                <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />} />
+              <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />} />
           <Route path="/cart" element={
             <Cart
               cart={cart}
