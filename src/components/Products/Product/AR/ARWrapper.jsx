@@ -21,7 +21,7 @@ const ARWrapper = ({ products, onAddToCart }) => {
 
   return (
     <div>
-      <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(targetProduct.id, 1)}>Add To Cart</Button>
+      {targetProduct.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(targetProduct.id, 1)}>Add To Cart</Button>}
       <Outlet />
     </div>
   );
