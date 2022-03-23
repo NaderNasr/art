@@ -33,8 +33,6 @@ const App = () => {
   //error message
   const [errorMessage, setErrorMessage] = useState('')
 
-
-
   // --------User Authentication -------------------
 
   const [userEmail, setUserEmail] = useState('');
@@ -47,8 +45,6 @@ const App = () => {
   const [customerOrder, setCustomerOrder] = useState('')
 
   //------------------------------------------------
-
-
 
   // use promise to load products
   const fetchProducts = () => {
