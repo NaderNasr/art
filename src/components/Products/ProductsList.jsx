@@ -19,13 +19,13 @@ const Item = styled(Paper)(({ theme }) => ({
   },
 }));
 
-const ProductsList = ({ products, onAddToCart, onChange }) => {
+const ProductsList = ({ products, onAddToCart, handleSearch }) => {
   //view the products in browser > inspect > console
   // console.log(products)
   return (
     //Material UI Grid
     <div>
-      <Search onChange={onChange} />
+      <Search handleSearch={handleSearch} />
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
           {products.map((product) => (

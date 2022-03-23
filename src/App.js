@@ -37,9 +37,10 @@ const App = () => {
 
   const [search, setSearch] = useState('');
 
-  const handleSearch = async (event) => {
-    const downCase = await event.target.value.toLowerCase();
+  const handleSearch = (value) => {
+    const downCase =  value.toLowerCase();
     setSearch(downCase);
+    console.log(`searched for ${value}`);
   }
 
   const handleFilter = (target) => {
@@ -224,7 +225,7 @@ const App = () => {
                 </Box>
               </div>
               :
-                <ProductsList products={products} onAddToCart={handleAddToCart} onChange={handleSearch} />} />
+                <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />} />
           <Route path="/cart" element={
             <Cart
               cart={cart}
