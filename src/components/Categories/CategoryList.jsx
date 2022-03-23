@@ -36,6 +36,10 @@ const Item = styled(Paper)(({ theme }) => ({
 //   </Box>;
 // }
 
+
+
+
+
 const Category = ({ categories, products, onAddToCart }) => {
   console.log(categories);
   console.log(products);
@@ -49,7 +53,7 @@ const Category = ({ categories, products, onAddToCart }) => {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 2, sm: 8, md: 12 }}
           >
-            {products
+            { products
               .filter((prod) => prod.categories[0].id === categories[0].id)
               .map((filteredcat) => (
                 <>
