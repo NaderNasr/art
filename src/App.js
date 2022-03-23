@@ -48,8 +48,6 @@ const App = () => {
 
   //------------------------------------------------
 
-
-
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
@@ -136,7 +134,7 @@ const App = () => {
   //--------------------------------AUTHENTICATION----------------------------------------------------------------------------------------------------------------------------
 
   const auth = () => {
-    commerce.customer.login(userEmail, 'http://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
+    commerce.customer.login(userEmail, 'https://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
   }
 
   //Post alert when email as been sent console.log(loginToken)
@@ -146,20 +144,13 @@ const App = () => {
     auth()
   };
 
-
-
-
   const handleLogOut = (e) => {
     commerce.customer.logout();
   };
 
-  console.log('Customer Id is: ', commerce.customer.id())
-  // console.log('userEmail: ', userEmail);
-  // console.log('JWT_Token: ', userToken);
-  console.log('YOUR EMAIL', userEmail);
-  console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
-  console.log('commerce.customer.id():  ', commerce.customer.id())
-  console.log('commerce.customer.token():  ', commerce.customer.token())
+  console.log('YOUR EMAIL', emailSent);
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
+
 
   const customer_ID = commerce.customer.id()
 
@@ -167,11 +158,6 @@ const App = () => {
     commerce.customer.getOrders(customer_ID)
       .then((res) => setCustomerOrder(res))
   };
-
-  console.log('====================>>>>>>>>>>>>>>>>>>', customerOrder, '<<<<<<<<<<<<<<<<<++++++++++++'
-  )
-
-
 
   useEffect(() => {
     if (commerce.customer.id()) {
