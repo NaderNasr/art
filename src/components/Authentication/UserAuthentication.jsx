@@ -8,15 +8,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import commerce from '../../lib/commerce';
 import { Alert } from '@mui/material';
-// import Profile from './userProfile/Profile';
 
 const theme = createTheme();
 
 const UserAuthentication = ({
   handleSubmit,
-  handleLogOut,
   emailSent,
   setUserEmail
 }) => {
@@ -67,18 +64,6 @@ const UserAuthentication = ({
               Sign In
             </Button>
           </Box>
-        </Box>
-        <Box component="form" onSubmit={handleLogOut} sx={{ mt: 1 }}>
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            logout
-          </Button>
-          {<br />}
         </Box>
       </Container>
     </ThemeProvider>

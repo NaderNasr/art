@@ -9,7 +9,7 @@ import {
   Checkout,
   Category,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
@@ -62,7 +62,6 @@ const App = () => {
   // --------User Authentication -------------------
 
   const [userEmail, setUserEmail] = useState('');
-  const [userToken, setUserToken] = useState('');
   const [emailSent, setEmailSent] = useState('');
   // --------------------------------------------------------------------------------------------------------
 
@@ -163,7 +162,7 @@ const App = () => {
   //--------------------------------AUTHENTICATION----------------------------------------------------------------------------------------------------------------------------
 
   const auth = () => {
-    commerce.customer.login(userEmail, 'http://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
+    commerce.customer.login(userEmail, 'https://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
   }
 
   //Post alert when email as been sent console.log(loginToken)
@@ -173,10 +172,7 @@ const App = () => {
     auth()
   };
 
-
-
-
-  const handleLogOut = (e) => {
+  const handleLogOut = () => {
     commerce.customer.logout();
   };
 
@@ -195,11 +191,6 @@ const App = () => {
       .then((res) => setCustomerOrder(res))
   };
 
-  // console.log('====================>>>>>>>>>>>>>>>>>>', customerOrder, '<<<<<<<<<<<<<<<<<++++++++++++'
-  // )
-
-
-
   useEffect(() => {
     if (commerce.customer.id()) {
       customerOrderList()
@@ -208,10 +199,11 @@ const App = () => {
     fetchCart();
     setLoading(false);
 
-    // const timer = setInterval(() => {
-    //   setLoading(false)
-    // }, 2000);
-    // return () => clearInterval(timer);
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
+    const timer = setInterval(() => {
+      setLoading(false)
+    }, 2000);
+    return () => clearInterval(timer);
   }, [search]);
 
 
