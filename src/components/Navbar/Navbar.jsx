@@ -17,7 +17,8 @@ import commerce from '../../lib/commerce'
 import logo from '../../assets/logo.png'
 import useStyles from './styles';
 
-const Navbar = ({ totalItems }) => {
+
+const Navbar = ({ totalItems, clearSearch }) => {
 
   const classes = useStyles();
   const [anchor, setAnchor] = useState(null);
@@ -59,7 +60,7 @@ const Navbar = ({ totalItems }) => {
                 <Button component={Link} to={"/:id"} variant="text" >
                   profile
                 </Button>
-                <Button component={Link} to={"/"} variant="text" >
+                <Button component={Link} to={"/"} variant="text" onClick={() => clearSearch()}>
                   Products
                 </Button>
               </div>

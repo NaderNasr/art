@@ -16,7 +16,7 @@ import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
-import Catch from './components/Catch'
+import Catch from './components/Catch';
 
 
 
@@ -33,7 +33,31 @@ const App = () => {
   //error message
   const [errorMessage, setErrorMessage] = useState('')
 
+  // ------------------ Search --------------------
 
+  const [search, setSearch] = useState('');
+
+  const handleSearch = (value) => {
+    const downCase = value.toLowerCase();
+    setSearch(downCase);
+    console.log(`searched for ${value}`);
+  }
+
+  const handleFilter = (target) => {
+    const downcaseName = target.name.toLowerCase();
+    const downcaseDesc = target.description.toLowerCase();
+    const downcaseCat = target.categories[0].slug;
+    if (downcaseName.includes(search) || downcaseCat.includes(search) || downcaseDesc.includes(search)) {
+      return true;
+    }
+  }
+
+  const clearSearch = () => {
+    setSearch('');
+  }
+
+
+  //------------------------------------------------
 
   // --------User Authentication -------------------
 
@@ -51,7 +75,12 @@ const App = () => {
   const fetchProducts = () => {
     commerce.products.list()
       .then((products) => {
-        setProducts(products.data);
+        if (!search) {
+          setProducts(products.data);
+        } else {
+          const filtered = products.data.filter(handleFilter);
+          setProducts(filtered);
+        }
       })
       .catch((error) => {
         console.log('There was an error fetching the products', error)
@@ -147,8 +176,13 @@ const App = () => {
     commerce.customer.logout();
   };
 
-  // console.log('YOUR EMAIL', emailSent);
-
+  // console.log('Customer Id is: ', commerce.customer.id())
+  // console.log('userEmail: ', userEmail);
+  // console.log('JWT_Token: ', userToken);
+  // console.log('YOUR EMAIL', userEmail);
+  // console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
+  // console.log('commerce.customer.id():  ', commerce.customer.id())
+  // console.log('commerce.customer.token():  ', commerce.customer.token())
 
   const customer_ID = commerce.customer.id()
 
@@ -163,20 +197,21 @@ const App = () => {
     }
     fetchProducts();
     fetchCart();
+    setLoading(false);
 
     console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
-  }, []);
+  }, [search]);
 
 
   return (
     <Router>
       <div className="App">
         <div style={{ marginBottom: '100px' }}>
-          <Navbar totalItems={cart.total_items} />
+          <Navbar totalItems={cart.total_items} clearSearch={clearSearch} />
         </div>
         <Routes>
           <Route path="/" element={
@@ -189,7 +224,7 @@ const App = () => {
                 </Box>
               </div>
               :
-              <ProductsList products={products} onAddToCart={handleAddToCart} />} />
+              <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />} />
           <Route path="/cart" element={
             <Cart
               cart={cart}
