@@ -10,7 +10,9 @@ import commerce from '../../../lib/commerce'
 const Profile = () => {
   const [userToken, setUserToken] = useState('');
   const [userInfo, setUserInfo] = useState('');
-  const [allOrders, setAllOrders] = useState('');
+  const [allOrders, setAllOrders] = useState(null);
+
+  const [productNames, setProductNames] = useState('')
 
 
 
@@ -24,20 +26,48 @@ const Profile = () => {
       .catch((err) => console.log('JWT ERROR: ', err))
   }
 
+  const customerInfo = () => {
+    commerce.customer.about().then((customer) => setUserInfo(customer));
+  }
+
+  const customerOrder = () => {
+    commerce.customer.getOrders(userInfo.id).then((orders) => setAllOrders(orders));
+  }
 
 
   useEffect(() => {
-    if (jwtToken) {
-      jwt()
-    }
-    const user = commerce.customer.about().then((customer) => setUserInfo(customer));
-    if(user){
-  }
-  console.log(user)
+    // jwt()
+    customerInfo()
+    customerOrder()
+    // console.log('userInfo: ', userInfo)
   }, [])
 
-  console.log(allOrders)
-  console.log(userInfo)
+  // customer order => order => multiple of products => product name
+
+  useEffect(() => {
+
+    if (allOrders) {
+      const getCustomerOrders = allOrders.data
+      if (getCustomerOrders) {
+        const orders = getCustomerOrders.map((eachCustomer) => eachCustomer.order);
+        const lineItems = orders.map((order) => order.line_items)
+
+        const productNames = lineItems.map((lineItem) => (
+          lineItem.map((product) => product.product_name)
+        ))
+
+        console.log('ProductNames: ', productNames)
+
+        setProductNames(productNames)
+      }
+    }
+
+
+  }, [allOrders])
+
+  // console.log('allOrders: ', allOrders.data)
+  console.log('productNames: ', productNames)
+  // console.log('userToken: ', userToken)
   return (
     <>
       <Typography variant="h4" component="div">
@@ -61,6 +91,27 @@ const Profile = () => {
           </Typography>
         </CardContent>
       </Card>
+      {/* ----------------------------------Orders----------------------------- */}
+      <br /><br /><br />
+      <Divider sx={{ borderBottomWidth: 2 }} />
+      <br /><br /><br />
+      <Typography variant="h4" component="div">
+        Orders
+      </Typography>
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          {<br />}
+          {<br />}
+
+          {productNames !== '' ?
+            productNames.map((productName, id) => (
+              <Typography key={id} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                {productName}
+              </Typography>
+            )) : <></>}
+
+        </CardContent>
+      </Card>
       {/* ----------------------------------Address----------------------------- */}
       <br /><br /><br />
       <Divider sx={{ borderBottomWidth: 2 }} />
@@ -69,7 +120,7 @@ const Profile = () => {
       <Typography variant="h4" component="div">
         Address
       </Typography>
-      <Card sx={{ minWidth: 275 }}>
+      {/* <Card sx={{ minWidth: 275 }}>
         <CardContent>
           {<br />}
           {<br />}
@@ -77,7 +128,7 @@ const Profile = () => {
             Postal Code:    {userInfo.default_shipping.postal_zip_code}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            State:    {userInfo.default_shipping.county_state}
+            Province:    {userInfo.default_shipping.county_state}
           </Typography>
           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
             Country:    {userInfo.default_shipping.country}
@@ -89,7 +140,7 @@ const Profile = () => {
             City:    {userInfo.default_shipping.town_city}
           </Typography>
         </CardContent>
-      </Card>
+      </Card> */}
       {/* ----------------------------------Orders----------------------------- */}
       <br /><br /><br />
       <Divider sx={{ borderBottomWidth: 2 }} />
