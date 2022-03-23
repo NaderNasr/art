@@ -1,7 +1,7 @@
 import React from 'react'
 import Banner from './Banner'
 import { BrowserView, MobileView } from 'react-device-detect';
-import Intro from './Intro';
+// import Intro from './Intro';
 
 
 const LandingPage = () => {
@@ -11,7 +11,6 @@ const LandingPage = () => {
         <div id='toot' style={{display: 'flex', height: '100vh' }}>
           <Banner />
         </div>
-          <Intro />
       </BrowserView>
       <MobileView>
         <div style={{ height: '700px' }}>

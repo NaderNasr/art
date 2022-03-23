@@ -36,6 +36,8 @@ const App = () => {
   //error message
   const [errorMessage, setErrorMessage] = useState('')
 
+  const [categories, setCategories] = useState([]);
+
 
 
   // --------User Authentication -------------------
@@ -51,12 +53,17 @@ const App = () => {
 
   //------------------------------------------------
 
+  const fetchCategories = async () => {
+    const response = await commerce.categories.list()
+    setCategories(response.data)
+  }
 
 
   // use promise to load products
   const fetchProducts = () => {
     commerce.products.list()
       .then((products) => {
+        console.log("products: ", products.data)
         setProducts(products.data);
       })
       .catch((error) => {
@@ -182,6 +189,7 @@ const App = () => {
     }
     fetchProducts();
     fetchCart();
+    fetchCategories();
 
     const timer = setInterval(() => {
       setLoading(false)
@@ -220,7 +228,11 @@ const App = () => {
               onUpdateCartQuantity={handleUpdateCartQuantity}
             />} />
           <Route path="/hot" element={<Hot />} />
-          <Route path='/categories' element={<Category />} />
+          <Route path='/categories' element={
+            <Category
+              categories={categories}
+              products={products}
+            />} />
           <Route
             path="/checkout"
             element={
