@@ -38,7 +38,6 @@ const App = () => {
   // --------User Authentication -------------------
 
   const [userEmail, setUserEmail] = useState('');
-  const [userToken, setUserToken] = useState('');
   const [emailSent, setEmailSent] = useState('');
   // --------------------------------------------------------------------------------------------------------
 
@@ -144,12 +143,11 @@ const App = () => {
     auth()
   };
 
-  const handleLogOut = (e) => {
+  const handleLogOut = () => {
     commerce.customer.logout();
   };
 
-  console.log('YOUR EMAIL', emailSent);
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
+  // console.log('YOUR EMAIL', emailSent);
 
 
   const customer_ID = commerce.customer.id()
@@ -166,6 +164,7 @@ const App = () => {
     fetchProducts();
     fetchCart();
 
+    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
