@@ -228,7 +228,7 @@ const App = () => {
                 onCaptureCheckout={handleCaptureCheckout}
                 error={errorMessage}
               />} />
-          <Route path="/AR" element={<ARWrapper />}>
+          <Route path="/AR" element={<ARWrapper products={products} onAddToCart={handleAddToCart} />}>
             <Route path=":productId" element={<ProductAR products={products} />} />
           </Route>
           <Route

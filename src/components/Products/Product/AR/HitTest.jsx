@@ -6,7 +6,7 @@ import Art from './Art';
 const HitTest = ({ dimensions, image }) => {
   const [placed, setPlaced] = useState(false);
   const [placement, setPlacement] = useState([]);
-  const [marker, setMarker] = useState([0.1, 0.2, 32]);
+  const [marker, setMarker] = useState([0.2, 0.4, 32]);
   const ref = useRef();
 
   const texture = useTexture(image);
@@ -14,7 +14,7 @@ const HitTest = ({ dimensions, image }) => {
   const onSelect = () => {
     if (placed) {
       setPlaced(false);
-      setMarker([0.1, 0.2, 32]);
+      setMarker([0.2, 0.4, 32]);
     } else {
       setPlaced(true);
       setMarker([0, 0]);
@@ -25,7 +25,7 @@ const HitTest = ({ dimensions, image }) => {
     if (placed) return;
     hit.decompose(ref.current.position, ref.current.rotation, ref.current.scale);
     const x = ref.current.position.x;
-    const y = ref.current.position.y;
+    const y = ref.current.position.y + 0.5;
     const z = ref.current.position.z;
     setPlacement([x, y, z]);
   });
