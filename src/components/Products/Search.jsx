@@ -1,5 +1,7 @@
-import { Typography, TextField, Button } from '@mui/material';
+import { InputBase } from '@mui/material';
 import React from 'react';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Search = ({ handleSearch }) => {
   let value = ''
@@ -10,11 +12,15 @@ const Search = ({ handleSearch }) => {
   }
 
 
-  return(
+  return (
     <div className="search">
-      <TextField id="outlined-basic" variant="outlined" label="Search" onChange={handleChange} />
-      <Button variant="contained" onClick={() => handleSearch(value)}>Submit</Button>
+      <InputBase id="outlined-basic" placeholder="Search ARt" variant="outlined" label="Search" onChange={handleChange} />
+      <IconButton onClick={() => handleSearch(value)} sx={{ p: '10px' }} aria-label="search">
+        <SearchIcon />
+      </IconButton>
     </div>
+
+
   )
 }
 
