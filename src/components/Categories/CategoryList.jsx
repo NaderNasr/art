@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState }from "react";
 // import commerce from "../../lib/commerce";
 // // import ProductItem from "../Products/Product/ProductItem";
 // import { experimentalStyled as styled } from "@mui/material/styles";
 // import Paper from "@mui/material/Paper";
 // import Grid from "@mui/material/Grid";
-// import { Box, Divider } from "@mui/material";
+import { Button } from "@mui/material";
 import Category from './Category'
 
 
@@ -13,13 +13,36 @@ import Category from './Category'
 
 const CategoryList = ({ categories, products, onAddToCart }) => {
 
-  console.log("array :", categories)
+  const [ category, setCategory ] = useState('')
+
+  console.log(categories)
+  console.log(category)
+
+
+
 
   return (
     <>
-    {categories.map((cat, id) => (
-      <Category key={id} cat={cat} onAddToCart={onAddToCart} products={products} />
-    ))}
+    
+    { !category ? 
+      <>
+      {categories.map((cat, id) => (
+        <Button key={id} onClick={() => setCategory(cat.id)}>{cat.name}</Button>
+      ))}
+      {categories.map((cat, id) => (
+       
+        <Category key={id} cat={cat} category={category} onAddToCart={onAddToCart} products={products} />
+      ))}
+      </>
+      : 
+      <>
+      {categories.map((cat, id) => (
+        <Button key={id} onClick={() => setCategory(cat.id)}>{cat.name}</Button>
+      ))}
+        <Category cat={category} onAddToCart={onAddToCart} products={products}/>
+        </>
+    }
+
       
       {/* <div>
         <Box sx={{ flexGrow: 1 }}>
