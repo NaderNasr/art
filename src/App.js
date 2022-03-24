@@ -9,7 +9,7 @@ import {
   Checkout,
   Category,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
@@ -240,7 +240,7 @@ const App = () => {
               setUserEmail={setUserEmail}
             />
             } />
-          <Route path="/profile"
+          <Route path="/:id"
             element={<Profile />}
           />
           <Route path="*" element={<Catch />} />
