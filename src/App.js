@@ -218,7 +218,6 @@ const App = () => {
               :
               <div>
                 <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />
-                <Footer />
               </div>
               } />
           <Route path="/cart" element={
@@ -259,6 +258,7 @@ const App = () => {
           />
           <Route path="*" element={<Catch />} />
         </Routes>
+      {!loading && <Footer />}
       </div>
     </Router>
 

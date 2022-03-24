@@ -1,12 +1,13 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { OrbitControls } from '@react-three/drei';
 import { ARCanvas } from '@react-three/xr';
 
 import HitTest from './HitTest';
 
+
 const ProductAR = ({ products }) => {
-  
+
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
   

@@ -143,7 +143,7 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
                     {/* Your local IP address for now, then set domain URL to redirect to mobile view */}
                     <p>{product.name}</p>
                     <p>{product.price.formatted_with_code}</p>
-                    <p>{descriptionStriped}</p>
+                    {/* <p>{descriptionStriped}</p> */}
                     {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
                     <Link to={`/AR/${product.id}`}>
                       <Button>

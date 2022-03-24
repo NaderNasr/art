@@ -3,6 +3,7 @@ import { Outlet, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
+
 const ARWrapper = ({ products, onAddToCart }) => {
   const params = useParams();
   const targetProduct = products.find(product => product.id === params.productId);
