@@ -9,13 +9,14 @@ import {
   Checkout,
   Category,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch';
+import Auth from './components/Authentication/Auth';
 
 
 
@@ -152,7 +153,7 @@ const App = () => {
   //--------------------------------AUTHENTICATION------------
 
   const auth = () => {
-    commerce.customer.login(userEmail, 'https://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
+    commerce.customer.login(userEmail, 'https://localhost:3000/login/').then((loginToken) => setEmailSent(loginToken));
   }
 
   //Post alert when email as been sent console.log(loginToken)
@@ -184,12 +185,17 @@ const App = () => {
     fetchCart();
 
     console.log('Are you logged in ? ', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
-    console.log('Customer Token: ',commerce.customer.token());
+    console.log('Customer Token: ', commerce.customer.token());
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
     return () => clearInterval(timer);
   }, [search]);
+
+
+
+  let { slug } = useParams()
+
 
 
   return (
@@ -240,7 +246,10 @@ const App = () => {
               setUserEmail={setUserEmail}
             />
             } />
-          <Route path="/:id"
+          <Route path="/profile"
+            element={<Profile />}
+          />
+          <Route path='login/:slug'
             element={<Profile />}
           />
           <Route path="*" element={<Catch />} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -24,6 +24,8 @@ const Navbar = ({ totalItems, clearSearch }) => {
   const [anchor, setAnchor] = useState(null);
   const open = Boolean(anchor);
 
+  const [isCustomerOnline, setIsCustomerOnline] = useState(false)
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -32,9 +34,20 @@ const Navbar = ({ totalItems, clearSearch }) => {
   };
 
   const logOut = () => {
-    commerce.customer.logout();
+    commerce.customer.logout().forceUpdate();
     window.location.reload(false)
   }
+
+  useEffect(() => {
+    console.log('1 - Effect =', isCustomerOnline)
+    const timer = setInterval(() => {
+      setIsCustomerOnline(commerce.customer.isLoggedIn())
+    }, 500);
+    // }
+    return () => clearInterval(timer);
+  }, [isCustomerOnline])
+  console.log('3 - Effect =', isCustomerOnline)
+
 
   return (
     <div>
@@ -61,21 +74,29 @@ const Navbar = ({ totalItems, clearSearch }) => {
                   Products
                 </Button>
                 {commerce.customer.token() ?
-                  <Button component={Link} to={"/:id"} variant="text" >
+                  <Button component={Link} to={"/profile"} variant="text" >
                     profile
                   </Button>
                   :
                   <></>}
+
+
               </div>
-              {commerce.customer.token() ?
+              {isCustomerOnline &&
                 <Button component={Link} to={"/"} variant="text" onClick={() => logOut()}>
                   Logout
                 </Button>
-                :
+              }
+
+
+              {!isCustomerOnline &&
                 <Button component={Link} to={"/login"} variant="text">
                   Register
                 </Button>
               }
+
+
+
               <div className={classes.cart}>
                 <Link to="/cart">
                   <IconButton aria-label="Show cart items">
@@ -86,6 +107,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 </Link>
               </div>
             </>
+            //Bottom for mobile
             :
             <>
               <IconButton color="primary" className={classes.menuButton} edge="start" aria-label="menu" onClick={handleMenu}>

@@ -8,8 +8,6 @@ import { LinearProgress } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import commerce from '../../../lib/commerce'
 import { Box } from '@mui/system';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Hot from '../../Hot/Hot';
 
 
 const Profile = () => {
@@ -21,11 +19,11 @@ const Profile = () => {
   const [productImages, setProductImages] = useState('')
 
 
-  let { id } = useParams();
-  let jwtToken = { id }
+  let { slug } = useParams();
+  let jwtToken = { slug }
 
   const jwt = () => {
-    commerce.customer.getToken(jwtToken.id)
+    commerce.customer.getToken(jwtToken.slug)
       .then((jwt) => setUserToken(jwt))
       .catch((err) => console.log('JWT ERROR: ', err))
   }
@@ -38,10 +36,19 @@ const Profile = () => {
     commerce.customer.getOrders(userInfo.id).then((orders) => setAllOrders(orders));
   }
 
+  console.log()
+
   useEffect(() => {
-    jwt()
-    customerInfo()
-    customerOrder()
+
+    const timer = setInterval(() => {
+      jwt()
+      customerInfo()
+      customerOrder()
+    }, 200);
+    // }
+    return () => clearInterval(timer);
+
+
     // console.log('userInfo: ', userInfo)
   }, [])
 
