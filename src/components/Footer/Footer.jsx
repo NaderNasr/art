@@ -15,7 +15,7 @@ const Footer = () => {
           <Grid container spacing={5}>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>
-                <Typography>Armin Glavovic</Typography>
+                <Typography >Armin Glavovic</Typography>
                 <a href="" target="_blank" className={classes.icon}>
                   <GitHub/>
                 </a>
@@ -62,6 +62,9 @@ const Footer = () => {
             </Typography>
             <Typography variant="subtitle2">
             Final Project for Lighthouse Labs January Cohort
+            </Typography>
+            <Typography variant="subtitle2">
+            Made using <a href="https://commercejs.com/" target="_blank">Commerce.js</a>
             </Typography>
           </div>
         </Container>
