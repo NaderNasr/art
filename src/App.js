@@ -1,4 +1,4 @@
-import { Alert, LinearProgress } from '@mui/material';
+import { LinearProgress } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useEffect, useState } from 'react'
 import commerce from './lib/commerce';
@@ -9,8 +9,7 @@ import {
   Checkout,
   Category,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
@@ -36,7 +35,15 @@ const App = () => {
   // ------------------ Search --------------------
 
   const [search, setSearch] = useState('');
+  // --------User Authentication -------------------
+  const [userEmail, setUserEmail] = useState('');
+  const [emailSent, setEmailSent] = useState('');
+  // --------------------------------------------------------------------------------------------------------
+  // --------User Orders ---------------------------
+  const [customerOrder, setCustomerOrder] = useState('')
+  //------------------------------------------------
 
+  //-----------Search-------------------------
   const handleSearch = (value) => {
     const downCase = value.toLowerCase();
     setSearch(downCase);
@@ -55,21 +62,6 @@ const App = () => {
   const clearSearch = () => {
     setSearch('');
   }
-
-
-  //------------------------------------------------
-
-  // --------User Authentication -------------------
-
-  const [userEmail, setUserEmail] = useState('');
-  const [emailSent, setEmailSent] = useState('');
-  // --------------------------------------------------------------------------------------------------------
-
-  // --------User Orders ---------------------------
-
-  const [customerOrder, setCustomerOrder] = useState('')
-
-  //------------------------------------------------
 
   // use promise to load products
   const fetchProducts = () => {
@@ -157,16 +149,13 @@ const App = () => {
         console.log(`There was an error updating quantity of ${lineItemId}`, error);
       });
   }
-
-
-  //--------------------------------AUTHENTICATION----------------------------------------------------------------------------------------------------------------------------
+  //--------------------------------AUTHENTICATION------------
 
   const auth = () => {
     commerce.customer.login(userEmail, 'https://localhost:3000/').then((loginToken) => setEmailSent(loginToken));
   }
 
   //Post alert when email as been sent console.log(loginToken)
-
   const handleSubmit = (event) => {
     event.preventDefault();
     auth()
@@ -176,13 +165,9 @@ const App = () => {
     commerce.customer.logout();
   };
 
-  // console.log('Customer Id is: ', commerce.customer.id())
-  // console.log('userEmail: ', userEmail);
-  // console.log('JWT_Token: ', userToken);
-  // console.log('YOUR EMAIL', userEmail);
-  // console.log('IS CUSTOMER LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO Not YET"));
-  // console.log('commerce.customer.id():  ', commerce.customer.id())
-  // console.log('commerce.customer.token():  ', commerce.customer.token())
+  // const customerToken = () => {
+  //   commerce.customer.token()
+  // }
 
   const customer_ID = commerce.customer.id()
 
@@ -197,9 +182,9 @@ const App = () => {
     }
     fetchProducts();
     fetchCart();
-    setLoading(false);
 
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> LOGGED IN?', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
+    console.log('Are you logged in ? ', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
+    console.log('Customer Token: ',commerce.customer.token());
     const timer = setInterval(() => {
       setLoading(false)
     }, 2000);
@@ -255,10 +240,8 @@ const App = () => {
               setUserEmail={setUserEmail}
             />
             } />
-          <Route path="/:id"
-            element={<Profile
-              customerOrder={customerOrder}
-            />}
+          <Route path="/profile"
+            element={<Profile />}
           />
           <Route path="*" element={<Catch />} />
         </Routes>
