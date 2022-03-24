@@ -16,13 +16,13 @@ const Footer = () => {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>
                 <Typography >Armin Glavovic</Typography>
-                <a href="" target="_blank" className={classes.icon}>
+                <a href="https://github.com/glavovic" target="_blank" className={classes.icon}>
                   <GitHub/>
                 </a>
                 <a href="" target="_blank" className={classes.icon}>
                   <LinkedIn />
                 </a>
-                <a href="mailto: " className={classes.icon}>
+                <a href="mailto: glavovic.armin@gmail.com" className={classes.icon}>
                   <Email />
                 </a>
               </Box>
@@ -30,10 +30,10 @@ const Footer = () => {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>
                 <Typography>Nader Nasr</Typography>
-                <a href="" target="_blank" className={classes.icon}>
+                <a href="https://github.com/NaderNasr" target="_blank" className={classes.icon}>
                   <GitHub/>
                 </a>
-                <a href="" target="_blank" className={classes.icon}>
+                <a href="https://www.linkedin.com/in/nnasr/" target="_blank" className={classes.icon}>
                   <LinkedIn />
                 </a>
                 <a href="mailto: " className={classes.icon}>
