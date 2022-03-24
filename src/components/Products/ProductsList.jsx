@@ -4,6 +4,7 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/material';
+import Category from '../Categories/Category';
 
 import Search from './Search';
 
@@ -16,7 +17,7 @@ const Item = styled(Paper)(() => ({
 }));
 
 
-const ProductsList = ({ products, onAddToCart, handleSearch }) => {
+const ProductsList = ({ products, onAddToCart, handleSearch, categories, setSearch }) => {
   //view the products in browser > inspect > console
   // console.log(products)
   return (
@@ -29,6 +30,15 @@ const ProductsList = ({ products, onAddToCart, handleSearch }) => {
         marginBottom:'40px'
       }}>
         <Search handleSearch={handleSearch} />
+        </div>
+      <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom:'40px'
+      }}>
+        <Category categories={categories} setSearch={setSearch}/>
       </div>
       <Box>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>

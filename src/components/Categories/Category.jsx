@@ -1,8 +1,20 @@
 import React from 'react'
+import { Button } from '@mui/material'
+import setSearch from '../../App'
 
-const Category = () => {
+const Category = ({ categories, setSearch }) => {
+
+
+   console.log("cats:", categories)
+
+
   return (
-    <div>Category</div>
+    <>
+    {categories.map((category, id) => (
+      <Button key={id} onClick={() => setSearch(category.slug)}>{category.name}</Button>
+    ))}
+    
+    </>
   )
 }
 

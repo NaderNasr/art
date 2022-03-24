@@ -44,6 +44,8 @@ const App = () => {
   // --------User Orders ---------------------------
   const [customerOrder, setCustomerOrder] = useState('')
   //------------------------------------------------
+  //--------------categories-------------
+  const [categories, setCategories] = useState([])
 
   //-----------Search-------------------------
   const handleSearch = (value) => {
@@ -99,6 +101,12 @@ const App = () => {
       .catch((error) => {
         console.log(`There was an error adding ${productId} to cart`, error);
       });
+  }
+
+  // use promise to get categories
+  const fetchCategories = async () => {
+    const response = await commerce.categories.list()
+    setCategories(response.data)
   }
 
   const handleEmptyCart = () => {
@@ -184,6 +192,7 @@ const App = () => {
     }
     fetchProducts();
     fetchCart();
+    fetchCategories();
 
     console.log('Are you logged in ? ', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
     console.log('Customer Token: ', commerce.customer.token());
@@ -217,7 +226,7 @@ const App = () => {
               </div>
               :
               <div>
-                <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />
+                <ProductsList products={products} onAddToCart={handleAddToCart} categories={categories} setSearch={setSearch} handleSearch={handleSearch} />
               </div>
               } />
           <Route path="/cart" element={
@@ -228,7 +237,7 @@ const App = () => {
               onUpdateCartQuantity={handleUpdateCartQuantity}
             />} />
           <Route path="/hot" element={<Hot />} />
-          <Route path='/categories' element={<Category />} />
+          <Route path='/categories' element={<Category categories={categories} />} />
           <Route
             path="/checkout"
             element={
