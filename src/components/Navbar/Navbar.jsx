@@ -7,26 +7,18 @@ import {
   useMediaQuery,
   Button,
   Badge,
-  // useScrollTrigger,
-  // Slide,
-  // Menu,
-  // MenuItem,
-  // ListItemIcon
 } from "@material-ui/core";
-// import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
-import { Link } from "react-router-dom"
 
+import { Link } from "react-router-dom"
 import MenuIcon from "@material-ui/icons/Menu";
 import { ShoppingCart } from '@material-ui/icons';
-
 import { useTheme } from '@mui/material/styles';
 import commerce from '../../lib/commerce'
-
 import logo from '../../assets/logo.png'
 import useStyles from './styles';
 
 
-const Navbar = ({ totalItems }) => {
+const Navbar = ({ totalItems, clearSearch }) => {
 
   const classes = useStyles();
   const [anchor, setAnchor] = useState(null);
@@ -39,6 +31,10 @@ const Navbar = ({ totalItems }) => {
     setAnchor(event.currentTarget);
   };
 
+  const logOut = () => {
+    commerce.customer.logout();
+    window.location.reload(false)
+  }
 
   return (
     <div>
@@ -64,20 +60,19 @@ const Navbar = ({ totalItems }) => {
                 <Button component={Link} to={"/:id"} variant="text" >
                   profile
                 </Button>
-                <Button component={Link} to={"/"} variant="text" >
+                <Button component={Link} to={"/"} variant="text" onClick={() => clearSearch()}>
                   Products
                 </Button>
               </div>
-                {commerce.customer.token() ?
-                <Button component={Link} to={"/"} variant="text" onClick={() => { commerce.customer.logout();  }}>
-                {/* window.location.reload(false) refresh page to change title to register? */}
+              {commerce.customer.token() ?
+                <Button component={Link} to={"/"} variant="text" onClick={() => logOut()}>
                   Logout
                 </Button>
                 :
                 <Button component={Link} to={"/login"} variant="text">
                   Register
                 </Button>
-                }
+              }
               <div className={classes.cart}>
                 <Link to="/cart">
                   <IconButton aria-label="Show cart items">

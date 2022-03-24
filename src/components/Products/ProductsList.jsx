@@ -5,6 +5,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Box } from '@mui/material';
 
+import Search from './Search';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -17,12 +19,13 @@ const Item = styled(Paper)(({ theme }) => ({
   },
 }));
 
-const ProductsList = ({ products, onAddToCart }) => {
+const ProductsList = ({ products, onAddToCart, handleSearch }) => {
   //view the products in browser > inspect > console
   // console.log(products)
   return (
     //Material UI Grid
     <div>
+      <Search handleSearch={handleSearch} />
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>
           {products.map((product) => (

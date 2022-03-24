@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
+import { Button } from '@mui/material';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 
-// using this component for nested routes... outlet may be causing problems...
-
-const ARWrapper = () => {
+const ARWrapper = ({ products, onAddToCart }) => {
+  const params = useParams();
+  const targetProduct = products.find(product => product.id === params.productId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,6 +21,7 @@ const ARWrapper = () => {
 
   return (
     <div>
+      {targetProduct.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(targetProduct.id, 1)}>Add To Cart</Button>}
       <Outlet />
     </div>
   );
