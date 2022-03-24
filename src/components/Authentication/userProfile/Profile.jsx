@@ -37,7 +37,7 @@ const customerOrder = () => {
 
 
 useEffect(() => {
-  // jwt()
+  jwt()
   customerInfo()
   customerOrder()
   // console.log('userInfo: ', userInfo)
