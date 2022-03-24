@@ -17,6 +17,9 @@ export default makeStyles((theme) => ({
   icon: {
     color: "black"
   },
+  disclaimer: {
+    paddingTop: "1em"
+  },
   footer: {
     display: "flex",
     justifyContent: "space-between",
