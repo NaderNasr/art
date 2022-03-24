@@ -17,6 +17,7 @@ import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch';
 import Auth from './components/Authentication/Auth';
+import Footer from './components/Footer/Footer';
 
 
 
@@ -215,7 +216,11 @@ const App = () => {
                 </Box>
               </div>
               :
-              <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />} />
+              <div>
+                <ProductsList products={products} onAddToCart={handleAddToCart} handleSearch={handleSearch} />
+                <Footer />
+              </div>
+              } />
           <Route path="/cart" element={
             <Cart
               cart={cart}
