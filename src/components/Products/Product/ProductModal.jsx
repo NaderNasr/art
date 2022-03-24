@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,13 +11,19 @@ import { Button } from '@mui/material';
 import { BrowserView, MobileView } from 'react-device-detect';
 import AR from '../../../mobile.png'
 import { Link } from 'react-router-dom'
-import QR from './QR/QR';
 
 
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import ModalQR from './ModalQR';
+import AvailableProductsAlert from '../../AvailableProductsAlert'
 
 
 const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
+  const [openModal, setOpenModal] = useState(false);
+
+  const openQR = () => setOpenModal(true);
+  const closeQR = () => setOpenModal(false);
+
 
   const style = {
     position: 'absolute',
@@ -48,8 +54,8 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
     clear: 'both',
     display: 'table'
   };
-  //Remove html tags from JSON data
 
+  //Remove html tags from JSON description data
   const regex = /(<([^>]+)>)/ig
   const description = product.description
   const descriptionStriped = description.replace(regex, "");
@@ -73,41 +79,48 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
               <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1 0 auto' }} style={{ justifyContent: 'space-between' }}>
                   <Typography component="div" variant="h5">
-                    <p>{product.name}</p>
-                    <p>{product.price.formatted_with_code}</p>
+                    <div style={{display:'flex'}}>
+                      <AvailableProductsAlert product={product} />
+                      <h1>{product.name}</h1>
+                    </div>
+                    <p>${product.price.formatted_with_code}</p>
                     {<br />}
-                    {/* Your local IP address for now, then set domain URL to redirect to mobile view */}
-                    <p>{descriptionStriped}</p>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <img src={AR} alt="AR button" style={{ width: '40px', transform: 'rotate(90deg)', paddingLeft: '2px' }} />
+                    <Button onClick={openQR}>View in AR</Button>
+                    <div style={{ display: 'flex' }}>
                       {product.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(product.id, 1)}>Add To Cart</Button>}
-                      <div>
-                        <Link to={`/AR/${product.id}`}>
-                          <Button>
-                            <img src={AR} alt="AR button" style={{ width: '40px', marginRight: '10px' }} />
-                            View in AR
-                          </Button>
-                        </Link>
-                        <QR />
-                      </div>
+                      <ModalQR openModal={openModal} closeQR={closeQR} />
+                      <Link to={`/AR/${product.id}`}>
+                        <Button>
+                          View AR in Browser
+                        </Button>
+                      </Link>
+                    </div>
+                    {<br />}
+                    <div style={{ width: "65%" }}>
+                      Description:
+                      <p>{descriptionStriped}</p>
                     </div>
                   </Typography>
                 </CardContent>
               </Box>
-              <CardMedia
-                component="img"
-                sx={{ width: 550 }}
-                image={product.image?.url}
-                style={{
-                  width: '40%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-                alt="Image"
-              />
+              <img src={product.image?.url} alt="cover" />
             </Card>
           </Fade>
         </Modal>
       </BrowserView>
+
+
+
+
+
+
+
+
+
+
+
+
 
       <MobileView>
         <Modal
