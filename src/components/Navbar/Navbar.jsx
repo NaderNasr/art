@@ -57,12 +57,15 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 <Button component={Link} to={"/categories"} variant="text" >
                   categories
                 </Button>
-                <Button component={Link} to={"/:id"} variant="text" >
-                  profile
-                </Button>
                 <Button component={Link} to={"/"} variant="text" onClick={() => clearSearch()}>
                   Products
                 </Button>
+                {commerce.customer.token() ?
+                  <Button component={Link} to={"/:id"} variant="text" >
+                    profile
+                  </Button>
+                  :
+                  <></>}
               </div>
               {commerce.customer.token() ?
                 <Button component={Link} to={"/"} variant="text" onClick={() => logOut()}>
