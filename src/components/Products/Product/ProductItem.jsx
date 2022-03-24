@@ -1,10 +1,5 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-// import AvailableProductsAlert from "../../AvailableProductsAlert";
-// import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
-// import Poster from "../../src/1.gltf"
-// import '@google/model-viewer'
-// import { BrowserView, MobileView } from 'react-device-detect';
 import ProductModal from "./ProductModal";
 import './styles.css'
 
