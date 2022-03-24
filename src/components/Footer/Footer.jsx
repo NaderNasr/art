@@ -1,6 +1,5 @@
 import { Container, Grid, Box, Typography } from "@material-ui/core";
 import { GitHub, LinkedIn, Email } from "@material-ui/icons";
-import { Link } from "react-router-dom";
 import makeStyles from './styles';
 
 const Footer = () => {
@@ -17,43 +16,43 @@ const Footer = () => {
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>
                 <Typography>Armin Glavovic</Typography>
-                <Link to='/' className={classes.icon}>
+                <a href="" target="_blank" className={classes.icon}>
                   <GitHub/>
-                </Link>
-                <Link to='/' className={classes.icon}>
+                </a>
+                <a href="" target="_blank" className={classes.icon}>
                   <LinkedIn />
-                </Link>
-                <Link to='/' className={classes.icon}>
+                </a>
+                <a href="mailto: " className={classes.icon}>
                   <Email />
-                </Link>
+                </a>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>
                 <Typography>Nader Nasr</Typography>
-                <Link to='/' className={classes.icon}>
+                <a href="" target="_blank" className={classes.icon}>
                   <GitHub/>
-                </Link>
-                <Link to='/' className={classes.icon}>
+                </a>
+                <a href="" target="_blank" className={classes.icon}>
                   <LinkedIn />
-                </Link>
-                <Link to='/' className={classes.icon}>
+                </a>
+                <a href="mailto: " className={classes.icon}>
                   <Email />
-                </Link>
+                </a>
               </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={1}>
                 <Typography>Gerard Compion</Typography>
-                <Link to='/' className={classes.icon}>
+                <a href="https://github.com/gerard-c" target="_blank" className={classes.icon}>
                   <GitHub/>
-                </Link>
-                <Link to='/' className={classes.icon}>
+                </a>
+                <a href="https://www.linkedin.com/in/gerard-compion-37567b233/" target="_blank" className={classes.icon}>
                   <LinkedIn />
-                </Link>
-                <Link to='/' className={classes.icon}>
+                </a>
+                <a href="mailto: gcompion93@gmail.com" className={classes.icon}>
                   <Email />
-                </Link>
+                </a>
               </Box>
             </Grid>
           </Grid>
