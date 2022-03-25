@@ -74,6 +74,15 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 >
                   Products
                 </Button>
+                <Button
+                  component={Link}
+                  to={"/gallery"}
+                  variant="text"
+                  onClick={() => clearSearch()}
+                >
+                  Gallery
+                </Button>
+
                 {commerce.customer.token() ? (
                   <Button component={Link} to={"/profile"} variant="text">
                     profile
