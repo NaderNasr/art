@@ -31,8 +31,6 @@ const Gallery = ({ products }) => {
     const z = Math.sin(t) * 4;
 
     let rotation = -t + 1.5;
-    
-    console.log(rotation);
 
     carousel.push(
       <Exhibit
