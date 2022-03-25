@@ -11,7 +11,7 @@ const Gallery = ({ products }) => {
 
   console.log(products);
 
-  const testImage = 'https://vast-earth-27464.herokuapp.com/' + products[0].image.url
+  const testImage = 'https://vast-earth-27464.herokuapp.com/' + products[0].image.url // CORS workaround 😞
 
   const getDimensions = (image) => {
     return [image.image_dimensions.height, image.image_dimensions.width];
