@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTexture } from '@react-three/drei';
+import { DoubleSide } from 'three';
 
 
 const Exhibit = ({ position, dimensions, image }) => {
@@ -9,7 +10,7 @@ const Exhibit = ({ position, dimensions, image }) => {
   return(
     <mesh position={position}>
       <planeGeometry args={dimensions} />
-      <meshStandardMaterial map={testTexture} />
+      <meshStandardMaterial map={testTexture} side={DoubleSide}/>
     </mesh>
   )
 }

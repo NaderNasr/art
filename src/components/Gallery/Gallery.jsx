@@ -35,10 +35,11 @@ const Gallery = ({ products }) => {
   const testDimensions = products[0].image.image_dimensions;
 
   return (
-    <Canvas>
-      <ambientLight />
+    <Canvas style={{ height: "25em" }}>
+      <color attach="background" args={['black']} />
+      <spotLight intensity={0.5} position={[300, 300, 2000]} />
       <Suspense fallback={null}>
-        <Exhibit position={[0, 0, 0]} dimensions={rescaleImage(testDimensions.height, testDimensions.width)} image={testImage} />
+        <Exhibit position={[0, 0, 0]} dimensions={rescaleImage(getDimensions(products[0].image))} image={testImage} />
       </Suspense>
       <OrbitControls />
     </Canvas>
