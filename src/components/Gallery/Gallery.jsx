@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Exhibit from './Exhibit';
@@ -47,9 +47,9 @@ const Gallery = ({ products }) => {
   }
 
   return (
-    <Canvas style={{ height: "25em" }}>
+    <Canvas style={{ height: "25em" }} camera={{ position: [0, 0, -6] }}>
       <color attach="background" args={['black']} />
-      <ambientLight intensity={0.5}/>
+      <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <directionalLight position={[0, 10, 5]} intensity={1} />
       <spotLight intensity={1} position={[1000, 0, 0]} />
@@ -58,7 +58,7 @@ const Gallery = ({ products }) => {
         {carousel}
         </group>
       </Suspense>
-      <OrbitControls />
+      <OrbitControls autoRotate enableRotate={false} enableZoom={false} enablePan={false} />
     </Canvas>
   )
 }
