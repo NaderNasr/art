@@ -40,6 +40,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
   };
 
   const logOut = () => {
+    setAnchor(null)
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
@@ -164,13 +165,23 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 <MenuItem
                   onClick={() => setAnchor(null)}
                   component={Link}
+                  to="/"
+                >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <Typography variant="h6"> Products</Typography>
+                </MenuItem>
+                {isCustomerOnline && <MenuItem
+                  onClick={() => setAnchor(null)}
+                  component={Link}
                   to="/profile"
                 >
                   <ListItemIcon>
                     <AccountBox />
                   </ListItemIcon>
                   <Typography variant="h6"> Profile</Typography>
-                </MenuItem>
+                </MenuItem>}
 
                 {isCustomerOnline && (
                   <MenuItem onClick={() => logOut()}>
