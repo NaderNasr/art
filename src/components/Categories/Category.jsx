@@ -1,20 +1,26 @@
 import React from 'react'
-import { Button } from '@mui/material'
 import setSearch from '../../App'
+import Chip from "@material-ui/core/Chip";
+
+
 
 const Category = ({ categories, setSearch }) => {
 
-
-   console.log("cats:", categories)
-
+  console.log("cats:", categories)
 
   return (
-    <>
-    {categories.map((category, id) => (
-      <Button key={id} onClick={() => setSearch(category.slug)}>{category.name}</Button>
-    ))}
-    
-    </>
+    <div style={{display:'flex', flexWrap:'wrap', justifyContent:'space-evenly'}}>
+      {categories.map((category, id) => (
+        <div style={{display:'flex', padding:'5px'}}>
+          <Chip
+            style={{color:'#BB86FC', backgroundColor:'#202124'}}
+            key={id}
+            onClick={() => setSearch(category.slug)}
+            label={category.name}
+          />
+        </div>
+      ))}
+    </div>
   )
 }
 

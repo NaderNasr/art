@@ -5,21 +5,28 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
   appBar: {
-    backgroundColor: 'white'
+    backgroundColor: '#202124',
+    display:'flex'
+  },
+  titleMobile: {
+    flexGrow: 1,
+    color: '#BB86FC'
   },
   title: {
-    flexGrow: 1,
-    color: 'black'
+    color: '#BB86FC'
   },
   image: {
-    marginRight: '1rem',
+    marginTop: '1rem'
   },
   buttons: {
     flexGrow: 1,
-    color: 'black'
+    paddingLeft:'20px'
+  },
+  buttonColor: {
+    color: '#BB86FC',
   },
   cart: {
-
+    color: 'red'
   },
   menuButton: {
     display: "flex",

@@ -11,7 +11,7 @@ import Search from './Search';
 const Item = styled(Paper)(() => ({
   background: "#F6F6F6",
   '&:hover': {
-    boxShadow: '0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)'
+    boxShadow: '0 14px 20px rgba(0,0,0,0.25), 0 20px 45px rgba(0,0,0,0.40)'
   },
   borderRadius: '25px'
 }));
@@ -22,23 +22,26 @@ const ProductsList = ({ products, onAddToCart, handleSearch, categories, setSear
   // console.log(products)
   return (
     //Material UI Grid
-    <div>
+    <div style={{ paddingRight: '2px', marginLeft: '8px' }}>
       <div style={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom:'40px'
+        marginBottom: '40px'
       }}>
         <Search handleSearch={handleSearch} />
+      </div>
+      <div style={{display:'flex', justifyContent:'center'}}>
+          <h1>Popular Collections</h1>
         </div>
       <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom:'40px'
-      }}>
-        <Category categories={categories} setSearch={setSearch}/>
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginBottom: '40px'
+        }}>
+        <Category categories={categories} setSearch={setSearch} />
       </div>
       <Box>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 2, sm: 8, md: 12 }}>

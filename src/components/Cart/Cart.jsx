@@ -4,6 +4,9 @@ import { Alert } from "@mui/material";
 import { Link } from 'react-router-dom'
 import makeStyles from './styles';
 import CartItem from './CartItem/CartItem';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { BrowserView, MobileView } from 'react-device-detect';
+
 
 const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => {
   const classes = makeStyles();
@@ -11,9 +14,11 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
       <Alert severity="error">Your shopping cart is empty </Alert>
+      <div style={{marginTop:'15px'}}>
       <Link to='/'>
-      Browse Products
+      <Button variant="contained" style={{backgroundColor: '#BB86FC', color: '#FFFFFF'}}>Browse Products</Button>
       </Link>
+      </div>
     </Typography>
   );
 
@@ -51,6 +56,7 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
 
   return (
     <Container>
+      <a href="/"><ArrowBackIcon /></a>
       <div className={classes.toolbar} />
       <Typography className={classes.title} variant="h3" gutterBottom>Your Shopping Cart</Typography>
       {cart.line_items.length === 0 ? <EmptyCart /> : <FilledCart />}

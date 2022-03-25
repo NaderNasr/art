@@ -8,14 +8,13 @@ import {
   Button,
   Badge,
 } from "@material-ui/core";
-
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import { ShoppingCart } from "@material-ui/icons";
 import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
-import logo from "../../assets/logo.png";
 import useStyles from "./styles";
+import Logo from '../../assets/logo.svg'
 
 const Navbar = ({ totalItems, clearSearch }) => {
   const classes = useStyles();
@@ -54,19 +53,18 @@ const Navbar = ({ totalItems, clearSearch }) => {
             <>
               <Typography
                 variant="h5"
-                color="primary"
                 className={classes.title}
               >
                 <img
-                  src={logo}
+                  src={Logo}
                   alt="ARt"
-                  height="25px"
+                  height="45px"
                   className={classes.image}
                 />
-                ARt
               </Typography>
               <div className={classes.buttons}>
                 <Button
+                  className={classes.buttonColor}
                   component={Link}
                   to={"/"}
                   variant="text"
@@ -75,7 +73,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
                   Products
                 </Button>
                 {commerce.customer.token() ? (
-                  <Button component={Link} to={"/profile"} variant="text">
+                  <Button className={classes.buttonColor} component={Link} to={"/profile"} variant="text">
                     profile
                   </Button>
                 ) : (
@@ -84,6 +82,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
               </div>
               {isCustomerOnline && (
                 <Button
+                  className={classes.buttonColor}
                   component={Link}
                   to={"/"}
                   variant="text"
@@ -94,16 +93,16 @@ const Navbar = ({ totalItems, clearSearch }) => {
               )}
 
               {!isCustomerOnline && (
-                <Button component={Link} to={"/login"} variant="text">
+                <Button className={classes.buttonColor} component={Link} to={"/login"} variant="text">
                   Register
                 </Button>
               )}
 
-              <div className={classes.cart}>
+              <div>
                 <Link to="/cart">
                   <IconButton aria-label="Show cart items">
                     <Badge badgeContent={totalItems} color="secondary">
-                      <ShoppingCart />
+                      <ShoppingCart style={{color: '#BB86FC'}}/>
                     </Badge>
                   </IconButton>
                 </Link>
@@ -113,7 +112,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
             //Bottom for mobile
             <>
               <IconButton
-                color="primary"
+                style={{color: '#BB86FC'}}
                 className={classes.menuButton}
                 edge="start"
                 aria-label="menu"
@@ -124,21 +123,20 @@ const Navbar = ({ totalItems, clearSearch }) => {
               <Typography
                 variant="h5"
                 color="primary"
-                className={classes.title}
+                className={classes.titleMobile}
               >
                 <img
-                  src={logo}
+                  src={Logo}
                   alt="ARt"
                   height="25px"
                   className={classes.image}
                 />
-                ARt
               </Typography>
-              <div className={classes.cart}>
+              <div>
                 <Link to="/cart">
                   <IconButton aria-label="Show cart items">
                     <Badge badgeContent={totalItems} color="secondary">
-                      <ShoppingCart />
+                      <ShoppingCart style={{color: '#BB86FC'}}/>
                     </Badge>
                   </IconButton>
                 </Link>
