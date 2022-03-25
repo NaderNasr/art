@@ -9,16 +9,21 @@ import {
   Badge,
   Menu,
   MenuItem,
-  ListItemIcon
+  ListItemIcon,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import { ShoppingCart } from "@material-ui/icons";
+import {
+  ShoppingCart,
+  AccountBox,
+  ExitToApp,
+  LockOpen,
+} from "@material-ui/icons";
 import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
 import useStyles from "./styles";
 import Logo from "../../assets/logo.svg";
-import { HomeIcon, AccountBox } from "@material-ui/icons/School"
+import HomeIcon from "@material-ui/icons/School";
 
 const Navbar = ({ totalItems, clearSearch }) => {
   const classes = useStyles();
@@ -132,10 +137,10 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 <MenuIcon />
               </IconButton>
               <Menu
+                styles={{ backgroudColor: "#BB86FC" }}
                 id="menu-appbar"
                 anchorEl={anchor}
                 anchorOrigin={{
-                  
                   vertical: "bottom",
                   horizontal: "left",
                 }}
@@ -166,16 +171,28 @@ const Navbar = ({ totalItems, clearSearch }) => {
                   </ListItemIcon>
                   <Typography variant="h6"> Profile</Typography>
                 </MenuItem>
-                <MenuItem
-                  onClick={() => setAnchor(null)}
-                  component={Link}
-                  to="/profile"
-                >
-                  <ListItemIcon>
-                    <AccountBox />
-                  </ListItemIcon>
-                  <Typography variant="h6"> Profile</Typography>
-                </MenuItem>
+
+                {isCustomerOnline && (
+                  <MenuItem onClick={() => logOut()}>
+                    <ListItemIcon>
+                      <ExitToApp />
+                    </ListItemIcon>
+                    <Typography variant="h6"> Logout</Typography>
+                  </MenuItem>
+                )}
+
+                {!isCustomerOnline && (
+                  <MenuItem
+                    onClick={() => setAnchor(null)}
+                    component={Link}
+                    to="/login"
+                  >
+                    <ListItemIcon>
+                      <LockOpen />
+                    </ListItemIcon>
+                    <Typography variant="h6"> Login</Typography>
+                  </MenuItem>
+                )}
               </Menu>
               <Typography
                 variant="h5"
