@@ -50,9 +50,9 @@ const Gallery = ({ products }) => {
     <Canvas style={{ height: "25em" }} camera={{ position: [0, 0, -6] }}>
       <color attach="background" args={['black']} />
       <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <directionalLight position={[0, 10, 5]} intensity={1} />
-      <spotLight intensity={1} position={[1000, 0, 0]} />
+      <directionalLight position={[10, 10, 5]} intensity={0.5} />
+      <directionalLight position={[0, 10, 5]} intensity={0.5} />
+      <spotLight position={[1000, 0, 0]} intensity={0.5} />
       <Suspense fallback={null}>
         <group>
         {carousel}
