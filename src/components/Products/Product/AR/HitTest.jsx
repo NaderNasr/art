@@ -38,6 +38,7 @@ const HitTest = ({ dimensions, image }) => {
     button.style.background = '#BB86FC';
     button.style.display = 'inline';
     button.style.bottom = '0'
+    button.style.zIndex = '0';
   }
 
   alterButton();

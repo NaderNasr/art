@@ -28,7 +28,12 @@ const ARWrapper = ({ products, onAddToCart }) => {
         onClick={() => onAddToCart(targetProduct.id, 1)}
         style={{ color: "#BB86FC" }}
       >Add To Cart</Button>}
-      <img src={targetProduct.image.url} />
+      <br />
+      <img
+        src={targetProduct.image.url}
+        style={{ display: "block", width: "40%", paddingTop: "10px", marginLeft: "auto", marginRight: "auto" }}
+        alt={`Preview of ${targetProduct.name}`}
+      />
       <Outlet />
     </div>
   );
