@@ -16,7 +16,7 @@ import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch';
-import Auth from './components/Authentication/Auth';
+// import Auth from './components/Authentication/Auth';
 import Footer from './components/Footer/Footer';
 import Gallery from './components/Gallery/Gallery';
 
