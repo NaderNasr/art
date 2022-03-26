@@ -34,7 +34,6 @@ const ProductAR = ({ products }) => {
           <ambientLight intensity={0.3} />
           <HitTest className='hittest' dimensions={planeDimensions} image={image} />
         </Suspense>
-        {/* <OrbitControls /> */}
       </ARCanvas>
     </div>
   )
