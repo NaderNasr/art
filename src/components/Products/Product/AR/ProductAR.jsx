@@ -29,13 +29,13 @@ const ProductAR = ({ products }) => {
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
 
   return (
-    <div style={{ height: "35rem" }}>
+    <div style={{ height: "35rem", display: "none" }}>
       <ARCanvas className="canvas" sessionInit={{ requiredFeatures: ['hit-test'] }}>
         <Suspense fallback={null}>
           <ambientLight intensity={0.3} />
           <HitTest className='hittest' dimensions={planeDimensions} image={image} />
         </Suspense>
-        <OrbitControls />
+        {/* <OrbitControls /> */}
       </ARCanvas>
     </div>
   )

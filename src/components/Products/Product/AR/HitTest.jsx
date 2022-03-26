@@ -36,11 +36,10 @@ const HitTest = ({ dimensions, image }) => {
     div.prepend(button);
     button.style.position = 'relative';
     button.style.background = '#BB86FC';
+    button.style.display = 'inline'
   }
 
-  useEffect(() => {
-    alterButton();
-  })
+  alterButton();
 
   return (
   <Interactive onSelect={() => onSelect()}>
