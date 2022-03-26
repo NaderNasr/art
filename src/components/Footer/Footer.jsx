@@ -20,10 +20,10 @@ const Footer = () => {
                 <Typography style={{ marginBottom: '25px' }}>Armin Glavovic</Typography>
               </Box>
               <Box style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', paddingBottom: '10px' }}>
-                <a href="https://github.com/glavovic" target="_blank" className={classes.icon}>
+                <a href="https://github.com/glavovic" target="_blank" className={classes.icon} rel="noreferrer">
                   <GitHub className={classes.svg_icons} />
                 </a>
-                <a href="https://www.linkedin.com/in/glavovica/" target="_blank" className={classes.icon}>
+                <a href="https://www.linkedin.com/in/glavovica/" target="_blank" className={classes.icon} rel="noreferrer">
                   <LinkedIn className={classes.svg_icons} />
                 </a>
                 <a href="mailto: glavovic.armin@gmail.com" className={classes.icon}>
@@ -36,10 +36,10 @@ const Footer = () => {
                 <Typography style={{ marginBottom: '25px' }}>Nader Nasr</Typography>
               </Box>
               <Box style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', paddingBottom: '10px' }}>
-                <a href="https://github.com/NaderNasr" target="_blank" className={classes.icon}>
+                <a href="https://github.com/NaderNasr" target="_blank" className={classes.icon} rel="noreferrer">
                   <GitHub className={classes.svg_icons} />
                 </a>
-                <a href="https://www.linkedin.com/in/nnasr/" target="_blank" className={classes.icon}>
+                <a href="https://www.linkedin.com/in/nnasr/" target="_blank" className={classes.icon} rel="noreferrer">
                   <LinkedIn className={classes.svg_icons} />
                 </a>
                 <a href="mailto: nadernasr7@gmail.com" className={classes.icon}>
@@ -52,10 +52,10 @@ const Footer = () => {
                 <Typography style={{ marginBottom: '25px' }}>Gerard Compion</Typography>
               </Box>
               <Box style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', paddingBottom: '10px' }}>
-                <a href="https://github.com/gerard-c" target="_blank" className={classes.icon}>
+                <a href="https://github.com/gerard-c" target="_blank" className={classes.icon} rel="noreferrer">
                   <GitHub className={classes.svg_icons} />
                 </a>
-                <a href="https://www.linkedin.com/in/gerard-compion-37567b233/" target="_blank" className={classes.icon}>
+                <a href="https://www.linkedin.com/in/gerard-compion-37567b233/" target="_blank" className={classes.icon} rel="noreferrer">
                   <LinkedIn className={classes.svg_icons} />
                 </a>
                 <a href="mailto: gcompion93@gmail.com" className={classes.icon}>
@@ -71,15 +71,15 @@ const Footer = () => {
           </div>
           <div className={classes.footer}>
             <Typography variant="subtitle2">
-              Made using <a className={classes.links} href="https://commercejs.com/" target="_blank">CommerceJs</a>
-              <a className={classes.links} href="https://reactjs.org/" target="_blank"> ReactJS </a>
-              <a className={classes.links} href="https://nodejs.org/en/" target="_blank"> NodeJs </a>
-              <a className={classes.links} href="https://v5.reactrouter.com/web/guides/quick-start" target="_blank"> React Router DOM </a>
-              <a className={classes.links} href="https://mui.com/" target="_blank"> MaterialUI </a>
-              <a className={classes.links} href="https://stripe.com/" target="_blank"> Stripe</a>
+              Made using <a className={classes.links} href="https://commercejs.com/" target="_blank" rel="noreferrer">CommerceJs</a>
+              <a className={classes.links} href="https://reactjs.org/" target="_blank" rel="noreferrer"> ReactJS </a>
+              <a className={classes.links} href="https://nodejs.org/en/" target="_blank" rel="noreferrer"> NodeJs </a>
+              <a className={classes.links} href="https://v5.reactrouter.com/web/guides/quick-start" target="_blank" rel="noreferrer"> React Router DOM </a>
+              <a className={classes.links} href="https://mui.com/" target="_blank" rel="noreferrer"> MaterialUI </a>
+              <a className={classes.links} href="https://stripe.com/" target="_blank" rel="noreferrer"> Stripe</a>
             </Typography>
             <Typography variant="subtitle2">
-              Final Project for <a className={classes.links} href="https://lighthouselabs.ca" target="_blank"> Lighthouse Labs</a> January Cohort
+              Final Project for <a className={classes.links} href="https://lighthouselabs.ca" target="_blank" rel="noreferrer"> Lighthouse Labs</a> January Cohort
             </Typography>
             <Typography variant="subtitle2">
               ARt © 2022

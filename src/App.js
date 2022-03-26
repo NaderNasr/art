@@ -18,6 +18,7 @@ import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch';
 import Auth from './components/Authentication/Auth';
 import Footer from './components/Footer/Footer';
+import Gallery from './components/Gallery/Gallery';
 
 
 
@@ -206,7 +207,7 @@ const App = () => {
     console.log('Customer Token: ', commerce.customer.token());
     const timer = setInterval(() => {
       setLoading(false)
-    }, 2000);
+    }, 2200);
     return () => clearInterval(timer);
   }, [search]);
 
@@ -273,6 +274,7 @@ const App = () => {
           <Route path='login/:slug'
             element={<Profile />}
           />
+          <Route path="/gallery" element={<Gallery products={products}/>}/>
           <Route path="*" element={<Catch />} />
         </Routes>
       {!loading && <Footer />}

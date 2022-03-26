@@ -99,6 +99,15 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                 >
                   Products
                 </Button>
+                <Button
+                  component={Link}
+                  to={"/gallery"}
+                  variant="text"
+                  onClick={() => clearSearch()}
+                >
+                  Gallery
+                </Button>
+
                 {commerce.customer.token() ? (
                   <Button
                     className={classes.buttonColor}
