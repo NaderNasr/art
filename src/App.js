@@ -210,7 +210,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <div style={{ marginBottom: '100px' }}>
+        <div style={{ paddingBottom: '70px' }}>
           <Navbar totalItems={cart.total_items} clearSearch={clearSearch} />
         </div>
         <Routes>
