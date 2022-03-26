@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { OrbitControls } from '@react-three/drei';
 import { ARCanvas } from '@react-three/xr';
 
 import HitTest from './HitTest';
@@ -29,7 +28,7 @@ const ProductAR = ({ products }) => {
   const planeDimensions = rescaleImageForAR(dimensions.height, dimensions.width);
 
   return (
-    <div style={{ height: "35rem", display: "none" }}>
+    <div style={{ height: "1rem" }}>
       <ARCanvas className="canvas" sessionInit={{ requiredFeatures: ['hit-test'] }}>
         <Suspense fallback={null}>
           <ambientLight intensity={0.3} />

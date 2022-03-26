@@ -36,7 +36,8 @@ const HitTest = ({ dimensions, image }) => {
     div.prepend(button);
     button.style.position = 'relative';
     button.style.background = '#BB86FC';
-    button.style.display = 'inline'
+    button.style.display = 'inline';
+    button.style.bottom = '0'
   }
 
   alterButton();
