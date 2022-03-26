@@ -7,12 +7,15 @@ import {
   useMediaQuery,
   Button,
   Badge,
-  Menu,
-  MenuItem,
+  Box,
+  // Menu,
+  // MenuItem,
   ListItemIcon,
 } from "@material-ui/core";
+import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import ListItemButton from "@mui/material/ListItemButton";
 import {
   ShoppingCart,
   AccountBox,
@@ -23,24 +26,26 @@ import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
 import useStyles from "./styles";
 import Logo from "../../assets/logo.svg";
-import HomeIcon from "@material-ui/icons/School";
+// import HomeIcon from "@material-ui/icons/";
+import Drawer from "@mui/material/Drawer";
 
 const Navbar = ({ totalItems, clearSearch }) => {
   const classes = useStyles();
-  const [anchor, setAnchor] = useState(null);
-  const open = Boolean(anchor);
+  // const [anchor, setAnchor] = useState(null);
+  const [open, setOpen] = useState(false);
+  // const open = Boolean(anchor);
 
   const [isCustomerOnline, setIsCustomerOnline] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const handleMenu = (event) => {
-    setAnchor(event.currentTarget);
-  };
+  // const handleMenu = (event) => {
+  //   setAnchor(event.currentTarget);
+  // };
 
   const logOut = () => {
-    setAnchor(null)
+    // setAnchor(null)
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
@@ -54,6 +59,16 @@ const Navbar = ({ totalItems, clearSearch }) => {
     return () => clearInterval(timer);
   }, [isCustomerOnline]);
   console.log("3 - Effect =", isCustomerOnline);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpen(open);
+  };
 
   return (
     <div>
@@ -133,11 +148,12 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 className={classes.menuButton}
                 edge="start"
                 aria-label="menu"
-                onClick={handleMenu}
+                onClick={toggleDrawer(true)}
+                sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
+              {/* <Menu
                 styles={{ backgroudColor: "#BB86FC" }}
                 id="menu-appbar"
                 anchorEl={anchor}
@@ -204,7 +220,25 @@ const Navbar = ({ totalItems, clearSearch }) => {
                     <Typography variant="h6"> Login</Typography>
                   </MenuItem>
                 )}
-              </Menu>
+              </Menu> */}
+              <Drawer
+                anchor="left"
+                variant="temporary"
+                open={open}
+                onClose={toggleDrawer(false)}
+                onOpen={toggleDrawer(true)}
+              >
+                <IconButton sx={{ mb: 2 }}>
+                  <CloseIcon onClick={toggleDrawer(false)} />
+                </IconButton>
+                
+                <Box>
+                  <ListItemButton>
+                    <ListItemIcon></ListItemIcon>
+                  </ListItemButton>
+                </Box>
+              </Drawer>
+
               <Typography
                 variant="h5"
                 color="primary"
