@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useHitTest, Interactive } from '@react-three/xr';
 import { useTexture, Ring } from '@react-three/drei';
 import Art from './Art';
@@ -29,6 +29,18 @@ const HitTest = ({ dimensions, image }) => {
     const z = ref.current.position.z;
     setPlacement([x, y, z]);
   });
+
+  const alterButton = () => {
+    const button = document.querySelector('#ARButton');
+    const div = document.querySelector('.ARdiv');
+    div.prepend(button);
+    button.style.position = 'relative';
+
+  }
+
+  useEffect(() => {
+    alterButton();
+  })
 
   return (
   <Interactive onSelect={() => onSelect()}>
