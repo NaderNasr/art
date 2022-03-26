@@ -20,6 +20,7 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItemButton from "@mui/material/ListItemButton";
 import HomeIcon from "@mui/icons-material/Home";
+import LoginIcon from '@mui/icons-material/Login';
 import {
   ShoppingCart,
 } from "@material-ui/icons";
@@ -48,7 +49,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
   // };
 
   const logOut = () => {
-    // setAnchor(null)
+    setOpen(false)
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
@@ -130,7 +131,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                   to={"/login"}
                   variant="text"
                 >
-                  Register
+                  register
                 </Button>
               )}
 
@@ -274,6 +275,9 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       color: "#BB86FC",
                       marginTop: "1em",
                     }}
+                    component={Link}
+                    to="/"
+                    onClick={() => setOpen(false)}
                   >
                     <ListItemIcon>
                       <HomeIcon style={{ color: "#BB86FC" }} />
@@ -286,6 +290,9 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       color: "#BB86FC",
                       marginTop: "1em",
                     }}
+                    component={Link}
+                    to="/"
+                    onClick={() => setOpen(false)}
                   >
                     <ListItemIcon>
                       <CropPortraitIcon style={{ color: "#BB86FC" }} />
@@ -302,6 +309,9 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                         color: "#BB86FC",
                         marginTop: "1em",
                       }}
+                      component={Link}
+                      to="/profile"
+                      onClick={() => setOpen(false)}
                     >
                       <ListItemIcon
                         style={{ backgroundColor: "#24252A", color: "#BB86FC" }}
@@ -331,8 +341,11 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       style={{ backgroundColor: "#BB86FC", color: "#000000" }}
                       variant="outlined"
                       sx={{ m: 1, width: 0.5 }}
+                      component={Link}
+                      to="/login"
+                      onClick={() => setOpen(false)}
                     >
-                      
+                      <LoginIcon style={{marginRight: '0.5em'}} />
                       Login
                     </Button>
                   )}
@@ -341,6 +354,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       style={{ backgroundColor: "#BB86FC", color: "#000000" }}
                       variant="outlined"
                       sx={{ m: 1, width: 0.5 }}
+                      onClick={() => logOut()}
                     >
                       <ExitToAppIcon style={{marginRight: '0.5em'}}/>
                       Logout
