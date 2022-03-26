@@ -22,10 +22,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import HomeIcon from "@mui/icons-material/Home";
 import {
   ShoppingCart,
-  AccountBox,
-  ExitToApp,
-  LockOpen,
 } from "@material-ui/icons";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
 import useStyles from "./styles";
@@ -234,32 +232,48 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                 open={open}
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer(true)}
-                style={{ width: '75%'}}
+                style={{ width: "75%" }}
               >
-                <div >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                    
-                  <AccountCircleOutlinedIcon style={{ marginLeft: '0.7em', color: "#BB86FC" }} />
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AccountCircleOutlinedIcon
+                      style={{ marginLeft: "0.7em", color: "#BB86FC" }}
+                    />
 
-                  <IconButton sx={{ mb: 2 }}>
-                    <CloseIcon
-                      onClick={toggleDrawer(false)}
-                      style={{ color: "#BB86FC" }}
+                    <IconButton sx={{ mb: 2 }}>
+                      <CloseIcon
+                        onClick={toggleDrawer(false)}
+                        style={{ color: "#BB86FC" }}
                       />
-                  </IconButton>
-                      </div>
-                  <div style={ {padding: '1em 1em 0em 1em', bottom: "0",}}>
-                  <Typography variant='h5' style={{ color: "#BB86FC" }}>
-                    {userInfo.firstname} {userInfo.lastname}
-                  </Typography>
-                  <Typography variant='subtitle1' style={{ color: "#BB86FC" }}>
-                    {userInfo.email}
-                  </Typography>
+                    </IconButton>
                   </div>
+                  {isCustomerOnline && (
+                    <div style={{ padding: "1em 1em 0em 1em", bottom: "0" }}>
+                      <Typography variant="h5" style={{ color: "#BB86FC" }}>
+                        {userInfo.firstname} {userInfo.lastname}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        style={{ color: "#BB86FC" }}
+                      >
+                        {userInfo.email}
+                      </Typography>
+                    </div>
+                  )}
                 </div>
                 <Box>
                   <ListItemButton
-                    style={{ backgroundColor: "#24252A", color: "#BB86FC", marginTop : '1em' }}
+                    style={{
+                      backgroundColor: "#24252A",
+                      color: "#BB86FC",
+                      marginTop: "1em",
+                    }}
                   >
                     <ListItemIcon>
                       <HomeIcon style={{ color: "#BB86FC" }} />
@@ -267,7 +281,11 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                     <ListItemText style={{ color: "#BB86FC" }} primary="Home" />
                   </ListItemButton>
                   <ListItemButton
-                    style={{ backgroundColor: "#24252A", color: "#BB86FC", marginTop : '1em'  }}
+                    style={{
+                      backgroundColor: "#24252A",
+                      color: "#BB86FC",
+                      marginTop: "1em",
+                    }}
                   >
                     <ListItemIcon>
                       <CropPortraitIcon style={{ color: "#BB86FC" }} />
@@ -277,19 +295,25 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       primary="Products"
                     />
                   </ListItemButton>
-                  <ListItemButton
-                    style={{ backgroundColor: "#24252A", color: "#BB86FC", marginTop : '1em'  }}
-                  >
-                    <ListItemIcon
-                      style={{ backgroundColor: "#24252A", color: "#BB86FC" }}
+                  {isCustomerOnline && (
+                    <ListItemButton
+                      style={{
+                        backgroundColor: "#24252A",
+                        color: "#BB86FC",
+                        marginTop: "1em",
+                      }}
                     >
-                      <PersonIcon />
-                    </ListItemIcon>
-                    <ListItemText
-                      style={{ color: "#BB86FC" }}
-                      primary="Profile"
-                    />
-                  </ListItemButton>
+                      <ListItemIcon
+                        style={{ backgroundColor: "#24252A", color: "#BB86FC" }}
+                      >
+                        <PersonIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        style={{ color: "#BB86FC" }}
+                        primary="Profile"
+                      />
+                    </ListItemButton>
+                  )}
                 </Box>
                 <Box
                   sx={{
@@ -302,13 +326,26 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                     transform: "translate(-50%, 0)",
                   }}
                 >
-                  <Button
-                    style={{ backgroundColor: "#BB86FC", color: "#000000" }}
-                    variant="outlined"
-                    sx={{ m: 1, width: 0.5 }}
-                  >
-                    Login
-                  </Button>
+                  {!isCustomerOnline && (
+                    <Button
+                      style={{ backgroundColor: "#BB86FC", color: "#000000" }}
+                      variant="outlined"
+                      sx={{ m: 1, width: 0.5 }}
+                    >
+                      
+                      Login
+                    </Button>
+                  )}
+                  {isCustomerOnline && (
+                    <Button
+                      style={{ backgroundColor: "#BB86FC", color: "#000000" }}
+                      variant="outlined"
+                      sx={{ m: 1, width: 0.5 }}
+                    >
+                      <ExitToAppIcon style={{marginRight: '0.5em'}}/>
+                      Logout
+                    </Button>
+                  )}
                 </Box>
               </Drawer>
 

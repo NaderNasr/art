@@ -40,11 +40,11 @@ const Profile = () => {
 
   console.log()
 
-  jwt()
 
   useEffect(() => {
 
     const timer = setInterval(() => {
+      jwt()
       customerInfo()
       customerOrder()
     }, 200);
