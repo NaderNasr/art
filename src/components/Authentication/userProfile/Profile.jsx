@@ -23,9 +23,11 @@ const Profile = () => {
   let jwtToken = { slug }
 
   const jwt = () => {
+    if(!userInfo) {
     commerce.customer.getToken(jwtToken.slug)
       .then((jwt) => setUserToken(jwt))
       .catch((err) => console.log('JWT ERROR: ', err))
+    }
   }
 
   const customerInfo = () => {
@@ -38,10 +40,11 @@ const Profile = () => {
 
   console.log()
 
+  jwt()
+
   useEffect(() => {
 
     const timer = setInterval(() => {
-      jwt()
       customerInfo()
       customerOrder()
     }, 200);

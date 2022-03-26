@@ -9,13 +9,14 @@ import {
   Checkout,
   Category,
 } from './components/'
-import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
 import ARWrapper from './components/Products/Product/AR/ARWrapper';
 import UserAuthentication from './components/Authentication/UserAuthentication';
 import Profile from './components/Authentication/userProfile/Profile';
 import ProductAR from './components/Products/Product/AR/ProductAR';
 import Catch from './components/Catch';
+import Auth from './components/Authentication/Auth';
 import Footer from './components/Footer/Footer';
 
 
@@ -45,6 +46,13 @@ const App = () => {
   //------------------------------------------------
   //--------------categories-------------
   const [categories, setCategories] = useState([])
+
+  //====cx info----
+  const [userInfo, setUserInfo] = useState({});
+
+  const customerInfo = () => {
+    commerce.customer.about().then((customer) => setUserInfo(customer));
+  }
 
   //-----------Search-------------------------
   const handleSearch = (value) => {
@@ -192,6 +200,7 @@ const App = () => {
     fetchProducts();
     fetchCart();
     fetchCategories();
+    customerInfo();
 
     console.log('Are you logged in ? ', (commerce.customer.isLoggedIn() ? "YES" : "NO"));
     console.log('Customer Token: ', commerce.customer.token());
@@ -211,7 +220,7 @@ const App = () => {
     <Router>
       <div className="App">
         <div style={{ marginBottom: '100px' }}>
-          <Navbar totalItems={cart.total_items} clearSearch={clearSearch} />
+          <Navbar totalItems={cart.total_items} clearSearch={clearSearch} userInfo={userInfo}/>
         </div>
         <Routes>
           <Route path="/" element={

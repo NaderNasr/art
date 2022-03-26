@@ -14,12 +14,12 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
-import PersonIcon from '@mui/icons-material/Person';
-import CropPortraitIcon from '@mui/icons-material/CropPortrait';
+import PersonIcon from "@mui/icons-material/Person";
+import CropPortraitIcon from "@mui/icons-material/CropPortrait";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItemButton from "@mui/material/ListItemButton";
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from "@mui/icons-material/Home";
 import {
   ShoppingCart,
   AccountBox,
@@ -32,8 +32,9 @@ import useStyles from "./styles";
 import Logo from "../../assets/logo.svg";
 // import HomeIcon from "@material-ui/icons/";
 import Drawer from "@mui/material/Drawer";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
-const Navbar = ({ totalItems, clearSearch }) => {
+const Navbar = ({ totalItems, clearSearch, userInfo }) => {
   const classes = useStyles();
   // const [anchor, setAnchor] = useState(null);
   const [open, setOpen] = useState(false);
@@ -53,6 +54,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
+  console.log("userInfo: ", userInfo);
 
   useEffect(() => {
     console.log("1 - Effect =", isCustomerOnline);
@@ -226,48 +228,88 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 )}
               </Menu> */}
               <Drawer
-                classes={{paper : classes.Drawer}}
+                classes={{ paper: classes.Drawer }}
                 anchor="left"
                 variant="temporary"
                 open={open}
                 onClose={toggleDrawer(false)}
                 onOpen={toggleDrawer(true)}
+                style={{ width: '75%'}}
               >
-                <IconButton sx={{ mb: 2 }}>
-                  <CloseIcon onClick={toggleDrawer(false)} style={{color: '#BB86FC'}}/>
-                </IconButton>
-                
-                <Box  >
-                  <ListItemButton style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
-                    <ListItemIcon >
-                     <HomeIcon style={{color: '#BB86FC'}}/>
-                    </ListItemIcon>
-                    <ListItemText style={{color: '#BB86FC'}} primary="Home" />
-                  </ListItemButton>
-                  <ListItemButton style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
+                <div >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    
+                  <AccountCircleOutlinedIcon style={{ marginLeft: '0.7em', color: "#BB86FC" }} />
+
+                  <IconButton sx={{ mb: 2 }}>
+                    <CloseIcon
+                      onClick={toggleDrawer(false)}
+                      style={{ color: "#BB86FC" }}
+                      />
+                  </IconButton>
+                      </div>
+                  <div style={ {padding: '1em 1em 0em 1em', bottom: "0",}}>
+                  <Typography variant='h5' style={{ color: "#BB86FC" }}>
+                    {userInfo.firstname} {userInfo.lastname}
+                  </Typography>
+                  <Typography variant='subtitle1' style={{ color: "#BB86FC" }}>
+                    {userInfo.email}
+                  </Typography>
+                  </div>
+                </div>
+                <Box>
+                  <ListItemButton
+                    style={{ backgroundColor: "#24252A", color: "#BB86FC", marginTop : '1em' }}
+                  >
                     <ListItemIcon>
-                      <CropPortraitIcon style={{ color: '#BB86FC'}}/>
+                      <HomeIcon style={{ color: "#BB86FC" }} />
                     </ListItemIcon>
-                    <ListItemText style={{color: '#BB86FC'}} primary="Products" />
+                    <ListItemText style={{ color: "#BB86FC" }} primary="Home" />
                   </ListItemButton>
-                  <ListItemButton style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
-                    <ListItemIcon style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
-                      <PersonIcon/>
+                  <ListItemButton
+                    style={{ backgroundColor: "#24252A", color: "#BB86FC", marginTop : '1em'  }}
+                  >
+                    <ListItemIcon>
+                      <CropPortraitIcon style={{ color: "#BB86FC" }} />
                     </ListItemIcon>
-                    <ListItemText style={{color: '#BB86FC'}} primary="Profile" />
+                    <ListItemText
+                      style={{ color: "#BB86FC" }}
+                      primary="Products"
+                    />
+                  </ListItemButton>
+                  <ListItemButton
+                    style={{ backgroundColor: "#24252A", color: "#BB86FC", marginTop : '1em'  }}
+                  >
+                    <ListItemIcon
+                      style={{ backgroundColor: "#24252A", color: "#BB86FC" }}
+                    >
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      style={{ color: "#BB86FC" }}
+                      primary="Profile"
+                    />
                   </ListItemButton>
                 </Box>
-                <Box sx={{
-                    display: "flex", 
-                    justifyContent:"center", 
-                    position: "absolute", 
-                    bottom: "0", 
-                    marginBottom: '1em',
-                    left: "50%", 
-                    transform: "translate(-50%, 0)"}}
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    position: "absolute",
+                    bottom: "0",
+                    marginBottom: "1em",
+                    left: "50%",
+                    transform: "translate(-50%, 0)",
+                  }}
+                >
+                  <Button
+                    style={{ backgroundColor: "#BB86FC", color: "#000000" }}
+                    variant="outlined"
+                    sx={{ m: 1, width: 0.5 }}
                   >
-                    <Button style={{backgroundColor: '#BB86FC', color: '#000000'}} variant="outlined" sx={{m:1, width: .5}}>Login</Button> 
-                  </Box>
+                    Login
+                  </Button>
+                </Box>
               </Drawer>
 
               <Typography

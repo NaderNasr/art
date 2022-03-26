@@ -40,7 +40,8 @@ export default makeStyles((theme) => ({
   
   Drawer: {
     "&&" : {
-      backgroundColor: "#202124"
+      backgroundColor: "#202124",
+      width: '75%'
     }
   },
 }));
