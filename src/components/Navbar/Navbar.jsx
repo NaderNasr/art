@@ -7,15 +7,23 @@ import {
   useMediaQuery,
   Button,
   Badge,
+  Menu,
+  MenuItem,
+  ListItemIcon,
 } from "@material-ui/core";
-
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
-import { ShoppingCart } from "@material-ui/icons";
+import {
+  ShoppingCart,
+  AccountBox,
+  ExitToApp,
+  LockOpen,
+} from "@material-ui/icons";
 import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
-import logo from "../../assets/logo.png";
 import useStyles from "./styles";
+import Logo from "../../assets/logo.svg";
+import HomeIcon from "@material-ui/icons/School";
 
 const Navbar = ({ totalItems, clearSearch }) => {
   const classes = useStyles();
@@ -32,6 +40,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
   };
 
   const logOut = () => {
+    setAnchor(null)
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
@@ -52,21 +61,17 @@ const Navbar = ({ totalItems, clearSearch }) => {
         <Toolbar>
           {isMobile ? (
             <>
-              <Typography
-                variant="h5"
-                color="primary"
-                className={classes.title}
-              >
+              <Typography variant="h5" className={classes.title}>
                 <img
-                  src={logo}
+                  src={Logo}
                   alt="ARt"
-                  height="25px"
+                  height="45px"
                   className={classes.image}
                 />
-                ARt
               </Typography>
               <div className={classes.buttons}>
                 <Button
+                  className={classes.buttonColor}
                   component={Link}
                   to={"/"}
                   variant="text"
@@ -84,7 +89,12 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 </Button>
 
                 {commerce.customer.token() ? (
-                  <Button component={Link} to={"/profile"} variant="text">
+                  <Button
+                    className={classes.buttonColor}
+                    component={Link}
+                    to={"/profile"}
+                    variant="text"
+                  >
                     profile
                   </Button>
                 ) : (
@@ -93,6 +103,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
               </div>
               {isCustomerOnline && (
                 <Button
+                  className={classes.buttonColor}
                   component={Link}
                   to={"/"}
                   variant="text"
@@ -103,16 +114,21 @@ const Navbar = ({ totalItems, clearSearch }) => {
               )}
 
               {!isCustomerOnline && (
-                <Button component={Link} to={"/login"} variant="text">
+                <Button
+                  className={classes.buttonColor}
+                  component={Link}
+                  to={"/login"}
+                  variant="text"
+                >
                   Register
                 </Button>
               )}
 
-              <div className={classes.cart}>
+              <div>
                 <Link to="/cart">
                   <IconButton aria-label="Show cart items">
                     <Badge badgeContent={totalItems} color="secondary">
-                      <ShoppingCart />
+                      <ShoppingCart style={{ color: "#BB86FC" }} />
                     </Badge>
                   </IconButton>
                 </Link>
@@ -122,7 +138,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
             //Bottom for mobile
             <>
               <IconButton
-                color="primary"
+                style={{ color: "#BB86FC" }}
                 className={classes.menuButton}
                 edge="start"
                 aria-label="menu"
@@ -130,24 +146,91 @@ const Navbar = ({ totalItems, clearSearch }) => {
               >
                 <MenuIcon />
               </IconButton>
+              <Menu
+                styles={{ backgroudColor: "#BB86FC" }}
+                id="menu-appbar"
+                anchorEl={anchor}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                KeepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={open}
+              >
+                <MenuItem
+                  onClick={() => setAnchor(null)}
+                  component={Link}
+                  to="/"
+                >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <Typography variant="h6"> Home</Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => setAnchor(null)}
+                  component={Link}
+                  to="/"
+                >
+                  <ListItemIcon>
+                    <HomeIcon />
+                  </ListItemIcon>
+                  <Typography variant="h6"> Products</Typography>
+                </MenuItem>
+                {isCustomerOnline && <MenuItem
+                  onClick={() => setAnchor(null)}
+                  component={Link}
+                  to="/profile"
+                >
+                  <ListItemIcon>
+                    <AccountBox />
+                  </ListItemIcon>
+                  <Typography variant="h6"> Profile</Typography>
+                </MenuItem>}
+
+                {isCustomerOnline && (
+                  <MenuItem onClick={() => logOut()}>
+                    <ListItemIcon>
+                      <ExitToApp />
+                    </ListItemIcon>
+                    <Typography variant="h6"> Logout</Typography>
+                  </MenuItem>
+                )}
+
+                {!isCustomerOnline && (
+                  <MenuItem
+                    onClick={() => setAnchor(null)}
+                    component={Link}
+                    to="/login"
+                  >
+                    <ListItemIcon>
+                      <LockOpen />
+                    </ListItemIcon>
+                    <Typography variant="h6"> Login</Typography>
+                  </MenuItem>
+                )}
+              </Menu>
               <Typography
                 variant="h5"
                 color="primary"
-                className={classes.title}
+                className={classes.titleMobile}
               >
                 <img
-                  src={logo}
+                  src={Logo}
                   alt="ARt"
                   height="25px"
                   className={classes.image}
                 />
-                ARt
               </Typography>
-              <div className={classes.cart}>
+              <div>
                 <Link to="/cart">
                   <IconButton aria-label="Show cart items">
                     <Badge badgeContent={totalItems} color="secondary">
-                      <ShoppingCart />
+                      <ShoppingCart style={{ color: "#BB86FC" }} />
                     </Badge>
                   </IconButton>
                 </Link>
