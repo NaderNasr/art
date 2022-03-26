@@ -35,7 +35,7 @@ const HitTest = ({ dimensions, image }) => {
     const div = document.querySelector('.ARdiv');
     div.prepend(button);
     button.style.position = 'relative';
-
+    button.style.background = '#BB86FC';
   }
 
   useEffect(() => {
