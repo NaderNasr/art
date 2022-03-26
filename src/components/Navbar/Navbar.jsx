@@ -11,11 +11,15 @@ import {
   // Menu,
   // MenuItem,
   ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
 import CloseIcon from "@mui/icons-material/Close";
+import PersonIcon from '@mui/icons-material/Person';
+import CropPortraitIcon from '@mui/icons-material/CropPortrait';
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItemButton from "@mui/material/ListItemButton";
+import HomeIcon from '@mui/icons-material/Home';
 import {
   ShoppingCart,
   AccountBox,
@@ -222,6 +226,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 )}
               </Menu> */}
               <Drawer
+                classes={{paper : classes.Drawer}}
                 anchor="left"
                 variant="temporary"
                 open={open}
@@ -229,14 +234,40 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 onOpen={toggleDrawer(true)}
               >
                 <IconButton sx={{ mb: 2 }}>
-                  <CloseIcon onClick={toggleDrawer(false)} />
+                  <CloseIcon onClick={toggleDrawer(false)} style={{color: '#BB86FC'}}/>
                 </IconButton>
                 
-                <Box>
-                  <ListItemButton>
-                    <ListItemIcon></ListItemIcon>
+                <Box  >
+                  <ListItemButton style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
+                    <ListItemIcon >
+                     <HomeIcon style={{color: '#BB86FC'}}/>
+                    </ListItemIcon>
+                    <ListItemText style={{color: '#BB86FC'}} primary="Home" />
+                  </ListItemButton>
+                  <ListItemButton style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
+                    <ListItemIcon>
+                      <CropPortraitIcon style={{ color: '#BB86FC'}}/>
+                    </ListItemIcon>
+                    <ListItemText style={{color: '#BB86FC'}} primary="Products" />
+                  </ListItemButton>
+                  <ListItemButton style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
+                    <ListItemIcon style={{backgroundColor: '#24252A', color: '#BB86FC'}}>
+                      <PersonIcon/>
+                    </ListItemIcon>
+                    <ListItemText style={{color: '#BB86FC'}} primary="Profile" />
                   </ListItemButton>
                 </Box>
+                <Box sx={{
+                    display: "flex", 
+                    justifyContent:"center", 
+                    position: "absolute", 
+                    bottom: "0", 
+                    marginBottom: '1em',
+                    left: "50%", 
+                    transform: "translate(-50%, 0)"}}
+                  >
+                    <Button style={{backgroundColor: '#BB86FC', color: '#000000'}} variant="outlined" sx={{m:1, width: .5}}>Login</Button> 
+                  </Box>
               </Drawer>
 
               <Typography

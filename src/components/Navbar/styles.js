@@ -36,6 +36,11 @@ export default makeStyles((theme) => ({
   mobileBar: {
     display: "flex",
     alignItems: "center"
-  }
-
+  },
+  
+  Drawer: {
+    "&&" : {
+      backgroundColor: "#202124"
+    }
+  },
 }));
