@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHitTest, Interactive } from '@react-three/xr';
 import { useTexture, Ring } from '@react-three/drei';
 import Art from './Art';
