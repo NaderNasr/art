@@ -1,11 +1,11 @@
 import React from "react";
 import { Container, Typography, Button, Grid, LinearProgress } from '@material-ui/core';
-import { Alert } from "@mui/material";
+import { Alert, Box } from "@mui/material";
 import { Link } from 'react-router-dom'
 import makeStyles from './styles';
 import CartItem from './CartItem/CartItem';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { BrowserView, MobileView } from 'react-device-detect';
+// import { BrowserView, MobileView } from 'react-device-detect';
 
 
 const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => {
@@ -14,10 +14,10 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
       <Alert severity="error">Your shopping cart is empty </Alert>
-      <div style={{marginTop:'15px'}}>
-      <Link to='/'>
-      <Button variant="contained" style={{backgroundColor: '#BB86FC', color: '#FFFFFF'}}>Browse Products</Button>
-      </Link>
+      <div style={{ marginTop: '15px' }}>
+        <Link to='/'>
+          <Button variant="contained" style={{ backgroundColor: '#BB86FC', color: '#FFFFFF' }}>Browse Products</Button>
+        </Link>
       </div>
     </Typography>
   );
@@ -48,10 +48,10 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
   );
 
   if (!cart.line_items) return (
-    <div>
+    <Box sx={{ width: '50%', marginLeft: '25%', marginTop: '25%' }}>
       <p>Loading</p>
       <LinearProgress />
-    </div>
+    </Box>
   )
 
   return (

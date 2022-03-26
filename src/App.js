@@ -197,7 +197,7 @@ const App = () => {
     console.log('Customer Token: ', commerce.customer.token());
     const timer = setInterval(() => {
       setLoading(false)
-    }, 2000);
+    }, 2200);
     return () => clearInterval(timer);
   }, [search]);
 
@@ -210,7 +210,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <div style={{ paddingBottom: '70px' }}>
+        <div style={{ paddingBottom: '100px' }}>
           <Navbar totalItems={cart.total_items} clearSearch={clearSearch} />
         </div>
         <Routes>
