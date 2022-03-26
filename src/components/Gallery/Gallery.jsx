@@ -5,17 +5,17 @@ import Exhibit from './Exhibit';
 
 const Gallery = ({ products }) => {
   const carousel = [];
-  
+
   const getDimensions = (image) => {
     return [image.image_dimensions.height, image.image_dimensions.width];
   }
-  
+
   const rescaleImage = (dimensionArray) => {
     let planeWidth = 1;
     let planeHeight = 1;
     const height = dimensionArray[0];
     const width = dimensionArray[1];
-    
+
     if (height > width) {
       planeWidth = width / height;
     }
@@ -24,28 +24,28 @@ const Gallery = ({ products }) => {
     }
     return [planeWidth * 2, planeHeight * 2];
   }
-  
+
   for (let i = 0; i < products.length; i++) {
     const t = i / products.length * 2 * Math.PI;
     const x = Math.cos(t) * 4;
     const z = Math.sin(t) * 4;
-    
+
     let rotation = -t + 1.5;
-    
+
     carousel.push(
       <Exhibit
-      key={i}
-      position={[x, 0, z]}
-      dimensions={rescaleImage(getDimensions(products[i].image))}
-      // url below is a workaround for missing CORS headers... 😞
-      image={'https://vast-earth-27464.herokuapp.com/' + products[i].image.url}
-      rotation={[0, rotation, 0]}
+        key={i}
+        position={[x, 0, z]}
+        dimensions={rescaleImage(getDimensions(products[i].image))}
+        // url below is a workaround for missing CORS headers... 😞
+        image={'https://vast-earth-27464.herokuapp.com/' + products[i].image.url}
+        rotation={[0, rotation, 0]}
       />
-      )
-    }
-    
-    return (
-      <Canvas style={{ height: "25em" }} camera={{ position: [0, 0, -6] }}>
+    )
+  }
+
+  return (
+    <Canvas style={{ height: "25em" }} camera={{ position: [0, 0, -6] }}>
       <color attach="background" args={['black']} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={0.5} />
@@ -53,10 +53,10 @@ const Gallery = ({ products }) => {
       <spotLight position={[1000, 0, 0]} intensity={0.5} />
       <Suspense fallback={null}>
         <group>
-        {carousel}
+          {carousel}
         </group>
       </Suspense>
-      <OrbitControls autoRotate enableRotate={false} enableZoom={false} enablePan={false} />
+      <OrbitControls autoRotate={true} enableRotate={false} enableZoom={false} enablePan={false} />
     </Canvas>
   )
 }

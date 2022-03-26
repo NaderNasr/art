@@ -36,12 +36,11 @@ const Profile = () => {
     commerce.customer.getOrders(userInfo.id).then((orders) => setAllOrders(orders));
   }
 
-  console.log()
 
+  jwt()
   useEffect(() => {
 
     const timer = setInterval(() => {
-      jwt()
       customerInfo()
       customerOrder()
     }, 200);

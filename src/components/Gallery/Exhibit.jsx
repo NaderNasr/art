@@ -5,12 +5,14 @@ import { DoubleSide } from 'three';
 const Exhibit = ({ position, dimensions, image, rotation }) => {
 
   const testTexture = useTexture(image);
-  
-  return(
+
+  return (
+
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={dimensions} />
       <meshStandardMaterial map={testTexture} side={DoubleSide} />
     </mesh>
+
   )
 }
 
