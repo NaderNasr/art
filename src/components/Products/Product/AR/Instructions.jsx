@@ -1,13 +1,13 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import makeStyles from './styles'
 
-const Instructions = () => {
-
+const Instructions = ({ targetProduct, onAddToCart }) => {
   const classes = makeStyles();
 
   return (
-    <div>
+    <div className={classes.main}>
       <div className={classes.title}>
         <Typography variant='h4'>
           How to use AR
@@ -30,6 +30,13 @@ const Instructions = () => {
           Touch the artwork if you want to place it somewhere else
         </li>
       </ol>
+      {targetProduct.is.sold_out ? <></> :
+          <Button
+            className={classes.addToCart}
+            startIcon={<ShoppingCartCheckoutIcon />}
+            onClick={() => onAddToCart(targetProduct.id, 1)}
+            style={{ color: '#BB86FC' }}
+          >Add To Cart</Button>}
     </div>
   )
 }
