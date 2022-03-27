@@ -7,43 +7,53 @@ import {
   useMediaQuery,
   Button,
   Badge,
-  Menu,
-  MenuItem,
+  Box,
+  // Menu,
+  // MenuItem,
   ListItemIcon,
+  ListItemText,
 } from "@material-ui/core";
+import CloseIcon from "@mui/icons-material/Close";
+import PersonIcon from "@mui/icons-material/Person";
+import CropPortraitIcon from "@mui/icons-material/CropPortrait";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import ListItemButton from "@mui/material/ListItemButton";
+import HomeIcon from "@mui/icons-material/Home";
+import LoginIcon from '@mui/icons-material/Login';
 import {
   ShoppingCart,
-  AccountBox,
-  ExitToApp,
-  LockOpen,
 } from "@material-ui/icons";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
 import useStyles from "./styles";
 import Logo from "../../assets/logo.svg";
-import HomeIcon from "@material-ui/icons/School";
+// import HomeIcon from "@material-ui/icons/";
+import Drawer from "@mui/material/Drawer";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
-const Navbar = ({ totalItems, clearSearch }) => {
+const Navbar = ({ totalItems, clearSearch, userInfo }) => {
   const classes = useStyles();
-  const [anchor, setAnchor] = useState(null);
-  const open = Boolean(anchor);
+  // const [anchor, setAnchor] = useState(null);
+  const [open, setOpen] = useState(false);
+  // const open = Boolean(anchor);
 
   const [isCustomerOnline, setIsCustomerOnline] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-  const handleMenu = (event) => {
-    setAnchor(event.currentTarget);
-  };
+  // const handleMenu = (event) => {
+  //   setAnchor(event.currentTarget);
+  // };
 
   const logOut = () => {
-    setAnchor(null)
+    setOpen(false)
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
+  console.log("userInfo: ", userInfo);
 
   useEffect(() => {
     console.log("1 - Effect =", isCustomerOnline);
@@ -54,6 +64,16 @@ const Navbar = ({ totalItems, clearSearch }) => {
     return () => clearInterval(timer);
   }, [isCustomerOnline]);
   console.log("3 - Effect =", isCustomerOnline);
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setOpen(open);
+  };
 
   return (
     <div>
@@ -120,7 +140,7 @@ const Navbar = ({ totalItems, clearSearch }) => {
                   to={"/login"}
                   variant="text"
                 >
-                  Register
+                  register
                 </Button>
               )}
 
@@ -142,11 +162,12 @@ const Navbar = ({ totalItems, clearSearch }) => {
                 className={classes.menuButton}
                 edge="start"
                 aria-label="menu"
-                onClick={handleMenu}
+                onClick={toggleDrawer(true)}
+                sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
+              {/* <Menu
                 styles={{ backgroudColor: "#BB86FC" }}
                 id="menu-appbar"
                 anchorEl={anchor}
@@ -213,7 +234,144 @@ const Navbar = ({ totalItems, clearSearch }) => {
                     <Typography variant="h6"> Login</Typography>
                   </MenuItem>
                 )}
-              </Menu>
+              </Menu> */}
+              <Drawer
+                classes={{ paper: classes.Drawer }}
+                anchor="left"
+                variant="temporary"
+                open={open}
+                onClose={toggleDrawer(false)}
+                onOpen={toggleDrawer(true)}
+                style={{ width: "75%" }}
+              >
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AccountCircleOutlinedIcon
+                      style={{ marginLeft: "0.7em", color: "#BB86FC" }}
+                    />
+
+                    <IconButton sx={{ mb: 2 }}>
+                      <CloseIcon
+                        onClick={toggleDrawer(false)}
+                        style={{ color: "#BB86FC" }}
+                      />
+                    </IconButton>
+                  </div>
+                  {isCustomerOnline && (
+                    <div style={{ padding: "1em 1em 0em 1em", bottom: "0" }}>
+                      <Typography variant="h5" style={{ color: "#BB86FC" }}>
+                        {userInfo.firstname} {userInfo.lastname}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        style={{ color: "#BB86FC" }}
+                      >
+                        {userInfo.email}
+                      </Typography>
+                    </div>
+                  )}
+                </div>
+                <Box>
+                  <ListItemButton
+                    style={{
+                      backgroundColor: "#24252A",
+                      color: "#BB86FC",
+                      marginTop: "1em",
+                    }}
+                    component={Link}
+                    to="/"
+                    onClick={() => setOpen(false)}
+                  >
+                    <ListItemIcon>
+                      <HomeIcon style={{ color: "#BB86FC" }} />
+                    </ListItemIcon>
+                    <ListItemText style={{ color: "#BB86FC" }} primary="Home" />
+                  </ListItemButton>
+                  <ListItemButton
+                    style={{
+                      backgroundColor: "#24252A",
+                      color: "#BB86FC",
+                      marginTop: "1em",
+                    }}
+                    component={Link}
+                    to="/"
+                    onClick={() => setOpen(false)}
+                  >
+                    <ListItemIcon>
+                      <CropPortraitIcon style={{ color: "#BB86FC" }} />
+                    </ListItemIcon>
+                    <ListItemText
+                      style={{ color: "#BB86FC" }}
+                      primary="Products"
+                    />
+                  </ListItemButton>
+                  {isCustomerOnline && (
+                    <ListItemButton
+                      style={{
+                        backgroundColor: "#24252A",
+                        color: "#BB86FC",
+                        marginTop: "1em",
+                      }}
+                      component={Link}
+                      to="/profile"
+                      onClick={() => setOpen(false)}
+                    >
+                      <ListItemIcon
+                        style={{ backgroundColor: "#24252A", color: "#BB86FC" }}
+                      >
+                        <PersonIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        style={{ color: "#BB86FC" }}
+                        primary="Profile"
+                      />
+                    </ListItemButton>
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    position: "absolute",
+                    bottom: "0",
+                    marginBottom: "1em",
+                    left: "50%",
+                    transform: "translate(-50%, 0)",
+                  }}
+                >
+                  {!isCustomerOnline && (
+                    <Button
+                      style={{ backgroundColor: "#BB86FC", color: "#000000" }}
+                      variant="outlined"
+                      sx={{ m: 1, width: 0.5 }}
+                      component={Link}
+                      to="/login"
+                      onClick={() => setOpen(false)}
+                    >
+                      <LoginIcon style={{marginRight: '0.5em'}} />
+                      Login
+                    </Button>
+                  )}
+                  {isCustomerOnline && (
+                    <Button
+                      style={{ backgroundColor: "#BB86FC", color: "#000000" }}
+                      variant="outlined"
+                      sx={{ m: 1, width: 0.5 }}
+                      onClick={() => logOut()}
+                    >
+                      <ExitToAppIcon style={{marginRight: '0.5em'}}/>
+                      Logout
+                    </Button>
+                  )}
+                </Box>
+              </Drawer>
+
               <Typography
                 variant="h5"
                 color="primary"

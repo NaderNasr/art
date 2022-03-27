@@ -11,7 +11,7 @@ const Category = ({ categories, setSearch }) => {
   return (
     <div style={{display:'flex', flexWrap:'wrap', justifyContent:'space-evenly'}}>
       {categories.map((category, id) => (
-        <div style={{display:'flex', padding:'5px'}}>
+        <div style={{display:'flex', padding:'5px'}} key={id}>
           <Chip
             style={{color:'#BB86FC', backgroundColor:'#202124'}}
             key={id}
