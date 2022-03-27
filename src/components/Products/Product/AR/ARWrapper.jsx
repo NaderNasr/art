@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import Instructions from './Instructions';
 
 
 const ARWrapper = ({ products, onAddToCart }) => {
@@ -21,24 +22,27 @@ const ARWrapper = ({ products, onAddToCart }) => {
   }, [])
 
   return (
-    <div className="ARdiv">
-      {targetProduct.is.sold_out ? <></> :
-        <>
-          <br />
-          <Button
-            startIcon={<ShoppingCartCheckoutIcon />}
-            onClick={() => onAddToCart(targetProduct.id, 1)}
-            style={{ color: "#BB86FC", left: "calc(45% - 50px)" }}
-          >Add To Cart</Button>
-        </>}
-      <br />
-      <img
-        src={targetProduct.image.url}
-        style={{ display: "block", width: "40%", paddingTop: "10px", marginLeft: "auto", marginRight: "auto" }}
-        alt={`Preview of ${targetProduct.name}`}
-      />
-      <Outlet />
-    </div>
+    <>
+      <Instructions />
+      <div className="ARdiv">
+        {targetProduct.is.sold_out ? <></> :
+          <>
+            <br />
+            <Button
+              startIcon={<ShoppingCartCheckoutIcon />}
+              onClick={() => onAddToCart(targetProduct.id, 1)}
+              style={{ color: "#BB86FC", left: "calc(45% - 50px)" }}
+            >Add To Cart</Button>
+          </>}
+        <br />
+        <img
+          src={targetProduct.image.url}
+          style={{ display: "block", width: "40%", paddingTop: "10px", marginLeft: "auto", marginRight: "auto" }}
+          alt={`Preview of ${targetProduct.name}`}
+        />
+        <Outlet />
+      </div>
+    </>
   );
 }
 
