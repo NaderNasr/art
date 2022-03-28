@@ -9,7 +9,8 @@ const Exhibit = ({ position, dimensions, image, rotation }) => {
   return(
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={dimensions} />
-      <meshStandardMaterial map={testTexture} side={DoubleSide} />
+      {/* <meshStandardMaterial map={testTexture} side={DoubleSide} /> */}
+      <meshStandardMaterial map={testTexture} />
     </mesh>
   )
 }
