@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Exhibit from './Exhibit';
+import Title from './Title';
 
 const Gallery = ({ products }) => {
   const carousel = [];
@@ -53,6 +54,7 @@ const Gallery = ({ products }) => {
         <directionalLight position={[-10, 10, 5]} intensity={0.5} />
         <spotLight position={[1000, 0, 0]} intensity={0.5} />
         <Suspense fallback={null}>
+          <Title />
           <group>
             {carousel}
           </group>
