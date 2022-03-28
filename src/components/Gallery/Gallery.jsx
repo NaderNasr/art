@@ -5,7 +5,7 @@ import Exhibit from './Exhibit';
 import Title from './Title';
 
 const Gallery = ({ products }) => {
-  const carousel = [];
+  const gallery = JSON.parse(JSON.stringify(products));
 
   const getDimensions = (image) => {
     return [image.image_dimensions.height, image.image_dimensions.width];
@@ -26,23 +26,41 @@ const Gallery = ({ products }) => {
     return [planeWidth * 2, planeHeight * 2];
   }
 
-  for (let i = 0; i < products.length; i++) {
-    const t = i / products.length * 2 * Math.PI;
-    const x = Math.cos(t) * 4;
-    const z = Math.sin(t) * 4;
+  const shuffle = (array) => {
+    let currentIndex = array.length, randomIndex;
+    while (currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+      
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+    if (array.length > 20) {
+      return array.slice(0, 20);
+    }
+    return array;
+  }
 
-    let rotation = -t + 1.5;
-
-    carousel.push(
-      <Exhibit
-        key={i}
-        position={[x, 0, z]}
-        dimensions={rescaleImage(getDimensions(products[i].image))}
-        // url below is a workaround for missing CORS headers... 😞
-        image={'https://vast-earth-27464.herokuapp.com/' + products[i].image.url}
-        rotation={[0, rotation, 0]}
-      />
-    )
+  const generateCarousel = (array) => {
+    const carousel = [];
+    for (let i = 0; i < array.length; i++) {
+      const t = i / array.length * 2 * Math.PI;
+      const x = Math.cos(t) * 4;
+      const z = Math.sin(t) * 4;
+  
+      let rotation = -t + 1.5;
+  
+      carousel.push(
+        <Exhibit
+          key={i}
+          position={[x, 0, z]}
+          dimensions={rescaleImage(getDimensions(array[i].image))}
+          // url below is a workaround for missing CORS headers... 😞
+          image={'https://vast-earth-27464.herokuapp.com/' + array[i].image.url}
+          rotation={[0, rotation, 0]}
+        />
+      )
+    }
+    return carousel;
   }
 
   return (
@@ -56,7 +74,7 @@ const Gallery = ({ products }) => {
         <Suspense fallback={null}>
           <Title />
           <group>
-            {carousel}
+            {generateCarousel(shuffle(gallery))}
           </group>
         </Suspense>
         <OrbitControls autoRotate enableRotate={false} enableZoom={false} enablePan={false} />
