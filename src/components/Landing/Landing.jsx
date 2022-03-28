@@ -1,8 +1,8 @@
 import React from 'react'
-import Sally from '../../assets/Sally.png'
+
 import SallyBG from '../../assets/SallyBG.svg'
-import Demo from '../../assets/Demo.gif'
-import titleTwo from '../../assets/title2.svg'
+import Demo from '../../assets/ARDemo.mp4'
+
 import Button from '../../assets/Button/Large.svg'
 
 import './styles.css'
@@ -30,7 +30,9 @@ const Landing = () => {
         </Grid>
         <Grid item xs={4}>
           <img className='sallybg' src={SallyBG} alt='Sally AR' />
-          <img className='bob' src={Demo} alt='bob AR' />
+          <video width="100%" height="100%" preload='auto'>
+            <source src={Demo} type="video/mp4" />
+          </video>
           <div className='blueCircle'></div>
         </Grid>
         {/* <p className='howItWorks'>How it works</p>
