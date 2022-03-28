@@ -1,10 +1,14 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { useMediaQuery } from '@mui/material';
+import { useTheme } from "@mui/material/styles";
 import Exhibit from './Exhibit';
 import Title from './Title';
 
 const Gallery = ({ products }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
   const gallery = JSON.parse(JSON.stringify(products));
 
   const getDimensions = (image) => {
@@ -31,7 +35,7 @@ const Gallery = ({ products }) => {
     while (currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
-      
+
       [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
     if (array.length > 20) {
@@ -46,9 +50,9 @@ const Gallery = ({ products }) => {
       const t = i / array.length * 2 * Math.PI;
       const x = Math.cos(t) * 4;
       const z = Math.sin(t) * 4;
-  
+
       let rotation = -t + 1.5;
-  
+
       carousel.push(
         <Exhibit
           key={i}
@@ -65,7 +69,10 @@ const Gallery = ({ products }) => {
 
   return (
     <>
-      <Canvas style={{ height: "25em" }} camera={{ position: [0, 0, -6] }}>
+      <Canvas
+        style={isMobile ? { height: "25em" } : { height: "12em" }}
+        camera={{ position: [0, 0, -6] }}
+      >
         <color attach="background" args={['black']} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={0.5} />
