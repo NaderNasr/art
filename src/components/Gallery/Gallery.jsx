@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useMediaQuery } from '@mui/material';
-import { useTheme } from "@mui/material/styles";
+import { useTheme } from '@mui/material/styles';
 import Exhibit from './Exhibit';
 import Title from './Title';
 
@@ -70,7 +70,7 @@ const Gallery = ({ products }) => {
   return (
     <>
       <Canvas
-        style={isMobile ? { height: "25em" } : { height: "12em" }}
+        style={isMobile ? { height: '25em' } : { height: '12em' }}
         camera={{ position: [0, 0, -6] }}
       >
         <color attach="background" args={['black']} />
