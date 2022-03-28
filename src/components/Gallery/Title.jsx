@@ -7,14 +7,13 @@ const Title = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-  return(
-  <Html fullscreen position={[0, -4, 0]} style={{ textAlign: "center", height: "auto" }}>
-      {isMobile ? (<>
-        <Typography variant="h3" style={{ color: '#BB86FC', background: '#202124'  }}>The Future of Lorem Ipsum</Typography>
-      </>) : (<>
-        <Typography variant="h5" style={{ color: '#BB86FC', background: '#202124'  }}>The Future of Lorem Ipsum</Typography>
-      </>) }
-  </Html>
+  return (
+    <Html fullscreen position={[0, -4, 0]} style={{ textAlign: "center", height: "auto" }}>
+      <Typography
+        variant={isMobile ? 'h3' : 'h5'}
+        style={{ color: '#BB86FC', background: 'rgba(32, 33, 36, 0.5)' }}
+      >The Future of Lorem Ipsum</Typography>
+    </Html>
   )
 }
 
