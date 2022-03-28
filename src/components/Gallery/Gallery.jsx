@@ -68,7 +68,8 @@ const Gallery = ({ products }) => {
   }
 
   return (
-    <>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Title />
       <Canvas
         style={isMobile ? { height: '25em' } : { height: '12em' }}
         camera={{ position: [0, 0, -6] }}
@@ -79,14 +80,13 @@ const Gallery = ({ products }) => {
         <directionalLight position={[-10, 10, 5]} intensity={0.5} />
         <spotLight position={[1000, 0, 0]} intensity={0.5} />
         <Suspense fallback={null}>
-          <Title />
           <group>
             {generateCarousel(shuffle(gallery))}
           </group>
         </Suspense>
         <OrbitControls autoRotate enableRotate={false} enableZoom={false} enablePan={false} />
       </Canvas>
-    </>
+    </div>
   )
 }
 

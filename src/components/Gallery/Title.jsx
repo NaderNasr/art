@@ -1,19 +1,21 @@
 import React from 'react';
-import { Html } from '@react-three/drei';
-import { Typography, useMediaQuery } from '@mui/material';
+import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import makeStyles from './styles';
 
 const Title = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
+  const classes = makeStyles();
 
   return (
-    <Html fullscreen position={[0, -4, 0]} style={{ textAlign: 'center', height: 'auto' }}>
-      <Typography
-        variant={isMobile ? 'h3' : 'h5'}
-        style={{ color: '#BB86FC', background: 'rgba(32, 33, 36, 0.5)' }}
-      >The Future of Lorem Ipsum</Typography>
-    </Html>
+      <>
+        {isMobile ? <h1 className={classes.title}>
+          The Future of Lorem Ipsum
+        </h1> : <h3 className={classes.title}>
+          The Future of Lorem Ipsum
+          </h3>}
+      </>
   )
 }
 
