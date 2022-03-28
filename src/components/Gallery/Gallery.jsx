@@ -1,9 +1,10 @@
-import React, { Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Exhibit from './Exhibit';
+import Group from './Group';
 import Title from './Title';
 
 const Gallery = ({ products }) => {
@@ -80,11 +81,8 @@ const Gallery = ({ products }) => {
         <directionalLight position={[-10, 10, 5]} intensity={0.5} />
         <spotLight position={[1000, 0, 0]} intensity={0.5} />
         <Suspense fallback={null}>
-          <group>
-            {generateCarousel(shuffle(gallery))}
-          </group>
+          <Group exhibits={generateCarousel(shuffle(gallery))} />
         </Suspense>
-        <OrbitControls autoRotate enableRotate={false} enableZoom={false} enablePan={false} />
       </Canvas>
     </div>
   )
