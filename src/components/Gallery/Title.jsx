@@ -8,7 +8,7 @@ const Title = () => {
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
   return(
-  <Html fullscreen position={isMobile ? [0, -4, 0] : [0, -4.3, 0]} style={{ textAlign: "center" }}>
+  <Html fullscreen position={[0, -4, 0]} style={{ textAlign: "center", height: "auto" }}>
       {isMobile ? (<>
         <Typography variant="h3" style={{ color: '#BB86FC', background: '#202124'  }}>The Future of Lorem Ipsum</Typography>
       </>) : (<>
