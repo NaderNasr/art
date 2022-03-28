@@ -101,7 +101,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                 </Button>
                 <Button
                   component={Link}
-                  to={"/gallery"}
+                  to={"/landing"}
                   variant="text"
                   onClick={() => clearSearch()}
                 >

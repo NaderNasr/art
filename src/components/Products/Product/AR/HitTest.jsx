@@ -30,6 +30,19 @@ const HitTest = ({ dimensions, image }) => {
     setPlacement([x, y, z]);
   });
 
+  const alterButton = () => {
+    const button = document.querySelector('#ARButton');
+    const div = document.querySelector('.ARdiv');
+    div.prepend(button);
+    button.style.position = 'relative';
+    button.style.background = '#BB86FC';
+    button.style.display = 'inline';
+    button.style.bottom = '0'
+    button.style.zIndex = '0';
+  }
+
+  alterButton();
+
   return (
   <Interactive onSelect={() => onSelect()}>
     <Ring ref={ref} args={marker}>

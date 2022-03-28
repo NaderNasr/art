@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
-import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+
+import Instructions from './Instructions';
 
 
 const ARWrapper = ({ products, onAddToCart }) => {
@@ -21,10 +21,18 @@ const ARWrapper = ({ products, onAddToCart }) => {
   }, [])
 
   return (
-    <div>
-      {targetProduct.is.sold_out ? <></> : <Button startIcon={<ShoppingCartCheckoutIcon />} onClick={() => onAddToCart(targetProduct.id, 1)}>Add To Cart</Button>}
-      <Outlet />
-    </div>
+    <>
+      <Instructions targetProduct={targetProduct} onAddToCart={onAddToCart} />
+      <div className="ARdiv">
+        <br />
+        <img
+          src={targetProduct.image.url}
+          style={{ display: "block", width: "40%", paddingTop: "10px", marginLeft: "auto", marginRight: "auto" }}
+          alt={`Preview of ${targetProduct.name}`}
+        />
+        <Outlet />
+      </div>
+    </>
   );
 }
 
