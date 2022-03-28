@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Exhibit from './Exhibit';
-import Demo from './Demo';
 
 const Gallery = ({ products }) => {
   const carousel = [];
@@ -60,7 +59,6 @@ const Gallery = ({ products }) => {
         </Suspense>
         <OrbitControls autoRotate enableRotate={false} enableZoom={false} enablePan={false} />
       </Canvas>
-      <Demo />
     </>
   )
 }
