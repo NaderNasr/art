@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,900;1,900&display=swap');
 
-html {
+html, body {
+  margin: 0px;
+  padding: 0px;
+  max-width: 100vw;
   overflow-x: hidden;
 }
 
@@ -169,13 +172,35 @@ html {
   position: absolute;
   width: 45%;
   height: 70%;
-  left: 66%;
+  left: 57%;
   top: 30%;
 }
 
 @media only screen and (max-width: 600px) {
+
   .bob {
+    width: 85%;
+    height: 15%;
+    left: 7%;
     top: 2%;
-    left: 25%;
+  }
+
+  .yellowCircle_3, .redCircle_2, .blueCircle_4, .blueCircle, .blueCircle_3  {
+    display: none;
+  }
+
+  .title {
+    font-size: 47px;
+    margin-bottom: 15px;
+    margin-left: 15px;
+    left: 0;
+  }
+
+  .desc {
+    left: 15px;
+  }
+
+  .button {
+    left: 15px;
   }
 }
