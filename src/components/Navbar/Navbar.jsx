@@ -200,7 +200,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       marginTop: "1em",
                     }}
                     component={Link}
-                    to="/"
+                    to="/landing"
                     onClick={() => setOpen(false)}
                   >
                     <ListItemIcon>

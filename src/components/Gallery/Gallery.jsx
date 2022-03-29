@@ -71,7 +71,7 @@ const Gallery = ({ products }) => {
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <Title />
       <Canvas
-        style={isMobile ? { height: '25em' } : { height: '12em' }}
+        style={isMobile ? { height: '25em' } : { height: '20em', width: '100%' }}
         camera={{ position: [0, 0, -6] }}
       >
 
