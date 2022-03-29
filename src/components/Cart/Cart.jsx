@@ -12,14 +12,18 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
   const classes = makeStyles();
 
   const EmptyCart = () => (
-    <Typography variant="subtitle1">
-      <Alert severity="error">Your shopping cart is empty </Alert>
-      <div style={{ marginTop: '15px' }}>
-        <Link to='/'>
-          <Button variant="contained" style={{ backgroundColor: '#BB86FC', color: '#FFFFFF' }}>Browse Products</Button>
-        </Link>
-      </div>
-    </Typography>
+    <div>
+      {/* ----------------------------------User Info----------------------------- */}
+      <Typography variant="subtitle1">
+        <div style={{ marginTop: '100px', marginLeft: '20px', marginRight: '20px' }}></div>
+        <Alert severity="error">Your shopping cart is empty </Alert>
+        <div style={{ marginTop: '15px' }}>
+          <Link to='/'>
+            <Button variant="contained" style={{ backgroundColor: '#BB86FC', color: '#FFFFFF' }}>Browse Products</Button>
+          </Link>
+        </div>
+      </Typography>
+    </div>
   );
 
   const FilledCart = () => (
@@ -55,12 +59,15 @@ const Cart = ({ cart, onRemoveFromCart, onEmptyCart, onUpdateCartQuantity }) => 
   )
 
   return (
-    <Container>
-      <a href="/"><ArrowBackIcon /></a>
-      <div className={classes.toolbar} />
-      <Typography className={classes.title} variant="h3" gutterBottom>Your Shopping Cart</Typography>
-      {cart.line_items.length === 0 ? <EmptyCart /> : <FilledCart />}
-    </Container>
+    <>
+      <div style={{ marginTop: '100px', marginLeft: '20px', marginRight: '20px' }}></div>
+      <Container>
+        <a href="/"><ArrowBackIcon /></a>
+        <div className={classes.toolbar} />
+        <Typography className={classes.title} variant="h3" gutterBottom>Your Shopping Cart</Typography>
+        {cart.line_items.length === 0 ? <EmptyCart /> : <FilledCart />}
+      </Container>
+    </>
   )
 }
 
