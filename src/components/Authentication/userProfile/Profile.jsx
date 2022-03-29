@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -46,7 +46,7 @@ const Profile = () => {
 
 
   useEffect(() => {
-    
+
     if (allOrders) {
       const getCustomerOrders = allOrders.data
       if (getCustomerOrders) {
@@ -82,98 +82,100 @@ const Profile = () => {
 
 
   return (
-    <div style={{marginBottom:'100px'}}>
+    <div>
       {/* ----------------------------------User Info----------------------------- */}
+      <div style={{ marginTop: '100px', marginLeft:'20px', marginRight:'20px' }}>
+        <Typography variant="h4" component="div">
+          Profile Details
+        </Typography>
+        {userInfo ? <Card sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              First Name:    {userInfo.firstname}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Last Name:    {userInfo.lastname}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Phone Number:    {userInfo.phone}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              E-mail:    {userInfo.email}
+            </Typography>
+          </CardContent>
+        </Card> : <>
+          <Box sx={{ width: '100%' }}>
+            <p>Loading</p>
+            <LinearProgress />
+          </Box>
+        </>}
+        {/* ----------------------------------Orders----------------------------- */}
+        <br />
+        <Divider sx={{ borderBottomWidth: 2 }} />
+        <br />
+        <Typography variant="h4" component="div">
+          Orders
+        </Typography>
+        <Card sx={{ minWidth: 275 }}>
+          <CardContent>
+            {/* test */}
+            {productNames ?
+              productNames.map((productName, id) => (
+                <Typography key={id} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                  Order # {id} ---- {productName}
+                </Typography>
+              )) : <>
+                <Box sx={{ width: '100%' }}>
+                  <p>Loading</p>
+                  <LinearProgress />
+                </Box>
+              </>}
+            <div>
+              {productImages ? productImages.map((image, id) => (
+                <img key={id} alt='product' src={image} style={{ width: '100px' }} />
+              )) : <>
+                <Box sx={{ width: '100%' }}>
+                  <p>Loading</p>
+                  <LinearProgress />
+                </Box>
+              </>}
+            </div>
+          </CardContent>
+        </Card>
+        {/* ----------------------------------Address----------------------------- */}
+        <br />
+        <Divider sx={{ borderBottomWidth: 2 }} />
+        <br />
 
-      <Typography variant="h4" component="div">
-        Profile Details
-      </Typography>
-      {userInfo ? <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            First Name:    {userInfo.firstname}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Last Name:    {userInfo.lastname}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Phone Number:    {userInfo.phone}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            E-mail:    {userInfo.email}
-          </Typography>
-        </CardContent>
-      </Card> : <>
-        <Box sx={{ width: '100%' }}>
-          <p>Loading</p>
-          <LinearProgress />
-        </Box>
-      </>}
-      {/* ----------------------------------Orders----------------------------- */}
-      <br />
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <br />
-      <Typography variant="h4" component="div">
-        Orders
-      </Typography>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-{/* test */}
-          {productNames ?
-            productNames.map((productName, id) => (
-              <Typography key={id} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Order # {id} ---- {productName}
-              </Typography>
-            )) : <>
-              <Box sx={{ width: '100%' }}>
-                <p>Loading</p>
-                <LinearProgress />
-              </Box>
-            </>}
-          <div>
-            {productImages ? productImages.map((image, id) => (
-              <img key={id} alt='product' src={image} style={{ width: '100px' }} />
-            )) : <>
-              <Box sx={{ width: '100%' }}>
-                <p>Loading</p>
-                <LinearProgress />
-              </Box>
-            </>}
-          </div>
-        </CardContent>
-      </Card>
-      {/* ----------------------------------Address----------------------------- */}
-      <br />
-      <Divider sx={{ borderBottomWidth: 2 }} />
-      <br />
+        <Typography variant="h4" component="div">
+          Address
+        </Typography>
+        {userInfo.default_shipping ? <Card sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Postal Code:    {userInfo.default_shipping.postal_zip_code}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Province:    {userInfo.default_shipping.county_state}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Country:    {userInfo.default_shipping.country}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              Street:    {userInfo.default_shipping.street}
+            </Typography>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+              City:    {userInfo.default_shipping.town_city}
+            </Typography>
+          </CardContent>
+        </Card> : <>
+          <Box sx={{ width: '100%' }}>
+            <p>Loading</p>
+            <LinearProgress />
+          </Box>
+        </>}
+      </div>
 
-      <Typography variant="h4" component="div">
-        Address
-      </Typography>
-      {userInfo.default_shipping ? <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Postal Code:    {userInfo.default_shipping.postal_zip_code}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Province:    {userInfo.default_shipping.county_state}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Country:    {userInfo.default_shipping.country}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Street:    {userInfo.default_shipping.street}
-          </Typography>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            City:    {userInfo.default_shipping.town_city}
-          </Typography>
-        </CardContent>
-      </Card> : <>
-        <Box sx={{ width: '100%' }}>
-          <p>Loading</p>
-          <LinearProgress />
-        </Box>
-      </>}
     </div>
 
   )
