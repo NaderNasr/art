@@ -14,7 +14,7 @@ const Search = ({ handleSearch }) => {
 
   return (
 
-      <div style={{marginTop:'30px', border: "1px solid #202124", paddingLeft:'15px', borderRadius: '20px'}}>
+      <div style={{marginTop:'130px', border: "1px solid #202124", paddingLeft:'15px', borderRadius: '20px'}}>
       <InputBase id="outlined-basic" color="primary" placeholder="Search ARt" variant="outlined" label="Search" onChange={handleChange}/>
       <IconButton onClick={() => handleSearch(value)} sx={{ p: '10px' }} aria-label="search">
         <SearchIcon />
