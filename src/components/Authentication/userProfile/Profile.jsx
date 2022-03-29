@@ -82,7 +82,7 @@ const Profile = () => {
 
 
   return (
-    <>
+    <div style={{marginBottom:'100px'}}>
       {/* ----------------------------------User Info----------------------------- */}
 
       <Typography variant="h4" component="div">
@@ -174,7 +174,7 @@ const Profile = () => {
           <LinearProgress />
         </Box>
       </>}
-    </>
+    </div>
 
   )
 }
