@@ -6,7 +6,8 @@ export default makeStyles(() => ({
     flexDirection: 'column',
     alignItems: 'center',
     width: '90%',
-    margin: 'auto'
+    margin: 'auto',
+    marginTop: '100px'
   },
   title: {
     textAlign: 'center',
