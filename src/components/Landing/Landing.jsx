@@ -1,8 +1,4 @@
 import React from 'react'
-
-
-
-
 import Button from '../../assets/Button/Large.svg'
 
 import './styles.css'
@@ -11,18 +7,25 @@ import Gallery from '../Gallery/Gallery'
 import { Typography } from '@mui/material'
 
 
+
+
 const Landing = ({ products }) => {
   return (
     <>
       <div className='landingPage'>
-        <Grid container spacing={2}>
-          <Grid item xs={8}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid>
             <div className='yellowCircle'></div>
             <div className='yellowCircle_2'></div>
             <div className='yellowCircle_3'></div>
 
             <div className='redCircle'></div>
             <div className='redCircle_2'></div>
+            <div className='blueCircle'></div>
+
+            <div className='blueCircle_3'></div>
+            <div className='blueCircle_4'></div>
+
 
             <div>
               <p className='title'>Find your ARt</p>
@@ -30,14 +33,13 @@ const Landing = ({ products }) => {
               <a href='/'><img src={Button} className='button' alt='button' /></a>
             </div>
           </Grid>
-          <Grid item xs={4}>
+          <Grid>
             <div className='bigBlueBlog'></div>
 
             <div className='bob'>
               <Gallery products={products} />
 
             </div>
-            <div className='blueCircle'></div>
           </Grid>
 
         </Grid>
