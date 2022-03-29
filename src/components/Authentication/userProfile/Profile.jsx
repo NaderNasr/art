@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { LinearProgress } from '@mui/material';
 
-import { useParams } from 'react-router-dom';
 import commerce from '../../../lib/commerce'
 import { Box } from '@mui/system';
 
 
 const Profile = () => {
-  const [userToken, setUserToken] = useState('');
   const [userInfo, setUserInfo] = useState('');
   const [allOrders, setAllOrders] = useState(null);
 
@@ -19,16 +17,7 @@ const Profile = () => {
   const [productImages, setProductImages] = useState('')
 
 
-  let { slug } = useParams();
-  let jwtToken = { slug }
 
-  const jwt = () => {
-    if(!userInfo) {
-    commerce.customer.getToken(jwtToken.slug)
-      .then((jwt) => setUserToken(jwt))
-      .catch((err) => console.log('JWT ERROR: ', err))
-    }
-  }
 
   const customerInfo = () => {
     commerce.customer.about().then((customer) => setUserInfo(customer));
@@ -38,28 +27,13 @@ const Profile = () => {
     commerce.customer.getOrders(userInfo.id).then((orders) => setAllOrders(orders));
   }
 
-  console.log()
 
 
-  useEffect(() => {
+  console.log(allOrders)
 
-    const timer = setInterval(() => {
-      jwt()
-      customerInfo()
-      customerOrder()
-    }, 200);
-    // }
-    return () => clearInterval(timer);
-
-
-    // console.log('userInfo: ', userInfo)
-  }, [])
-
-  // customer order => order => multiple of products => product name
-
-  useEffect(() => {
-
-    if (allOrders) {
+  const data = useCallback(
+    () => {
+      // if (allOrders) {
       const getCustomerOrders = allOrders.data
       if (getCustomerOrders) {
         const orders = getCustomerOrders.map((eachCustomer) => eachCustomer.order);
@@ -78,14 +52,42 @@ const Profile = () => {
         setProductNames(productNames)
         setProductImages(lineItemProductImages)
         // console.log('lineItemProduct: ', lineItemProduct)
+        // }
       }
-    }
+    }, [allOrders])
+
+  useEffect(() => {
+
+    // const timer = setInterval(() => {
+    // jwt()
+    customerInfo()
+    customerOrder()
+    // }, 200);
+
+    // }
+    // return () => clearInterval(timer);
+    data()
+
+    // console.log('userInfo: ', userInfo)
+
+
 
 
   }, [allOrders])
+  // useEffect(() => {
+  //   data()
+
+
+  // }, [data])
 
   // console.log('productNames: ', productNames)
   // console.log(userInfo.default_shipping)
+
+
+
+  // customer order => order => multiple of products => product name
+
+
 
   return (
     <>

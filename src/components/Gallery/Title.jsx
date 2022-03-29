@@ -11,9 +11,9 @@ const Title = () => {
   return (
       <>
         {isMobile ? <h1 className={classes.title}>
-          The Future of Lorem Ipsum
+          {/* The Future of Lorem Ipsum */}
         </h1> : <h3 className={classes.title}>
-          The Future of Lorem Ipsum
+          {/* The Future of Lorem Ipsum */}
           </h3>}
       </>
   )

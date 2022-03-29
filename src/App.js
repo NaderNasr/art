@@ -20,6 +20,7 @@ import Catch from './components/Catch';
 import Footer from './components/Footer/Footer';
 import Gallery from './components/Gallery/Gallery';
 import Landing from './components/Landing/Landing';
+import WebToken from './components/Authentication/userProfile/WebToken';
 
 
 
@@ -273,10 +274,10 @@ const App = () => {
             element={<Profile />}
           />
           <Route path='login/:slug'
-            element={<Profile />}
+            element={<WebToken />}
           />
-          <Route path="/gallery" element={<Gallery products={products}/>}/>
-          <Route path="/landing" element={<Landing />}/>
+          {/* <Route path="/gallery" element={}/> */}
+          <Route path="/landing" element={<Landing products={products}/>}/>
 
           <Route path="*" element={<Catch />} />
         </Routes>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,900;1,900&display=swap');
 
 body {
   overflow-x: hidden;
@@ -6,7 +6,6 @@ body {
 
   height: 100vh;
 }
-
 
 
 @keyframes float {
@@ -42,7 +41,7 @@ body {
   width: 204px;
   height: 120px;
   left: 11%;
-  top: 75%;
+  top: 65%;
   cursor: pointer;
 }
 
@@ -50,13 +49,13 @@ body {
   position: absolute;
   left: 12.91%;
   right: 56.72%;
-  top: 60%;
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 24px;
+  top: 62%;
   /* or 158% */
-
+  font-family: 'Raleway';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 24px;
+  color: rgb(10, 10, 10);
   letter-spacing: 0.2px;
 }
 
@@ -165,7 +164,7 @@ body {
   width: 30%;
   height: 70%;
   left: 60%;
-  top: 20%;
+  top: 30%;
 }
 
 /* .sally {

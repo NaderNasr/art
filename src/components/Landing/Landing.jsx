@@ -7,9 +7,11 @@ import Button from '../../assets/Button/Large.svg'
 
 import './styles.css'
 import Grid from '@mui/material/Grid';
+import Gallery from '../Gallery/Gallery'
+import { Typography } from '@mui/material'
 
 
-const Landing = () => {
+const Landing = ({ products }) => {
   return (
     <>
 
@@ -24,27 +26,19 @@ const Landing = () => {
 
           <div>
             <p className='title'>Find your ARt</p>
-            <p className='desc'>Have confidence buying art online</p>
+            <Typography className='desc'>Shop with confidence, with AR integration</Typography>
             <a href='/'><img src={Button} className='button' alt='button' /></a>
           </div>
         </Grid>
         <Grid item xs={4}>
           <img className='sallybg' src={SallyBG} alt='Sally AR' />
-          <video width="100%" height="100%" preload='auto'>
-            <source src={Demo} type="video/mp4" />
-          </video>
+          <div className='bob'>
+          <Gallery products={products} />
+          
+          </div>
           <div className='blueCircle'></div>
         </Grid>
-        {/* <p className='howItWorks'>How it works</p>
 
-        <Grid item xs={4}>
-
-          <img className='sally' src={Sally} alt='Sally AR' />
-        </Grid>
-        <Grid item xs={8}>
-          <img src={titleTwo} alt='second title' className='title_2' />
-
-        </Grid> */}
       </Grid>
 
 

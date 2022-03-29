@@ -74,7 +74,7 @@ const Gallery = ({ products }) => {
         style={isMobile ? { height: '25em' } : { height: '12em' }}
         camera={{ position: [0, 0, -6] }}
       >
-        <color attach="background" args={['#E8E7E6']} />
+        <color attach="background" args={['#5956E9']} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={0.5} />
         <directionalLight position={[-10, 10, 5]} intensity={0.5} />
