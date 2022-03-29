@@ -24,7 +24,7 @@ const UserAuthentication = ({
 
   return (
     <>
-      <div style={{ marginTop: '100px'}}></div>
+      <div style={{ marginTop: '100px'}}/>
 
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
