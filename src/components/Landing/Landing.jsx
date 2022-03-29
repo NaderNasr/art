@@ -37,7 +37,7 @@ const Landing = ({ products }) => {
             <div className='bigBlueBlog'></div>
 
             <div className='bob'>
-              <Gallery products={products} />
+              <Gallery className={'gallery'} products={products} />
 
             </div>
           </Grid>
