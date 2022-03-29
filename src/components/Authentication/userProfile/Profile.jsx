@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -10,8 +10,8 @@ import { Box } from '@mui/system';
 
 
 const Profile = () => {
-  const [userInfo, setUserInfo] = useState('');
-  const [allOrders, setAllOrders] = useState(null);
+  const [userInfo, setUserInfo] = useState({});
+  const [allOrders, setAllOrders] = useState({});
 
   const [productNames, setProductNames] = useState('')
   const [productImages, setProductImages] = useState('')
@@ -31,9 +31,23 @@ const Profile = () => {
 
   console.log(allOrders)
 
-  const data = useCallback(
-    () => {
-      // if (allOrders) {
+
+  useEffect(() => {
+
+    // const timer = setInterval(() => {
+    // jwt()
+    customerInfo()
+    customerOrder()
+    // }, 200);
+    // }
+    // return () => clearInterval(timer);
+    // console.log('userInfo: ', userInfo)
+  }, [])
+
+
+  useEffect(() => {
+    
+    if (allOrders) {
       const getCustomerOrders = allOrders.data
       if (getCustomerOrders) {
         const orders = getCustomerOrders.map((eachCustomer) => eachCustomer.order);
@@ -52,33 +66,11 @@ const Profile = () => {
         setProductNames(productNames)
         setProductImages(lineItemProductImages)
         // console.log('lineItemProduct: ', lineItemProduct)
-        // }
       }
-    }, [allOrders])
-
-  useEffect(() => {
-
-    // const timer = setInterval(() => {
-    // jwt()
-    customerInfo()
-    customerOrder()
-    // }, 200);
-
-    // }
-    // return () => clearInterval(timer);
-    data()
-
-    // console.log('userInfo: ', userInfo)
-
-
+    }
 
 
   }, [allOrders])
-  // useEffect(() => {
-  //   data()
-
-
-  // }, [data])
 
   // console.log('productNames: ', productNames)
   // console.log(userInfo.default_shipping)
@@ -127,7 +119,7 @@ const Profile = () => {
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
 
-          {productNames !== '' ?
+          {productNames ?
             productNames.map((productName, id) => (
               <Typography key={id} sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                 Order # {id} ---- {productName}
@@ -139,8 +131,8 @@ const Profile = () => {
               </Box>
             </>}
           <div>
-            {productImages !== '' ? productImages.map((image, id) => (
-              <img alt='product' src={image} style={{ width: '100px' }} />
+            {productImages ? productImages.map((image, id) => (
+              <img key={id} alt='product' src={image} style={{ width: '100px' }} />
             )) : <>
               <Box sx={{ width: '100%' }}>
                 <p>Loading</p>
