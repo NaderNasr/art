@@ -8,8 +8,6 @@ import {
   Button,
   Badge,
   Box,
-  // Menu,
-  // MenuItem,
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
@@ -29,24 +27,18 @@ import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
 import useStyles from "./styles";
 import Logo from "../../assets/logo.svg";
-// import HomeIcon from "@material-ui/icons/";
 import Drawer from "@mui/material/Drawer";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const Navbar = ({ totalItems, clearSearch, userInfo }) => {
   const classes = useStyles();
-  // const [anchor, setAnchor] = useState(null);
   const [open, setOpen] = useState(false);
-  // const open = Boolean(anchor);
 
   const [isCustomerOnline, setIsCustomerOnline] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-  // const handleMenu = (event) => {
-  //   setAnchor(event.currentTarget);
-  // };
 
   const logOut = () => {
     setOpen(false)
@@ -99,15 +91,6 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                 >
                   Products
                 </Button>
-                <Button
-                  component={Link}
-                  to={"/landing"}
-                  variant="text"
-                  onClick={() => clearSearch()}
-                >
-                  Gallery
-                </Button>
-
                 {commerce.customer.token() ? (
                   <Button
                     className={classes.buttonColor}
@@ -167,74 +150,6 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
               >
                 <MenuIcon />
               </IconButton>
-              {/* <Menu
-                styles={{ backgroudColor: "#BB86FC" }}
-                id="menu-appbar"
-                anchorEl={anchor}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                KeepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={open}
-              >
-                <MenuItem
-                  onClick={() => setAnchor(null)}
-                  component={Link}
-                  to="/"
-                >
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <Typography variant="h6"> Home</Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => setAnchor(null)}
-                  component={Link}
-                  to="/"
-                >
-                  <ListItemIcon>
-                    <HomeIcon />
-                  </ListItemIcon>
-                  <Typography variant="h6"> Products</Typography>
-                </MenuItem>
-                {isCustomerOnline && <MenuItem
-                  onClick={() => setAnchor(null)}
-                  component={Link}
-                  to="/profile"
-                >
-                  <ListItemIcon>
-                    <AccountBox />
-                  </ListItemIcon>
-                  <Typography variant="h6"> Profile</Typography>
-                </MenuItem>}
-
-                {isCustomerOnline && (
-                  <MenuItem onClick={() => logOut()}>
-                    <ListItemIcon>
-                      <ExitToApp />
-                    </ListItemIcon>
-                    <Typography variant="h6"> Logout</Typography>
-                  </MenuItem>
-                )}
-
-                {!isCustomerOnline && (
-                  <MenuItem
-                    onClick={() => setAnchor(null)}
-                    component={Link}
-                    to="/login"
-                  >
-                    <ListItemIcon>
-                      <LockOpen />
-                    </ListItemIcon>
-                    <Typography variant="h6"> Login</Typography>
-                  </MenuItem>
-                )}
-              </Menu> */}
               <Drawer
                 classes={{ paper: classes.Drawer }}
                 anchor="left"

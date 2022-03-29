@@ -222,7 +222,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <div style={{ marginBottom: '100px' }}>
+        <div>
           <Navbar totalItems={cart.total_items} clearSearch={clearSearch} userInfo={userInfo}/>
         </div>
         <Routes>
@@ -281,7 +281,7 @@ const App = () => {
 
           <Route path="*" element={<Catch />} />
         </Routes>
-      {/* {!loading && <Footer />} */}
+      {!loading && <Footer />}
       </div>
     </Router>
 

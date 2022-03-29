@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,900;1,900&display=swap');
 
-body {
+.landingPage {
   overflow-x: hidden;
-
   height: 100vh;
+
 }
 
 
@@ -95,7 +95,7 @@ body {
   width: 550px;
   height: 550px;
   left: 700px;
-  top: 170px;
+  top: 120px;
   background: #df8ccd;
 
   transform: translatey(0px);
@@ -162,28 +162,7 @@ body {
   position: absolute;
   width: 30%;
   height: 70%;
-  left: 60%;
+  left: 66%;
   top: 30%;
 }
 
-/* .sally {
-  position: absolute;
-  left: 145px;
-  top: 1200px;
-  width: 752px;
-  height: 752px;
-  animation: float 6s ease-in-out infinite;
-} */
-/*
-.sallyFlip {
-  transform: scaleX(-1);
-} */
-
-
-/* .title_2 {
-  position: absolute;
-  width: 486px;
-  height: 486px;
-  left: 905px;
-  top: 1250px;
-} */
