@@ -226,7 +226,7 @@ const App = () => {
           <Navbar totalItems={cart.total_items} clearSearch={clearSearch} userInfo={userInfo}/>
         </div>
         <Routes>
-          <Route path="/" element={
+          <Route path="/products" element={
             loading
               ?
               <div>
@@ -277,7 +277,7 @@ const App = () => {
             element={<WebToken />}
           />
           {/* <Route path="/gallery" element={}/> */}
-          <Route path="/landing" element={<Landing products={products}/>}/>
+          <Route path="/" element={<Landing products={products}/>}/>
 
           <Route path="*" element={<Catch />} />
         </Routes>

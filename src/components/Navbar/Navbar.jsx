@@ -18,11 +18,9 @@ import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItemButton from "@mui/material/ListItemButton";
 import HomeIcon from "@mui/icons-material/Home";
-import LoginIcon from '@mui/icons-material/Login';
-import {
-  ShoppingCart,
-} from "@material-ui/icons";
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import LoginIcon from "@mui/icons-material/Login";
+import { ShoppingCart } from "@material-ui/icons";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useTheme } from "@mui/material/styles";
 import commerce from "../../lib/commerce";
 import useStyles from "./styles";
@@ -39,9 +37,8 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
 
-
   const logOut = () => {
-    setOpen(false)
+    setOpen(false);
     commerce.customer.logout().forceUpdate();
     window.location.reload(false);
   };
@@ -73,19 +70,35 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
         <Toolbar>
           {isMobile ? (
             <>
-              <Typography variant="h5" className={classes.title}>
-                <img
-                  src={Logo}
-                  alt="ARt"
-                  height="45px"
-                  className={classes.image}
-                />
-              </Typography>
+              <Button
+                className={classes.buttonColor}
+                component={Link}
+                to={"/"}
+                variant="text"
+              >
+                <Typography variant="h5" className={classes.title}>
+                  <img
+                    src={Logo}
+                    alt="ARt"
+                    height="45px"
+                    className={classes.image}
+                  />
+                </Typography>
+              </Button>
+
               <div className={classes.buttons}>
                 <Button
                   className={classes.buttonColor}
                   component={Link}
                   to={"/"}
+                  variant="text"
+                >
+                  Home
+                </Button>
+                <Button
+                  className={classes.buttonColor}
+                  component={Link}
+                  to={"/products"}
                   variant="text"
                   onClick={() => clearSearch()}
                 >
@@ -200,7 +213,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       marginTop: "1em",
                     }}
                     component={Link}
-                    to="/landing"
+                    to="/"
                     onClick={() => setOpen(false)}
                   >
                     <ListItemIcon>
@@ -215,7 +228,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       marginTop: "1em",
                     }}
                     component={Link}
-                    to="/"
+                    to="/products"
                     onClick={() => setOpen(false)}
                   >
                     <ListItemIcon>
@@ -269,7 +282,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       to="/login"
                       onClick={() => setOpen(false)}
                     >
-                      <LoginIcon style={{marginRight: '0.5em'}} />
+                      <LoginIcon style={{ marginRight: "0.5em" }} />
                       Login
                     </Button>
                   )}
@@ -280,7 +293,7 @@ const Navbar = ({ totalItems, clearSearch, userInfo }) => {
                       sx={{ m: 1, width: 0.5 }}
                       onClick={() => logOut()}
                     >
-                      <ExitToAppIcon style={{marginRight: '0.5em'}}/>
+                      <ExitToAppIcon style={{ marginRight: "0.5em" }} />
                       Logout
                     </Button>
                   )}
