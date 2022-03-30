@@ -173,14 +173,21 @@ html, body {
   width: 45%;
   height: 70%;
   left: 57%;
-  top: 30%;
+  top: 45%;
 }
 
 @media only screen and (max-width: 600px) {
 
   .bob {
-    width: 85%;
-    height: 15%;
+    width: 90%;
+    height: 40%;
+    top: 10%;
+    left: 5%;
+  }
+
+  .youtube {
+    width: 100%;
+    height: 50%;
     left: 7%;
     top: 2%;
   }

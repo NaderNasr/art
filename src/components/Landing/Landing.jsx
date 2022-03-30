@@ -1,13 +1,11 @@
 import React from 'react'
+import { Typography } from '@mui/material';
 import Button from '../../assets/Button/Large.svg'
 
-import './styles.css'
+import Video from './Video';
 import Grid from '@mui/material/Grid';
-import Gallery from '../Gallery/Gallery'
-import { Typography } from '@mui/material'
-
-
-
+import Gallery from '../Gallery/Gallery';
+import './styles.css'
 
 const Landing = ({ products }) => {
   return (
@@ -37,7 +35,7 @@ const Landing = ({ products }) => {
             <div className='bigBlueBlog'></div>
 
             <div className='bob'>
-              <Gallery className={'gallery'} products={products} />
+              <Video />
 
             </div>
           </Grid>
