@@ -28,7 +28,7 @@ const Landing = ({ products }) => {
             <div>
               <p className='title'>Find your ARt</p>
               <Typography className='desc'>Shop with confidence, with AR integration</Typography>
-              <a href='/'><img src={Button} className='button' alt='button' /></a>
+              <a href='/products'><img src={Button} className='button' alt='button' /></a>
             </div>
           </Grid>
           <Grid>
