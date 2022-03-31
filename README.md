@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1 - ``` git clone git@github.com:NaderNasr/art.git ```
 
-## Available Scripts
+2 - ```npm install ```
 
-In the project directory, you can run:
+3 - create a .env file in your root directory
 
-### `npm start`
+  Below is an example API key from commerceJS
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    REACT_APP_CHEC_PUBLIC_KEY=pk_184625ed86f36703d7d233bcf6d519a4f9398f20048ec
+4 - ``` npm start ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  Upon running ```npm start``` the site will automagically run on desktop. You can also run this on your smart phone by following the guide below:
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - Go to Network/WiFi preferences:
 
-### `npm run build`
+  Find your machines local IP address:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  example:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  ```192.168.0.1```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  Make sure you're connected to the same wifi thats connected on your machine.
+        Add the IP address to your phone's web browser following the port number
 
-### `npm run eject`
+  ```:3000```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  example result ```192.168.0.1:3000```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  You may follow this tutorial to create a merchant of your own:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  [CommerceJS](https://commercejs.com/docs/guides/products-react#prerequisites)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  While you connect to the site you will get a security error:
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+      Warning: Potential Security Risk Ahead
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Don't panic this is because HTTP is set to true ```HTTPS=true``` in our package.json file
 
-### Code Splitting
+    "scripts": {
+      "start": "HTTPS=true react-scripts start"
+    }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To add headers to the Augmented Reality interface, which is not currently available with CommerceJS
 
-### Analyzing the Bundle Size
+# Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+ - @chec/commerce.js
+ - @material-ui/core
+ - @react-three/fiber
+ - @stripe/react-stripe-js
+ - react-dom
+ - three
 
-### Making a Progressive Web App
+#
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+If you have any questions or would like to contribute to this repo please feel free to contact us below:
 
-### Advanced Configuration
+Contributors | Github | LinkedIn ||
+--- | --- | --- | ---
+Armin Glavovic | [Github](https://github.com/glavovic) | [LinkedIn](https://www.linkedin.com/in/glavovica/) |
+Gerard Compion | [Github](https://github.com/gerard-c) | [LinkedIn](https://www.linkedin.com/in/gerard-compion-37567b233/) |
+Nader Nasr | [Github](https://github.com/NaderNasr) | [LinkedIn](https://www.linkedin.com/in/nnasr/) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
