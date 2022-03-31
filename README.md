@@ -59,9 +59,9 @@ To add headers to the Augmented Reality interface, which is not currently availa
 
 If you have any questions or would like to contribute to this repo please feel free to contact us below:
 
-Contributors | Github | LinkedIn ||
---- | --- | --- | ---
-Armin Glavovic | [Github](https://github.com/glavovic) | [LinkedIn](https://www.linkedin.com/in/glavovica/) |
-Gerard Compion | [Github](https://github.com/gerard-c) | [LinkedIn](https://www.linkedin.com/in/gerard-compion-37567b233/) |
-Nader Nasr | [Github](https://github.com/NaderNasr) | [LinkedIn](https://www.linkedin.com/in/nnasr/) |
+Contributors | Github | LinkedIn
+--- | --- | ---
+Armin Glavovic | [Github](https://github.com/glavovic) | [LinkedIn](https://www.linkedin.com/in/glavovica/)
+Gerard Compion | [Github](https://github.com/gerard-c) | [LinkedIn](https://www.linkedin.com/in/gerard-compion-37567b233/)
+Nader Nasr | [Github](https://github.com/NaderNasr) | [LinkedIn](https://www.linkedin.com/in/nnasr/)
 
