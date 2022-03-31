@@ -31,7 +31,7 @@
 
   You may follow this tutorial to create a merchant of your own:
 
-  [CommerceJS](https://commercejs.com/docs/guides/products-react#prerequisites)
+  [CommerceJS React JS tutorial](https://commercejs.com/docs/guides/products-react#prerequisites)
 
   While you connect to the site you will get a security error:
 
@@ -46,14 +46,16 @@ Don't panic this is because HTTP is set to true ```HTTPS=true``` in our package.
 
 To add headers to the Augmented Reality interface, which is not currently available with CommerceJS
 
-# Dependencies
+# Stack
 
- - @chec/commerce.js
- - @material-ui/core
- - @react-three/fiber
- - @stripe/react-stripe-js
- - react-dom
- - three
+ - React JS
+ - Node JS
+ - Stripe
+ - ThreeJS
+ - React Dom
+ - React Three Fiber
+ - Commerce.js
+ - Material UI
 
 #
 
