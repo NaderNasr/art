@@ -23,7 +23,7 @@
   ```192.168.0.1```
 
   Make sure you're connected to the same wifi thats connected on your machine.
-        Add the IP address to your phone's web browser following the port number
+        Add the IP address to your phone's web browser following the port number.
 
   ```:3000```
 
@@ -38,13 +38,13 @@
 
       Warning: Potential Security Risk Ahead
 
-Don't panic this is because HTTP is set to true ```HTTPS=true``` in our package.json file
+Don't panic this is because HTTP is set to true ```HTTPS=true``` in our package.json file.
 
     "scripts": {
       "start": "HTTPS=true react-scripts start"
     }
 
-To add headers to the Augmented Reality interface, which is not currently available with CommerceJS
+https is required to allow the site to connect to the user's phone camera.
 
 # Stack
 
