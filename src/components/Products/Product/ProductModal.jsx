@@ -10,7 +10,6 @@ import { Button } from '@mui/material';
 import { BrowserView, MobileView } from 'react-device-detect';
 import AR from '../../../mobile.png'
 import { Link } from 'react-router-dom'
-import ReactReadMoreReadLess from "react-read-more-read-less";
 
 import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
 import ModalQR from './ModalQR';
@@ -22,6 +21,14 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
 
   const openQR = () => setOpenModal(true);
   const closeQR = () => setOpenModal(false);
+
+  //Remove html tags from JSON description data
+  const regex = /(<([^>]+)>)/ig
+  const description = product.description
+  const descriptionStriped = description.replace(regex, "");
+
+  const [text, setText] = useState(descriptionStriped.slice(0, 100));
+  const [readMore, setReadMore] = useState(false);
 
 
   const style = {
@@ -40,10 +47,7 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
     display: 'block'
   };
 
-  //Remove html tags from JSON description data
-  const regex = /(<([^>]+)>)/ig
-  const description = product.description
-  const descriptionStriped = description.replace(regex, "");
+
 
   return (
     <>
@@ -132,18 +136,27 @@ const ProductModal = ({ handleClose, product, open, onAddToCart }) => {
                     <img style={{ width: '100%' }} src={product.image?.url} alt="cover" />
                     <div style={{ width: "100%" }}>
                       Description:
-                    {<br />}
-                    {<br />}
+                      {<br />}
+                      {<br />}
 
                       {/* {descriptionStriped} */}
-                      <ReactReadMoreReadLess
-                        charLimit={200}
-                        readMoreText={` MORE 🔻`}
-                        readLessText={` LESS 🔺`}
-                      >
-                        {descriptionStriped}
+                      {text}
+                      {/* read more state */}
+                      {!readMore && '...'}
 
-                      </ReactReadMoreReadLess>
+                      <div style={{color: 'blue'}} onClick={() => {
+                        if (!readMore) {
+                          setText(descriptionStriped);
+                          setReadMore(true)
+                        } else {
+                          setText(descriptionStriped.slice(0, 100));
+                          setReadMore(false)
+                        }
+                      }}>
+
+                      {readMore ? ' Show Less' : ' Read More'}
+                      </div>
+
                     </div>
                   </Typography>
                 </CardContent>
