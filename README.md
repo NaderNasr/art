@@ -1,3 +1,20 @@
+# Preview
+
+## ARt Website
+
+https://user-images.githubusercontent.com/35424606/161310130-f0553a00-bb48-47af-8f44-ec48986229d0.mov
+
+
+## AR demo
+
+https://user-images.githubusercontent.com/35424606/161310604-d55f68fb-eb03-4e2b-b709-fe84fe00c66e.mp4
+
+## E-mail Confirmation 
+
+![ARt purchase e-mail confirmation](https://user-images.githubusercontent.com/35424606/161310818-7853a354-9b65-4075-af6b-ec01ebdb807e.png)
+
+
+
 # Getting Started
 
 1 - ``` git clone git@github.com:NaderNasr/art.git ```
